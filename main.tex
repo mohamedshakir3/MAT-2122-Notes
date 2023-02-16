@@ -370,4 +370,102 @@ $$n_0 \coloneqq \max \{\ldots\}$$
     $$\lim_{n \rightarrow \infty} f(x_n) = L$$
     
 \end{prop}
+\begin{proof}
+    ($\implies$) Suppose $\lim_{x\rightarrow a} f(x) = L$. Let $\infseq{x}$ be a sequence in
+    $X \setminus \{a\}$ such that $x_n \rightarrow a$. We must show that $f(x_n) \rightarrow L$.\\[1ex]
+    Let $\epsilon > 0$ be given. Since $f(x) \rightarrow L$ as $x \rightarrow a$, $\exists \delta$
+    such that 
+    $$x \in X \cap B(a; \delta) \setminus \{a\} \implies ||f(x) - L||_2 < \epsilon$$
+    Since $x_n \rightarrow$, using $\delta$ in place of $\epsilon$, $\exists n_0$ such that
+    $\forall n \geq n_0$, $||x_n a||_2 < \delta$. i.e. $x_n \in B(a,\delta)$. Also 
+    $x_n \in X \setminus \{a\}$ Therefore, 
+    $$||f(x) - L ||_2 < \epsilon$$
+    ($\impliedby$) Suppose $\forall$ sequences $\infseq{x}$ ins $X \setminus \{a\}$ converging to $a$, $f(x) \rightarrow L$,
+    and for a contradction, suppose $$f(x) \not\rightarrow L$$
+    We negate "$f(x) \rightarrow L$" to get that $\exists \epsilon > 0$ such that $\forall \gamma > 0$,
+    $\exists x \in X \cap B(a;\delta) \setminus \{a\}$ such that $||f(x) - L||_2 \geq \epsilon$.\\[1ex]
+    This gives a sequence $\infseq{x_n}$ in $X \setminus \{a\}$, $||x_n - a||_2 \leq \frac{1}{n}$ $\forall n$,
+    so by the squeeze theorem 
+    $$||x_n - a||_2 \rightarrow 0$$
+    Since $||f(x_n) - L||_2 \geq \epsilon$, $f(x_n) \not\rightarrow L$. This is a contradction.
+\end{proof}
+\begin{center}
+    \textbf{Note:} if $\lim_{n\rightarrow \infty} f(x_n) = L$ for \emph{some} sequence
+    $\infseq{x}$ in $X \setminus \{a\}$ convering to a, it \emph{does not} follow
+    that $\lim_{x \rightarrow a} f(x) = L$
+\end{center}
+\textbf{Example:}
+$$f(x) \coloneqq\begin{cases}
+     0 \text{   if $x = \frac{1}{n}$, $n \in \nat_{\geq 1}$}\\
+     1 \text{   otherwise}
+\end{cases}$$
+$\lim_{x\rightarrow 0}f(x)$ does not exist but $\lim_{n\rightarrow \infty}f(\frac{1}{n}) = 0$
+\begin{prop}[Algebra of Limits]
+    Let $x \subseteq \real^d$, $a \in \real^d$ a limit point of $X$, $f: X \real^m$
+    ,$g: X \rightarrow \real^m$, $L,K \in \real^m$. Suppose $\lim_{x\rightarrow a} f(x) = L$, 
+    $lim_{x\rightarrow a} g(x) = K$
+    \begin{enumerate}[label=(\roman*)]
+        \item $$\lim_{x \rightarrow 0} f(x) + g(x) = L + K$$
+        \item $$\lim_{cf(x)} = cL$$
+        \item If $m = 1$, $$lim_{x\rightarrow a}f(x)g(x) = LK$$
+        \item If $m=1$, $g(x) \neq 0$ $\forall x \in X$, $K \neq 0$. Then
+        $$lim_{x\rightarrow a}\frac{f(x)}{g(x)} = \frac{L}{K}$$
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    \begin{enumerate}[label=(\roman*)]
+        \item Use Sequential Characterization: Let $\infseq{x}$ be in $X \setminus \{a\}$
+        such that $x \rightarrow a$. Then $f(x_n) \rightarrow L$ and $g(x_n) \rightarrow K$
+        So by algebra of limits for sequences, 
+        $$f(x_n) + g(x_n) = L + K$$
+        $$\therefore f(x) + g(x) \rightarrow L + K$$
+        \item \textbf{Exercise.}
+        \item \textbf{Exercise.}
+        \item \textbf{Exercise.}
+    \end{enumerate}
+\end{proof}
+\begin{theorem}[Squeeze Theorem]
+    Let $X \subseteq \real^d$, $a \in \real^d$ a limit point of $X$, 
+    $f,g,h: X \rightarrow \real$
+    $$f(x) \leq g(x) \leq h(x) \ \forall x \in X$$
+    and 
+    $$\lim_{x\rightarrow a} f(x) =  TBC$$
+\end{theorem}
+\begin{proof}
+    \textbf{Exercise}
+\end{proof}
+If $f: X \rightarrow \real_m$, We can define functions 
+$$f_1, \ldots, f_m: X \rightarrow \real$$
+by 
+$$(f_1(x), \ldots, f_m(x)) = f(x)$$
+$f_1, \ldots, f_m$ are called the \emph{component functions} of $f$.
+\begin{prop}
+    Let $X \in \real^d$, $a \in \real^d$ a limit point of $X$, $f: X \rightarrow \real^m$,
+    $f_1,\ldots, f_m$ its component functions. $L = (L_1, \ldots, L_m) \in \real^m$. Then
+    $$\lim_{x\rightarrow a} f(x) = L \iff \lim_{x\rightarrow a} f_i(x) = L_i \ \forall 1 \leq i \leq m$$
+\end{prop}
+\begin{proof}
+    \textbf{Exercise.}
+\end{proof}
+\begin{definition}
+    Let $X \subseteq \real$, $a \in \real$, $f: X \rightarrow \real^d$.
+    \begin{itemize}
+        \item If $a$ is a limit point of $X \cap (a, \infty)$ then we write
+            $\lim_{x\rightarrow a^+} f(x) = L$ to mean that 
+            $$\lim_{x \rightarrow a} g(x) = L$$
+            where 
+            $$g = f \mid_{X \cap (a, \infty)}$$
+        \item If $a$ is a limit point of $X \cap (-\infty,a)$ then we write
+        $\lim_{x\rightarrow a^+} f(x) = L$ to mean that 
+        $$\lim_{x \rightarrow a} g(x) = L$$
+        where 
+        $$g = f \mid_{X \cap (-\infty, a)}$$
+    \end{itemize}
+\end{definition}
+\textbf{Example:}
+$$f(x)\coloneqq \begin{cases}
+    -1, x < 0\\
+    0, x = 0\\
+    1, x x > 0
+\end{cases}$$
 \end{document}
