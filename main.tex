@@ -1,0 +1,373 @@
+\documentclass[openany]{report}
+\usepackage[utf8]{inputenc}
+
+\usepackage{stylesheets}
+\usepackage{lecture_notes_styles}
+\title{MAT 2125 Lecture Notes}
+\author{Last Updated:}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{The Real Numbers $\real$}
+TBC.
+\chapter{Completeness of $\real$, Absolute Value, Sequences }
+TBC.
+\chapter{Convergence of Sequences}
+TBC. 
+\chapter{Properties of Convergence, Squeeze Theorem, Monotone Sequences}
+TBC. 
+\chapter{Subsequences, Cauchy Sequences}
+TBC.
+\chapter{Limsup and Liminf}
+TBC.
+\chapter{}
+\chapter{}
+\chapter{$\real^d$}
+\textbf{Recall:} $||(x_1, \dots, x_d)|| \coloneqq \sqrt{x_1^2 + \cdots + x_d^2}$. This is a norm. i.e. 
+$$||a + b|| \leq ||a||_2 + ||b||_2 \ \forall a,b \in \real^d$$ 
+$$||ca|| = |c|\cdot ||a||_2, \ c \in \real, \ a \in \real^d$$ 
+$$||a||_2 > 0, \ \forall a \in \real^d \setminus \{(0,\dots,0)\}$$
+$$||(0,\dots, 0)||_2 = 0$$
+Other examples of norms: 
+\begin{itemize}
+    \item $||(x_1, \dots, x_d)||_1 \coloneqq |x_1| + \cdots + |x_d|$
+    \item  $||(x_1, \dots, x_d)||_\infty \coloneqq max\{|x_1|, \dots, |x_d|\}$
+\end{itemize}
+\textbf{Exercise:} For $a \in \real^d$, $$||a||_\infty \leq ||a||_2 \leq ||a||_1 \leq d||a||_\infty (\leq d||a||_2)$$
+\textbf{Interesting Fact:} There are other norms. but they are all equivalent in the sense that if $||\cdot||, ||\cdot||'$ are norms on $\real^d$, then $\exists v, R > 0$ such that
+$$r||a|| \leq ||a||' \leq R||a||$$
+\section{Convergence}
+\begin{definition}
+Let $(a_n)_{n=1}^\infty$ be a sequence in $\real^d$ and let $L \in \real^d$, we say $(a_n)_{n=1}^\infty$ \textbf{converges} to $L$, and write $\lim_{n \rightarrow \infty} = L$ or $a_n \rightarrow \infty$, if 
+$$\lim_{n \rightarrow \infty} ||a_n - L||_2 = 0$$
+\end{definition}
+\textit{Note: We could define convergence instead using some other norm, say $||\cdot||_1$.}\\[2ex]
+If $||a_n - L||_2 \rightarrow 0$, then $||a_n - L||_1 \leq d||a_n - L||_2 \rightarrow 0$
+If $||a_n - L||_1 \rightarrow 0$, then $||a_n - L||_2 \leq d||a_n - L||_1 \rightarrow 0$\\[2ex]
+in general, if $||\cdot||$ is any norm, then since $||\cdot||$ and $||\cdot||_2$ are equivalent.
+$$||a_n - L||_2 \rightarrow 0 \iff ||a_n - L|| \rightarrow 0$$
+\textbf{Example:} Say $a_n = \left(\frac{1}{n}, \frac{1}{n}, \dots, \frac{1}{n}\right)$, then 
+$$||a_n - L||_2 = \sqrt{1/n^2, + \cdots + 1/n^2} = \sqrt{\frac{d}{n^2}} = \frac{\sqrt{d}}{n}\rightarrow 0$$
+$$\therefore a_n \rightarrow L$$
+Given a sequence $(a_n)_{n=1}^\infty$ in $\real^d$, we write $a_1 = (a_1^{(1)},a_1^{(2)}, \dots, a_1^{(d)})$ where $a_1^{(1)},a_1^{(2)}, \dots, a_1^{(d)} \in \real$. Similarily, 
+$$a_1 = (a_1^{(1)},a_1^{(2)}, \dots, a_1^{(d)})$$
+$$a_2 = (a_2^{(1)},a_2^{(2)}, \dots, a_2^{(d)})$$
+$$a_3 = (a_3^{(1)},a_3^{(2)}, \dots, a_3^{(d)})$$
+$$\vdots$$
+$$L = (L^{(1)},L^{(2)}, \dots, L^{(d)}) \in \real^d$$
+We get $d$ sequences in $\real$, and $d$ possible limit points $L^{(1)}, \dots, L^{(d)} \in \real$
+\begin{prop}
+Given $(a_n)_{n=1}^\infty$ and $L$ as above, $a_n \rightarrow L$ as $d \rightarrow \infty$ $\iff$ $a_n^{(i)} \rightarrow L^{(i)}$ in $\real$ as $n \rightarrow \infty$, for $i = 1, \dots, d$.
+\end{prop}
+\begin{proof}
+$\implies$: Suppose $a_n \rightarrow L$, i.e.
+\begin{align*}
+    ||a_n - L||_2 \rightarrow 0\\
+    \intertext{For $x = (x_1, \dots, x_d) \in \real^d$}
+    ||x||^2_2 = x_1^2 + \cdots x_d^2 \geq x_i^2 = |x_i|^2
+    \therefore |x_i \leq ||x||_2
+\end{align*}
+Applying this to (*), we get 
+$$0 \leq |a_n^i - L^{(i)}| \leq ||a_n - L ||_2 \rightarrow 0$$
+So by the squeeze theorem, 
+$$|a_n^{(i)} - L^{(i)}| \rightarrow 0$$\\[2ex]
+$\implies$: Suppose $a_n^{(i)} \rightarrow L^{(i)}$ for $i = 1, \dots, d$.
+$$||a_n - L||^2_2 = (a_n^{(i)} - L^i)^2 + \cdots + (a_n^d - L^(d)) \rightarrow 0$$
+By algebra of limits,
+$$\therefore ||a_n - L||_2 \rightarrow 0$$
+\end{proof}
+\textbf{Example:} $a^n = ((-1)^n, \frac{1}{n}) \in \real^2$. Does $(a_n)$ converge? No, since $(-1)^n$ does not converge.
+
+\begin{definition}
+    A sequence $(a_n)_{n=1}^\infty$ in $\real^d$ is \textbf{Cauchy} if  $\forall \epsilon > 0$, $\exists n_0 \in \nat_{\geq 1}$ such that 
+    $$||a_n - a_m||_2 < \epsilon \ \forall m,n \geq n_0$$
+\end{definition}
+
+\begin{theorem}[Cauchy Convergence Criterion for $\real^d$]
+Let $(a_n)_{n=1}^\infty$ be a sequence in $\real^d$. It converges $\iff$ it is Cauchy.
+\end{theorem}
+
+\begin{proof}
+    $\implies$: Suppose $a_n \rightarrow L \in \real^d$. To show it is Cauchy, let $\epsilon > 0$. $||a_n - L||_2 \rightarrow 0$, so $\exists n_0 \in \nat_{\geq 1}$ such that 
+    $$||a_n - L||_2 < \frac{\epsilon}{2} \ \forall n \geq n_0)$$
+    Then if $m,n \geq n_0$, 
+    \begin{align*}
+        ||a_m - a_n||_2 &= ||a_m - L + L - a_n||_2\\
+        &\leq ||a_m - L||_2 + ||L - a_n||_2\\
+        &< \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+    \end{align*}
+        $\therefore (a_n)_{n=1}^\infty$ is Cauchy.
+    $\implies$: Suppose $(a_n)_{n=1}^\infty$ is Cauchy, write 
+    $$a_n = (a_n^{(1)}, \dots, a_n^{(d)}$$
+    For any $m,n \in \nat_{\geq 1}$,
+    $$|a_n^{(i)} - a_m^{(i)} \leq ||a_n - a_m||_2$$
+    $\therefore (a_n^{(i)})_{n=1}^\infty$ is Cauchy in $\real$. So by the Cauchy Convergence Criterion, $\exists L^{(i)} \in \real$, such that $a_n^{(i)} \rightarrow L^{(i)}$. By the previous proposition,
+    $$a_n \rightarrow (L^{(1)}, \dots, L^{(d)})$$
+\end{proof}
+\begin{definition}
+    $S \subseteq \real^d$ is \textbf{bounded} if $\exists M > 0$ such that 
+    $$||x|| \leq M \ \ \forall x \in S$$
+\end{definition}
+A sequence $(a_n)_{n=1}^\infty$ in $\real^d$ is bound if
+$\{a_n: n \in \nat_{\geq 1}\}$ is a bounded set.
+\begin{theorem}[Bolzano-Weierstrass for $\real^d$]
+    If $(a_n)_{n=1}^\infty$ is a bounded sequence in $\real^d$, then it has a subsequence $(a_{n_k})_{n=1}^\infty$ that converges.
+\end{theorem}
+\begin{proof}
+    Write $a_n = (a_n^{(1)}, \dots, a_n^{(d)})$.\\ 
+    \textbf{Naive Attempt:} TBC.
+\end{proof}
+\chapter{Open and Closed Sets in $\real^d$}
+Roughly, an open set is one that we draw with dotted lines. The line represents a "boundary" that is the not in the set. This is not a rigorous definition.
+\begin{definition}[Open Ball]
+    Let $a\in \real^d$, $r > 0$. The \textbf{open ball} of radius $r$ centered at $a$ is $$B(a;r) \coloneqq \{x \in \real^d: ||x-a||_2 < r\}$$
+\end{definition}
+\textbf{Relation to Convergence:} If $a_n \rightarrow L$, then this means that $||a_n - L ||_2 < \epsilon$ for all $n$ large. So, $a_n \in B(L;\epsilon)$
+\begin{definition}[Open Sets]
+    A set $U \subseteq \real^d$ is \textbf{open} if $\forall a \in U$, $\exists r > 0$, such that $B(a; r) \subseteq U$
+\end{definition}
+\textbf{Idea:} If $a \in U$, then $a$ is not on the boundary but it is truly "inside" the set, so we can fit a ball containing a in the set.
+\begin{definition}[Closed Sets]
+    A set $k \in \real^d$ is \textbf{closed} if its complement $\real^d \setminus k$ is open. 
+\end{definition}
+\textbf{Example:} $U \subseteq (0,1)$. Is this open? Yes.
+\begin{proof}
+    Let $a \in U$. We let $r := \min\{|a-0|, |a-1|\}$ (We do this so that $r$ is at most the distance to the closest bound, i.e. if $a$ is closer to $0$, then the radius $r$ cannot be $|a-1|$)then 
+    $$B(a ; r) = (a-r,a+r) \subseteq (0,1) = U$$
+\end{proof}
+\textbf{Example:} $U \coloneqq [0,1]$. Is this open? No.
+\begin{proof}
+    Let $a \coloneqq 0 \in U$. The for any $r > 0$, $\exists z \in B(a ; r) = (-r,r)$ s.t $z < 0$, so $z \not\in U$. Therefore $B(a;r) \subseteq U$
+\end{proof}
+Is $U$ closed? This is the same as asking if $\real \setminus U = (-\infty, 0) \cup (1,\infty)$ is open. 
+This is open.
+\begin{proof}
+    Let $a \in (-\infty, 0) \cup (1,\infty)$.
+    \begin{itemize}
+        \item \textbf{Case 1:} $a \in (-\infty, 0)$. Set $r := |a|$, so 
+        $$B(a;r) = (a-r,a+r) = (2a, 0) \subseteq U$$
+        \item \textbf{Case 2:} $a \in (1, \infty)$ similar.
+    \end{itemize}
+\end{proof}
+Therefore $U = [0,1]$ is closed.\\[3ex]
+\textbf{Example:} Is $U \coloneqq (0,1]$ open? No, for any $r > 0$
+$$B(1;r) \not\subseteq U$$
+Therefore, it is not open.\\[2ex]
+\begin{center}
+    \textit{\textbf{Note:} Sets are not always open or closed. Most sets are neither open nor closed.}
+\end{center}
+This set $U$ is one such example $U$ is not closed since $\real \setminus U = (-\infty, 0] \cup (1 \infty)$
+$0 \in \real \ U$ but $\forall r >0$, $B(0;r) \not\subseteq R \setminus U$\\[3ex]
+\textbf{Example:} For any $a \in \real^d$, $r > 0$ $B(a;r)$ is an open set.
+\begin{proof}
+    Let $x \in B(a;r)$, so $||x-a||_2 < r$. Set 
+    $$r_0 \coloneqq r - ||x-a||_2 > 0$$
+    \textbf{Claim:} $B(x; r_0) \subseteq B(a;r)$
+    To see this, let $y \in B(x;r_0)$ so $|y-x||_2 < r_0$. So,
+    \begin{align*}
+        ||y-a||_2 &\leq ||y-x||_2 + ||x - a||_2\tag{$\triangle$-inequality} \\
+        &< r_0 + ||x - a||_2\\
+        &= r
+    \end{align*}
+\end{proof}
+\begin{prop}
+    \begin{enumerate}[label=(\roman*)]
+        \item $\emptyset$, $\real^d$ are both open in $\real^d$
+        \item If $U_1, U_2, \dots, U_n \subseteq \real^d$ are all open, then so is $U_1 \cap U_2 \cap \cdots \cap U_n$.
+        \item If $U_a \subseteq \real^d$ is an open set for all $\alpha \in I$, (I is some index set) then 
+        $$\bigcup_{a\in I} U_a$$
+        is open.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    \textit{(i),(ii) are exercises}.\\[2ex]
+    \textbf{(iii):} Set 
+    $$V \coloneqq \bigcup_{\alpha \in I} U_a$$
+    Let $a \in V$. This means $\exists \alpha \in I$ such that $a \in U_\alpha$. $U_\alpha$ is open so $\exists r > 0$ s.t $B(a;r) \subseteq U_\alpha$. $U_\alpha \leq \bigcup_{\alpha \in I} U_\alpha = V$ So $B(a;r) \subseteq V$ as required.
+\end{proof}
+\noindent
+\textbf{Example:} For any $n \in \nat_{\geq 1}$.
+$$\left(\frac{-1}{n},\frac{1}{n}\right) = B(0;\frac{1}{n})$$ is open in $\real$. The intersection of these open sets is 
+$$\bigcap^\infty_{n = 1} \left(\frac{1}{n},\frac{-1}{n}\right) = \{0\} $$ which is not open. This shows that openess is not preserved by infinite intersections. \\[2ex]
+\textbf{Example:} Let $$U \coloneqq \{(x,y) \in \real^2 : x > 0 , y >0\}$$
+$U$ is open but not closed.\\[1ex]
+$$U = V \cap W$$
+where 
+\begin{align*}
+    V \coloneqq \{(x,y) : x > 0\} &&
+    W \coloneqq \{(x,y): y >0\}
+\end{align*}
+To show $V$ is open, let $a = (x,y) \in V$. Set $r \coloneqq x > 0$. Then if $(w,z) \in B(a;r)$. Then 
+$$|w-z| \leq ||(w,z)-a||_2 < r = x$$
+$$\therefore w > x -x = 0$$
+So $(w,z) \in U$. Similarly, $W$ is open. Therefore $U$ is open.\\[2ex]
+\textbf{Not Closed:} Exercise.
+\begin{prop}
+    Let $K \subseteq \real^d$. $K$ is closed $\iff$ for any subsequence $\infseq{a}$ in $K$, If it converges, then
+    $$lim_{n \rightarrow \infty} a_n \in K$$
+\end{prop}
+\begin{proof}
+    ($\implies$) Suppose $K$ is closed. Let $\infseq{a}$ be a sequence in $K$ s.t 
+    $$L \coloneq lim_{n \rightarrow \infty} a_n$$
+    exists. Suppose for a contradction $L \not\in K$. This means $L \in \real^d \setminus K$, which is open. So $\exists r > 0$ such that 
+    $$B(L;r) \subseteq \real^d \setminus K$$
+    Since $a_n \rightarrow L$, we must have $a_n \in B(L ; a)$ for some $n$ (in fact, for all n sufficiently large. So $a_n \in B(L;r) \subseteq \real^d \setminus K$. Therefore $a_n \not\in K$, which is a contradiction. \\[1ex]
+    ($\impliedby$) Suppose $K$ is not closed, and we'll prove $\exists \infseq{a}$ in $K$ such that $a_n \rightarrow L \not\in K$. Since $K$ is not closed, $\real^d \setminus K$ is not open. So $\exists L \in \real^d \setminus K$ such that $\forall r > 0$
+    $$B(L;r) \not\subseteq \real^d \setminus K$$
+    For each $n \in \nat_{\geq1}$, we can fine $a_n \in B(L; \frac{1}{n})$ such that $a_n \not\in \real^d \setminus K$. So $a_n \in K$. This gives a sequence $\infseq{a}$ in $K$ and 
+    $$||a_n - L||_2 < \frac{1}{n} \rightarrow 0$$
+    Therefore by the Squeeze Theorem,
+    $$||a_n - L||_2 \rightarrow 0 \implies a_n \rightarrow L$$
+    $L \in \real^d \setminus K$, so $L \not\in K$.
+\end{proof}
+\begin{definition}
+    Let $A \subseteq \real^d$ and let $a \in \real^d$, a is: 
+    \begin{enumerate}[label=(\roman*)]
+        \item an \textbf{interior point} if $\exists r > 0$ s.t $B(a;r) \subseteq A$
+        \item an \textbf{accumulation point} if $\exists$ a sequence $\infseq{a}$ in $A$ s.t $a_n \rightarrow a$
+        \item a \textbf{boundary point} if it is an accumulation point and it is not an interior point.
+        $$A^\circ \coloneqq \{All \ interior \ points\}$$
+        $$\bar{A} \coloneqq \{All \ accumulation \ points\}$$
+        $$\partial A \coloneqq \{All \  boundary 
+ \ points\} = \bar{A} \setminus A^\circ$$
+    \end{enumerate}
+    \begin{center}
+        \textit{\textbf{Note:} The set of interior points, accumulation points, and boundary points are referred to as the \textbf{interior} of A, the \textbf{closure} of A, and the \textbf{boundary} of A respectively}
+    \end{center}
+\end{definition}
+\textbf{Example:} $A \coloneqq (0, 1] \cup \{2\}$\\[1ex]
+$$A^\circ = (0,1)$$
+$$\bar{A} = [0,1] \cup \{2\}$$
+$$\partial A = \{0,1,2\}$$
+\textbf{Example:} $A \coloneqq \mathbb{Q}$\\[1ex]
+Since any open interval contains irrational numbers, we have
+$$A^\circ = \empty set$$
+Proposition from chapter 2,
+$$\bar{A} = \real$$
+$$\partial A = \real$$
+
+\chapter{Compactness}
+\begin{definition}
+    A set $A \subseteq \real^d$ is (sequentially) compact if every sequence $\infseq{a}$ in $A$ has a subsequence $(a_{n_k})^\infty_{k = 1}$ that converges to a point in $A$.
+\end{definition}
+\textbf{Example}
+TBC
+
+\chapter{Limits of a Function of Continous Variables}
+A sequence is a function $\nat \rightarrow \real$. Here, we'll consider function 
+that are going from $\real \rightarrow \real$ (or $\real^d \rightarrow \real^m$).
+\begin{definition}
+    Let $X \subseteq \real^d$, $a \in \real^d$ a limit point of $X$.
+    $f: X \rightarrow \real^m$, $L \in \real^m$. We say the limit of $f$
+    as $X$ approaches $a$ is $L$ if 
+    $$\forall \epsilon > 0, \exists \delta > 0 \ s.t \ \forall x \in X$$
+    $$x\in B(a;\delta) \wedge x \neq a \implies ||f(x)-L||_2 < \epsilon$$
+\end{definition}
+
+The idea is like the definition of convergence of a sequence, except we replace $n \geq n_0$
+(which captures "$n$ is sufficiently large") with $x \in B(a;\delta)$, $x \neq a$ (which captures
+"$x$ is close to, but not equal to $a$). In other words, the definition says
+that if $x$ is close to (but not equal to) $a$
+ then $f(x)$ is close to $L$.\\[2ex]
+
+ \textbf{Why "not equal to"?:} Often we consider the limit as $x$ approaches
+ $a$ when $f(a)$ is not defined. Other times we compare the limite to $f(a)$.
+ So we do not want to use $f(a)$ in the definition of the limit. \\[2ex]
+
+ \textbf{Notation:} We write 
+ $$\lim_{x \rightarrow a} f(x) = L$$
+ or 
+ $$f(x) \rightarrow L \ as \ x \rightarrow d$$
+ to mean that the limit of $f$ is $L$ as $x$ approaches $a$.\\[2ex]
+ \textbf{Example:} $f: \real \rightarrow \real$. $f(x) \coloneqq 3x - 2$. 
+ Let $a \in \real$. Claim
+ $$\lim_{x\rightarrow a} f(x) = 3a - 2$$
+ \begin{proof}
+    Let $\epsilon > 0$. Consider 
+    \begin{align*}
+        |f(x) - (3a-2)| &= |3x-2 - 3a + 2|\\
+        &= 3|x-a|
+    \end{align*}
+    We want this $< \epsilon$, set $\delta \coloneqq \frac{\epsilon}{3}$. Then if
+    $x \in B(a; \delta) = (a - \delta, a + \delta)$ (i.e $|x-a| < \delta$)
+    then 
+    $$|f(x) - (3a - 2)| = 3|x-a| < 3 \delta = \frac{3\epsilon}{3} = \epsilon$$
+ \end{proof}
+\textbf{Example:} $g: \real \rightarrow \real$. $g(x) \coloneqq x^2$. Claim: 
+$$\lim_{x\rightarrow a} g(x) = a^2$$
+\begin{proof}
+    Let $\epsilon > 0$ be given.
+    \begin{align*}
+        |g(x) - a^2| &= |x^2 - a^2| \\
+        & = |x - a| |x + a|
+    \end{align*}
+    What happens if $x$ is close to $a$? Intuitively, $|x + a|$ is close to $|a+a|$
+    and $|x-a|$ is small.
+    \begin{align*}
+        |x+a| &= |x -a + a + a| \leq |x - a| + |a + a|\\
+              &< 2|a| + \delta \tag{if $|x-a|<\delta$}\\
+              &\leq 2|a| + 1\tag{$\delta \leq 1$}
+    \end{align*}
+    Then, 
+    \begin{align*}
+        |x^2 - a^2| &= |x-a||x+a|\leq |x-a|(2|a| + 1)\\
+                    &< \delta(2|a| + 1)\tag{if $|x-a|<\delta$}\\
+                    &\leq \epsilon\tag{if $\delta \leq \frac{\epsilon}{2|a| + 1}$}
+    \end{align*}
+    \begin{center}
+        \red{\textbf{Important:} Do not define $\delta$ in terms of $x$ or $\delta$!
+        We can use $a$ here since $a$ is constant}
+    \end{center}
+    So we set $\delta \coloneqq \min \{1, \frac{\epsilon}{2|a| + 1}\}$
+    Then $\delta \leq \frac{\epsilon}{2|a| + 1}$ and $\delta \leq 1$. So
+    if $|x-a| < \delta$. Then from the work above, $|x^2-a^2| < \epsilon$ as required.
+\end{proof}
+
+\textbf{Note:} In proofs where we have $\delta - \epsilon$, we often use
+$$\delta \coloneqq \min \{\ldots\}$$
+In proofs where we have $n_0 - \epsilon$, we often use
+$$n_0 \coloneqq \max \{\ldots\}$$
+\begin{prop}[Uniqueness of Limits]
+    Let $f: X \rightarrow \real^m$ ($X \subseteq \real^d$), $a \in \real^d$
+    a limit point of $X$, $L, L' \in \real^m$. If the limit of $f$ as $x \rightarrow a$ is L
+    and the limit of $f$ as $x \rightarrow a$ is $L'$, then $L = L'$
+\end{prop}
+\begin{proof}
+    By contradction. Suppose $L \neq L'$. So 
+    $$||L - L'||_2 > 0$$
+    Set 
+    $$\epsilon \coloneqq \frac{||L - L||_2}{2} > 0$$
+    Since $f(x) \rightarrow L$ as $x \rightarrow a$, $\exists \delta > 0$
+    such that if $x \in X \cap B(a; \delta)\setminus \{a\}$, then
+    $$||f(x) - L||_2 < \epsilon$$
+    Since $f(x) \rightarrow L'$ as $x \rightarrow a$, $\exists \delta' > 0$ such that
+    $$x \in X \cap B(a;\delta')\setminus \{a\} \implies ||f(x) - L'||_2 < \epsilon$$
+    Let $\delta_0 \neq \min \{\delta, \delta'\}$. Let 
+    $$x \in X \cap B(a;\delta_0) \setminus \{a\}$$
+    Then
+    $$x \in X \cap B(a; \delta) \setminus \{a\}$$
+    So,
+    \begin{align*}
+        ||f(x) - L||_2 &< \epsilon\\
+        ||f(x) - L'||_2 &< \epsilon
+    \end{align*}
+    So, 
+    \begin{align*}
+        ||L - L'||_2 \leq ||L - f(x)||_2 + ||f(x) - L'|| &< \epsilon + \epsilon\\
+        &= ||L - L'||_2
+    \end{align*}
+    And thus, a contradction. 
+\end{proof}
+\begin{prop}[Sequential Characterization of Limits]
+    Let $X \subseteq \real^d$, $a \in \real^d$, a limit point of $X$.
+    $f: X \rightarrow \real^m$, $L \in \real^m$.\\[1ex]
+    $\lim_{x\rightarrow a} f(x) = L \iff$ for every sequence $\infseq{x}$ in $X$
+    such that $x_n \rightarrow a$, we have 
+    $$\lim_{n \rightarrow \infty} f(x_n) = L$$
+    
+\end{prop}
+\end{document}
