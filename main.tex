@@ -24,8 +24,315 @@ TBC.
 TBC.
 \chapter{Limsup and Liminf}
 TBC.
-\chapter{}
-\chapter{}
+
+%----------------------------Lecture 7 ----------------------------------
+\chapter{Series}
+\textbf{Recall:}
+\[\infser{a} = \lim_{N\rightarrow \infty} \sum_{n=1}^N a_n\]
+$\infser{a}$ "diverges" if above limit does not exisit.
+\begin{prop}
+    Suppose $\infseq{a}, \infseq{b}$ converges. Then
+    \begin{enumerate}[label=(\roman*)]
+        \item 
+        \[\sum_{n=1}^\infty a_n + b_n = \infser{a} + \infser{b}\]
+        \item
+        \[\sum_{n=1}^\infty cb_n = c\infser{b} \ \forall c \in \real\]
+    \end{enumerate}
+    This says 
+    \[V \coloneqq \{\infseq{a}: \infser{a} \ converges\}\]
+    is a vector space over $\real$.
+\end{prop}
+
+\begin{center}
+    \textbf{Note:}
+    \[\left(\sum_{n=1}^N a_n\right) \left(\sum_{n=1}^N b_n\right) \neq \sum_{n=1}^\infty a_nb_n\]
+\end{center}
+
+\begin{proof}
+    \textbf{Exercise.}
+\end{proof}
+
+\begin{prop}
+    \begin{center}
+        $\infser{a}$ converges $iff$ $\sum_{n=k}^\infty a_k$ converges.
+    \end{center}
+\end{prop}
+\begin{proof}
+    \textbf{Exercise.}
+\end{proof}
+
+\textbf{Example:} TBC.
+
+\begin{prop}
+    If $\infser{a}$ converges, then $a_n \rightarrow 0$.
+\end{prop}
+
+
+
+
+\section{Divergence Test}
+
+\begin{prop}[Divergence Test]
+    If $a_n\not\rightarrow 0$, then $\infser{a}$ diverges.
+\end{prop}
+\begin{proof}
+    $\sum_{n=1}^\infty a_n$ converges $\implies S_n \rightarrow L$ for some $L$, where 
+    \[S_n \coloneqq \sum_{n=1}^N a_n\]
+    So, 
+    \[a_n = S_n - S_{n-1}\]
+    By the Algebra of Limits, 
+    \begin{align*}
+        \lim_{n\rightarrow \infty} a_n &= \lim_{n\rightarrow \infty} S_n - \lim_{n\rightarrow \infty} S_{n-1}\\
+        &= L - L = 0
+    \end{align*}
+\end{proof}
+\textbf{Example:} TBC.
+
+\section{Convergence Tests}
+\begin{prop}[Boundedness Test]
+    Let $\infseq{a}$ bea  sequence, if 
+    \begin{enumerate}[label=(\roman*)]
+        \item $a_n \geq 0$
+        \item There is an upper bound on the parital sums
+        \[\exists M > 0 \ s.t \ \sum_{n=1}^N a_n \leq M\]
+    \end{enumerate}
+    Then $\infser{a}$ converges.
+\end{prop}
+\begin{proof}
+    Let 
+    \[S_N \coloneqq \sum_{n=1}^N a_n\]
+    Then 
+    \begin{align*}
+        S_{N+1} &= S_N + a_{N+1}\\ 
+        &\geq S_n
+    \end{align*}
+    So by the Monotone Convergence Criterion, $(S_N)_{N=1}^\infty$ converges $\iff$ it is bounded avove. By ($ii$), it is bounded.
+\end{proof}
+
+\begin{prop}[Comparison Test]
+    
+\end{prop}
+
+%----------------------------Lecture 8 ----------------------------------
+\chapter{Ratio, Root, Alternating Series, and Integral Test, Cauchy Convergence, Topology of $\real^d$}
+\section{Ratio Test}
+\begin{prop}[Ratio Test]
+    Let $\infseq{a}$ be a sequence of nonzero elements.
+    \begin{enumerate}[label=(\roman*)]
+        \item If 
+        \[\limsup_{n \rightarrow \infty} \left| \frac{a_{n+1}}{a_n} \right|< 1\]
+        then $\infser{a}$ converges absolutely.
+        \item If 
+        \[\liminf_{n\rightarrow \infty} \left| \frac{a_{n+1}}{a_n} > 1 \right| > 1\]
+        then $\infser{a}$ diverges.
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    ~\newline
+    \begin{enumerate}[label=(\roman*)]
+        \item Let 
+        \[q = \limsup_{n\rightarrow \infty} \left| \frac{a_{n+1}}{a_n} \right|\]
+        where $q < 1$, $\exists r \in (q,1)$. By the definition of $\limsup$, 
+        \[\left| \frac{a_{n+1}}{a_n} \right| \leq r \ \forall n \geq n_0\]
+        for some $n_0 \in \nat$.
+        \begin{align*}
+            \left| \frac{a_{n_0+1}}{a_{n_0}} \right| &\leq r\\
+            \left| a_{n_0+1} \right| &\leq r|a_{n_0}|\\
+            \left| a_{n_0+2} \right| &\leq r|a_{n_0+1}| \leq r^2|a_{n_0}|\\
+        \end{align*}
+        By induction, we have
+        \[0 \leq |a_{n_0 + k} \leq r^k |a_{n_0}|\]
+        By the comparison test, 
+        \[\sum_{k=1}^\infty |a_{n_0+ k}|\]
+        converges since 
+        \[\sum_{k=1}^\infty r^k|a_{n_0}|\]
+        is a geometric sequence and $0 \leq r < 1$. 
+        \[\sum_{n=1}^\infty |a_n|\]
+        Converges, thus $\infser{a}$ converges absolutely.
+        \item Let 
+        \[q = \liminf_{n \rightarrow \infty} \left| \frac{a_{n+1}}{a_n}\right| > 1\]
+        so $\exists n_0$ such that 
+        \[\left| \frac{a_{n+1}}{a_{n}} \right| > 1\]
+        for all $n \geq n_0$. Then
+        \[|a_{n_0 + k} \geq |a_{n_0}| \ \forall k \geq 0 \]
+        So $a_n \not\rightarrow 0$ as $n \rightarrow 0$, thus by the divergence test. $\infser{a}$ diverges.
+    \end{enumerate}
+\end{proof}
+
+\begin{center}
+    \red{\textbf{Note: The ratio test does not tell us anything when the limit is 1.}}
+\end{center}
+\textbf{For example:} 
+\[\sum_{n\geq 1} \frac{1}{n}\]
+diverges, but 
+\[\frac{\frac{1}{n+1}}{\frac{1}{n}} = \frac{n}{n+1} \rightarrow 1\]
+But on the other hand, 
+\[\sum_{n\geq1} \frac{1}{n+1}\]
+converges, and 
+\[\frac{\frac{1}{n+1(n+2)}}{\frac{1}{n(n+1)}} = \frac{n+1}{n+2} \rightarrow 1\]
+\section{Root Test}
+\begin{prop}[Root Test]
+    Let $\infseq{a}$ be a sequence of real numbers.
+    \begin{enumerate}[label=(\roman*)]
+        \item If 
+        \[\limsup_{n\rightarrow \infty} \sqrt[n]{|a_n|} < 1\]
+        then $\infser{a}$ converges absolutely.
+        \item If 
+        \[\limsup_{n\rightarrow \infty} \sqrt[n]{|a_n|} > 1\]
+        then $\infser{a}$ diverges.
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    ~\newline
+    \begin{enumerate}[label=(\roman*)]
+        \item Let 
+        \[q = \limsup_{n\rightarrow \infty} \sqrt[n]{|a_n|} < 1\]
+        Then there exists $r \in (q,1)$ such that $\exists n_0$ 
+        \[\sqrt[n]{|a_n|} \leq r\]
+        for all $n \geq n_0$. Then,
+        \[0 \leq |a_n| \leq r^n\]
+        Therefore $\sum_{n=n_0}^\infty r^n$ converges since $0 < r < 1$. Then by the comparison test, $\sum_{n=n_0}^\infty |a_n|$ converges.
+        \item Let
+        \[q = \limsup_{n\rightarrow \infty} \sqrt[n]{|a_n|} > 1\]
+        From exercise 2.7.3, there are infinitely many 
+        \[\sqrt[n]{|a_n|} \geq 1 \implies |a_n| \geq 1\]
+        Thus $a_n \not\rightarrow 0$ as $n \rightarrow \infty$, thus by the divergence test, $\infser{a}$ diverges.
+    \end{enumerate}
+\end{proof}
+
+\textbf{Examples:}
+\begin{itemize}
+    \item 
+    \[\sum_{n=1}^\infty \left(\frac{1}{2}\right)^n\]
+    \[\sqrt[n]{\left(\frac{1}{2}\right)^2} = \frac{1}{2}\]
+    \item
+    \[\infser{\left(\frac{n}{2n+1}\right)}\]
+    \[\sqrt[n]{\left(\frac{n}{2n+1}\right)^n} = \frac{1}{2^{n+1}} \rightarrow \frac{1}{2}\]
+    \item 
+    \[\infser{\frac{1}{n}}\]
+    \[\sqrt[n]{\frac{1}{n}} = \frac{1}{n^{\frac{1}{n}}} = \frac{1}{e^{\frac{\ln n}{n}}} \rightarrow 0\]
+\end{itemize}
+\section{Alternating Series Test}
+\begin{prop}[Alternating Series Test]
+    Let $\infseq{a}$ be a sequence of real numbers. Suppose
+    \begin{enumerate}[label=(\roman*)]
+        \item $\infseq{a}$ is decreasing
+        \item $\lim_{n\rightarrow \infty} a_n = 0$
+    \end{enumerate}
+    Then 
+    \[\sum_{n=1}^\infty (-1)^{n+1}a_n\]
+    converges. Moreover, for any $N$, 
+    \[\sum_{n=1}^{2N} (-1)^{n+1}a_n \leq \sum_{n=1}^\infty (-1)^{n+1}a_n \leq \sum_{n=1}^{2N-1} (-1)^{n+1}a_n\]
+\end{prop}
+\begin{proof}
+    $a_n \geq 0$ $\forall n$, since $a_n \rightarrow 0$ as $n \rightarrow \infty$, and $\infseq{a}$ is decreasing. Let
+    \[S_N \coloneqq \sum_{n=1}^N (-1)^{n+1}a_n\]
+    If $N$ is even, 
+    \[S_{N+2} = S_N + a_{N+1} - a_{N+2} \geq S_N\]
+    Since 
+    \[a_{N+2} \leq a_{N+1}\]
+    So $(S_{2N})_{N=1}^\infty$ is an increasing sequence and $(S_{2N -1})_{N=1}^\infty$ is a decreasing sequence. So by the monotone convergence criterion, both sequence converge. 
+    \[S_{2N - 1} + a_{2N} = S_{2N}\]
+    \[a_{2N} \xrightarrow{N \rightarrow \infty} 0 \]
+    So, 
+    \[\lim_{n\rightarrow \infty} S_{2N-1} = \lim_{N \rightarrow \infty} S_{2N} = L \implies \lim_{N\rightarrow \infty} S_N = L\]
+    $(S_{2N})^\infty_{N=1}$ is increasing, so 
+    \[L = \sup \{(S_{2N})_{N=1}^\infty\} \implies S_{2N} \leq L\]
+    Similarily, $(S_{2N-1})^\infty_{N=1}$ is decreasing, so
+    \[L = \inf\{(S_{2N_1})_{n=1}^\infty\} \implies S_{2N - 1} \geq L\] 
+
+\end{proof}
+
+\section{Integral Test}
+
+\begin{prop}
+    Let $f: [1,\infty) \rightarrow \real$. Suppose that
+    \begin{enumerate}[label=(\roman*)]
+        \item $f(x) \geq 0$ $\forall x \in [1,\infty)$
+        \item $f$ is decreasing
+    \end{enumerate}
+    Then 
+    \begin{center}
+        $\sum_{n=1}^\infty f(n)$ converges $\iff$ the improper integral $\int_1^\infty f(x) \ dx$ converges.
+    \end{center}
+\end{prop}
+
+\section{Cauchy Convergence Criterion for Series}
+
+\begin{prop}
+    Let $\infseq{a}$ be a sequence of real numbers. Then
+    \begin{center}
+        $\sum_{n=1}^\infty a_n$ converges $\iff$ $\forall \epsilon > 0$ $\exists N_0$ such that $N \leq M \leq N_0$, $|\sum_{n=M}^N a_n| \epsilon$. 
+    \end{center}
+\end{prop}
+\begin{proof}
+    Let 
+    \[S_N \coloneqq \sum_{n=1}^N a_n\]
+    Then $\sum_{n=1}^\infty a_n$ converges $\iff$ $(S_N)_{N=1}^\infty$ converges. Cauchy convergence criterion for sequences says that 
+    \begin{center}
+        $(S_N)^\infty_{n=1}$ converges $\iff$ it is cauchy.
+    \end{center}
+    \[\iff \forall \epsilon > 0 \ \exists N_0 \ s,t \ |S_N - S_M| < \epsilon \ \forall N,M \geq N_0\]
+\end{proof}
+
+\section{Topology of $\real^d$}
+\subsection{Norms}
+\begin{definition}
+    A norm on $\real^d$ is a function $||\cdot||: \real^d \rightarrow [0,\infty)$ satisfying the following properties:
+    \begin{enumerate}[label=(\roman*)]
+        \item $||a|| = 0 \iff a = (0,\dots,0)$
+        \item $||ca|| = |c|\cdot||a|| \ \forall c \in \real, a \in \real^d$
+        \item $||a+b|| \leq ||a|| + ||b|| \ \forall a,b \in \real^d$
+    \end{enumerate}
+\end{definition}
+The euclidean norm of $\real^d$ is given by
+\[||a,\ldots,a_d||_2 = \sqrt{\sum_{i=1}^d a_i^2}\]
+The dot prdouct on $\real^d$ is given by
+\[(a_1,\ldots,a_n) \cdot (b_1,\ldots,b_n) = \sum_{i=1}^d a_ib_i\]
+We also have the $l_1$-norm
+\[||(a_1,\ldots, a_n)||_1 =\sum_{i=1}^d |a_i|\]
+And the $l_\infty$-norm
+\[||(a_1,\ldots, a_d)||_\infty = \max\{|a_1|,\ldots,|a_d|\}\]
+\begin{prop}
+    Let $a,b\in\real^d$, write $||\cdot||$ for the euclidean norm on $\real^d$. Then
+    \begin{enumerate}[label=(\roman*)]
+        \item \textbf{Cauchy Schwarz Inequality:} 
+        \[|a\cdot b| \leq ||a||\cdot||b||\]
+        \item \textbf{Triangle Inequality:}
+        \[||a+b|| \leq ||a|| + ||b||\]
+        \item $||\cdot||$ is a norm on $\real^d$
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    ~\newline
+    \begin{enumerate}[label=(\roman*)]
+        \item Consider the equadratic function
+        \begin{align*}
+            P(t) &= ||a+tb||^2\\
+                &=(a+tb)\cdot(a+tb)\\
+                &=a\cdot a + 2a\cdot tb + tb\cdot tb\\
+                &=||a||^2 + 2t(a\cdot b) + t^2||b||^2
+        \end{align*}
+        The discriminant of $P(t)$ is less than or equal to 0,
+        \begin{align*}
+            (2a\cdot b)^2 - 4||a||^2||b||^2 &\leq 0\\
+            (a\cdot b)^2 &\leq ||a||^2||b||^2\\
+            |a\cdot b| &\leq ||a||\cdot||b||
+        \end{align*}
+        \item 
+        \begin{align*}
+            ||a+b||^2 &= ||a||^2 + 2a\cdot b + ||b||^2\\
+                    &\leq ||a||^2 + 2|a\cdot b|| + ||b||^2\\
+                    &\leq ||a||^2 + 2||a||\cdot||b|| + ||b||^2\\
+                    &= (||a|| + ||b||)^2
+        \end{align*}
+        \[||a+b||^2 \leq (||a|| + ||b||)^2 \implies ||a+b|| \leq ||a||+||b||\]
+        \item \textbf{Exercise.} We want to prove $||a|| = 0 \iff a = 0$ and $||ca|| = |c|\cdot||a||$.
+    \end{enumerate}
+\end{proof}
+%----------------------------Lecture 9 ----------------------------------
 \chapter{$\real^d$}
 \textbf{Recall:} $||(x_1, \dots, x_d)|| \coloneqq \sqrt{x_1^2 + \cdots + x_d^2}$. This is a norm. i.e. 
 $$||a + b|| \leq ||a||_2 + ||b||_2 \ \forall a,b \in \real^d$$ 
@@ -119,7 +426,9 @@ $\{a_n: n \in \nat_{\geq 1}\}$ is a bounded set.
 \end{theorem}
 \begin{proof}
     Write $a_n = (a_n^{(1)}, \dots, a_n^{(d)})$.\\ 
-    \textbf{Naive Attempt:} TBC.
+    We will prove it by indunction on $d$. For $d = 1$, this is the Bolzano-Weierstrass theorem for $\real$ For $d>1$ write
+    \[b_n \coloneq (a_n^{(1)}, \ldots, a_n^{(d-1)}) \in \real^{d-1}\]
+    By the induction hypothesis, $b_n$ has a subsequence $(b_{n_k})_{k=1}^\infty$ that converges. Let $L \in \real^{d-1}$ be the limit of this subsequence. Then $L \in \real^{d-1}$ is the limit of $b_n$. $(a^{(d)}_{n_k})^\infty_{k=1}$ is a bounded sequence in $\real$, so it has a subsequence $(a^{(d)}_{n_{k_j}})^\infty_{j=1}$ that converges. Let $L^{(d)} \in \real$ be the limit of this subsequence. Then $L = (L^{(1)}, \ldots, L^{(d-1)}, L^{(d)})$ is the limit of $a_n$.
 \end{proof}
 \chapter{Open and Closed Sets in $\real^d$}
 Roughly, an open set is one that we draw with dotted lines. The line represents a "boundary" that is the not in the set. This is not a rigorous definition.
@@ -254,9 +563,60 @@ $$\partial A = \real$$
 \begin{definition}
     A set $A \subseteq \real^d$ is (sequentially) compact if every sequence $\infseq{a}$ in $A$ has a subsequence $(a_{n_k})^\infty_{k = 1}$ that converges to a point in $A$.
 \end{definition}
-\textbf{Example}
-TBC
-
+\textbf{Example 1:} Is [0,1] compact? Yes.
+\begin{proof}
+    \textbf{Recall:} Bolzano-Weierstrass theorem states bounded sequence has a convergent subsequence. \\[1ex]
+    Therefore, every sequence $\infseq{a}$ in $[0,1]$ has a subsequence $\seq{a_n}{k}{\infty}$ that converges. So
+    $$0 \leq a_{n_k} \leq 1 \implies 0 \leq \lim_{k \rightarrow \infty} a_{n_k} \leq 1$$
+    $$\therefore L \in [0,1]$$
+\end{proof}
+\textbf{Example 2:} Is (0,1) compact? No.
+\begin{proof}
+    By counter example, let $a_n \coloneqq \frac{1}{n+1}$, so $a_n \rightarrow 0$. Therefore
+    for all subsequences of $a_n$, $a_{n_k} \rightarrow 0$. So there exists no subsequence which converges
+    to a point in (0,1).
+\end{proof}
+\textbf{Example 3:} Is $[0,\infty)$ compact? No.
+\begin{proof}
+    The Bolzano-Weierstrass theorem does not apply since $[0,\infty)$ is unbounded.
+    Set $a_n \coloneqq n$, then $a_n \rightarrow \infty$, so it has no bounded subsequence
+    and therefore no convergent subsequences.
+\end{proof}
+\begin{theorem}[Heine-Borel]
+    Let $A \subseteq \real^d$. $A$ is compact $\iff$ A i$s$ closed and not bounded.
+\end{theorem}
+\begin{proof}
+    ($\implies$) Similar to example 1. Assume $A$ is closed and bounded. Let $\infseq{a}$ be a sequence in $A$.
+    The sequence is bounded since $A$ is, so by the Bolzano-Weierstrass theorem for $\real^d$, it has a subsequence $\seq{a_n}{k}{\infty}$ that converges to some $L \in \real^d$. $a_{n_k} \in A$ $\forall k$ and $a_{n_k} \rightarrow L$ and $A$ is closed, so by the sequential characterization of closedness, $L \in A$, therefore $A$ is compact.\\[2ex]
+    ($\impliedby$) Assume $A$ is compact. To show $A$ is closed, assume for a contradction that $A$ is not closed. Therefore there exists a sequence $\seq{a}{n}{\infty}$ in $A$ such that $a_n \rightarrow L\not\in A$. Then for any subsequence $\seq{a_n}{k}{\infty}$, we have 
+    $$a_n \rightarrow L \not\in A$$
+    This contradicts that $A$ is compact, therefore $A$ is closed. \\[1ex]
+    Tow show $A$ is bounded, assume for a contradiction that $A$ is not bounded. Then $\forall n \in \nat_{\geq1}$, there exists $a_n \in A$ such that $||a_n||_2 \geq n$. This gives a sequence $\seq{a}{n}{\infty}$. Since $A$ is compact, it has a subsequence $\seq{a_n}{k}{\infty}$ that converges. But 
+    \[||a_{n_k}||_2 \geq n_k \rightarrow \infty\]
+    So $\seq{a_n}{k}{\infty}$ is unbounded, which is a contradiction.
+\end{proof}
+\begin{prop}
+~\newline
+    \begin{enumerate}[label=(\roman*)]
+        \item If $k_1, \ldots, k_n \subseteq \real^d$ are compact, then $\bigcup_{i=1}^n k_i$ is compact.
+        \item If $k_1, \ldots, k_n \subseteq \real^d$ are compact, then $\bigcap_{i=1}^n k_i$ is compact.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    \textbf{Exercise:}
+    \begin{enumerate}[label=(\roman*)]
+        \item Assume $A \coloneqq \bigcup_{i=1}^n k_i$. Let $\infseq{a}$ be a sequence in $A$. Then there exists $i \in \{1, \ldots, n\}$ such that $a_n \in k_i$. Since $k_i$ is compact, it has a subsequence $\seq{a_n}{k}{\infty}$ that converges to some $L \in \real^d$. $L \in k_i$ and $k_i \subseteq A$, so $L \in A$. Therefore $A$ is compact.\\[2ex]
+        \item Assume $A \coloneqq \bigcap_{i=1}^n k_i$. Let $\infseq{a}$ be a sequence in $A$. Then $a_n \in k_i$ $\forall i \in \{1, \ldots, n\}$. Since $k_i$ is compact, it has a subsequence $\seq{a_n}{k}{\infty}$ that converges to some $L \in \real^d$. $L \in k_i$ $\forall i \in \{1, \ldots, n\}$ and $k_i \subseteq A$, so $L \in A$. Therefore $A$ is compact.
+    \end{enumerate}
+\end{proof}
+\begin{definition}
+    $A \subseteq \real^d$ is \textbf{compact} if for any collection
+    \[U_\alpha: \alpha \in I\]
+    of open sets such that 
+    \[A \subseteq \bigcup_{\alpha \in I} U_\alpha\]
+    There exists finitely many indeces $\alpha_1, \ldots, \alpha_n$ such that 
+    \[A \subseteq \bigcup_{i=1}^n U_{\alpha_i}\]
+\end{definition}
 \chapter{Limits of a Function of Continous Variables}
 A sequence is a function $\nat \rightarrow \real$. Here, we'll consider function 
 that are going from $\real \rightarrow \real$ (or $\real^d \rightarrow \real^m$).
@@ -429,7 +789,9 @@ $\lim_{x\rightarrow 0}f(x)$ does not exist but $\lim_{n\rightarrow \infty}f(\fra
     $f,g,h: X \rightarrow \real$
     $$f(x) \leq g(x) \leq h(x) \ \forall x \in X$$
     and 
-    $$\lim_{x\rightarrow a} f(x) =  TBC$$
+    $$\lim_{x\rightarrow a} f(x) =  \lim_{x \rightarrow a} h(x) = L$$
+    Then
+    $$\lim_{x\rightarrow a} g(x) = L$$
 \end{theorem}
 \begin{proof}
     \textbf{Exercise}
@@ -438,7 +800,7 @@ If $f: X \rightarrow \real_m$, We can define functions
 $$f_1, \ldots, f_m: X \rightarrow \real$$
 by 
 $$(f_1(x), \ldots, f_m(x)) = f(x)$$
-$f_1, \ldots, f_m$ are called the \emph{component functions} of $f$.
+$f_1, \ldots, f_m$ are callF    ed the \emph{component functions} of $f$.
 \begin{prop}
     Let $X \in \real^d$, $a \in \real^d$ a limit point of $X$, $f: X \rightarrow \real^m$,
     $f_1,\ldots, f_m$ its component functions. $L = (L_1, \ldots, L_m) \in \real^m$. Then
@@ -454,7 +816,7 @@ $f_1, \ldots, f_m$ are called the \emph{component functions} of $f$.
             $\lim_{x\rightarrow a^+} f(x) = L$ to mean that 
             $$\lim_{x \rightarrow a} g(x) = L$$
             where 
-            $$g = f \mid_{X \cap (a, \infty)}$$
+            $$g = f{\big|}_{X \cap (a, \infty)}$$
         \item If $a$ is a limit point of $X \cap (-\infty,a)$ then we write
         $\lim_{x\rightarrow a^+} f(x) = L$ to mean that 
         $$\lim_{x \rightarrow a} g(x) = L$$
@@ -466,6 +828,7 @@ $f_1, \ldots, f_m$ are called the \emph{component functions} of $f$.
 $$f(x)\coloneqq \begin{cases}
     -1, x < 0\\
     0, x = 0\\
-    1, x x > 0
+    1, x > 0
 \end{cases}$$
+$$\lim_{x \rightarrow 0^+} f(x) = 1 \neq \lim_{x \rightarrow 0^-} f(x) = -1$$
 \end{document}
