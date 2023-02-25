@@ -31,3 +31,33 @@
 \newcommand{\infser}[1]{\sum_{n=1}^\infty #1_n}
 
 
+\newtheorem{manualtheoreminner}{Theorem}
+\newenvironment{manualtheorem}[1]{%
+  \renewcommand\themanualtheoreminner{#1}%
+  \manualtheoreminner
+}{\endmanualtheoreminner}
+
+\newtheorem{manualcorollaryinner}{Corollary}
+\newenvironment{manualcorollary}[1]{%
+  \renewcommand\themanualcorollaryinner{#1}%
+  \manualcorollaryinner
+}{\endmanualcorollaryinner}
+
+\newtheorem{manuallemmainner}{Lemma}
+\newenvironment{manuallemma}[1]{%
+  \renewcommand\themanuallemmainner{#1}%
+  \manuallemmainner
+}{\endmanuallemmainner}
+
+\newtheorem{manualdefinitioninner}{Definition}
+\newenvironment{manualdefinition}[1]{%
+  \renewcommand\themanualdefinitioninner{#1}%
+  \manualdefinitioninner
+}{\endmanualdefinitioninner}
+
+
+\newtheorem{manualpropinner}{Proposition}
+\newenvironment{manualprop}[1]{%
+  \renewcommand\themanualpropinner{#1}%
+  \manualpropinner
+}{\endmanualpropinner}
