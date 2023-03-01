@@ -132,7 +132,7 @@
         If the sequence isn't bounded, then either $\limsup\limits_{n\rightarrow\infty}a_n = \infty$ or $\liminf\limits_{n\rightarrow\infty} a_n = -\infty$, in either case the result is trivial. So assume that the sequence is bounded. Consider the sets used to define $\limsup$ and $\liminf$
         \[S \coloneqq \{\beta : \real : \exists n_0 \text{ such that } a_n \leq \beta \ \  \forall n \geq n_0\}\]
         \[T \coloneqq \{\alpha : \real : \exists m_0 \text{ such that } a_n \geq \alpha \ \ \forall n \geq m_0\}\]
-        So we have $\alpha \in T$ and $\beta \in S$, then for all $n \geq \max{n_0, m_0}$, we have
+        So we have $\alpha \in T$ and $\beta \in S$, then for all $n \geq \max\{n_0, m_0\}$, we have
         \[\alpha \leq a_n \leq \beta\]
         Thus, we have shown that for every $\alpha \in T$, and every $\beta \in S$, we have $\alpha \leq \beta$. From the definition of $\limsup$ and $\liminf$, we get that for any eventual lower bound $\alpha \in T$, it is a lower bound for the set of upper bounds $S$, so
         \[\alpha \leq \inf T = \limsup_{n\rightarrow\infty} a_n \]
@@ -167,16 +167,125 @@
     So, we have
     \[\lim_{N\rightarrow \infty} \left(1 + \frac{N}{2}\right) = \infty\]
     But, $S_{2^N} > 1 + \frac{N}{2}$ for all $N \in \nat$, so we have that the partial sums diverge. Therefore, the series diverges.
+\end{proof}
 
-     
+
+\begin{manualprop}{3.1.7}[Divergence Test]
+    Let $\infseq{a}$ bea sequence of real numbers. If the series
+    \[\infser{a}\]
+    converges, then
+    \[\lim_{n\rightarrow\infty} a_n = 0\]
+\end{manualprop}
+\begin{proof}
+    Suppose $\infser{a}$ converges to $L$. Set $L \coloneqq \infser{a}$. Consider the partial sums
+    \[S_N = \sum_{n=1}^N a_n\]
+    so $\lim\limits_{n\rightarrow\infty}S_N = L$. We also have that $\lim\limits_{n\rightarrow\infty}S_{N-1} = L$, since 
+    \[\lim_{N\rightarrow\infty} S_{N-1} = \lim_{N\rightarrow\infty} \sum_{n=1}^{N-1} a_n = \sum_{n=1}^{\infty-1} a_n = \sum_{n=1}^{\infty} a_n = L\]
+    Then, we have that 
+    \[S_N - S_{N-1} = \sum_{n=1}^N a_n - \sum_{n=1}^{N-1} a_n = a_N\]
+    So, 
+    \[\lim_{N\rightarrow \infty} S_N - S_{N-1} = L - L = 0\]
+    \[\lim_{N\rightarrow \infty} S_N - \lim_{N\rightarrow\infty} S_{N-1} = \lim_{N\rightarrow \infty} \sum_{n=1}^N a_n - \lim_{N\rightarrow \infty} \sum_{n=1}^{N-1} a_N = \lim_{N\rightarrow \infty} a_n = 0\]
+\end{proof}
+
+\begin{manualprop}{4.2.3}
+    Let $\infseq{a}$ be a sequence in $\real^d$, with 
+    \[a_n = (a_n^{(1)}, \ldots, a_n^{(d)}) \text { for each } n \in \nat\]
+    and let $L = (L_1, \ldots, L_d) \in \real^d$. Then
+    \[\lim_{n\rightarrow\infty} a_n = L\]
+    if and only if, for each $i = 1, \ldots, d$,
+    \[\lim_{n\rightarrow\infty} a_n^{(i)} = L_i\]
+\end{manualprop}
+\begin{proof}
+    ($\implies$) Assume that $\lim\limits_{n\rightarrow\infty} a_n = L$. Then, for each $i = 1, \ldots, d$, we have that $|x_i|^2 \leq \sum_{i=1}^{d} x_i^2 = ||x||_2^2$, therefore 
+    \[|x_i| \leq ||x||_2\]
+    Using this fact, we then have each component of $||a_n - L||_2$ is less than or equal to it. So 
+    \[|a_n^{(i)} - L_i| \leq ||a_n - L||_2\]
+    \[-||a_n - L||_2 \leq a_n^{(i)} - L_i \leq ||a_n-L||_2\]
+    Since $\lim\limits_{n\rightarrow \infty}a_n = L$, we have 
+    $\lim\limits_{n\rightarrow\infty} a_n - L = 0$. By the Squeeze theorem, it follows that 
+    \[\lim_{n \rightarrow \infty} a_n^{(i)} - L_i = 0 \implies \lim_{n\rightarrow \infty} a_n^{(i)} = L\]
+    ($\impliedby$) Suppose for each $i = 1, \ldots, d$, we have 
+    \[\lim_{n\rightarrow\infty} a_n^{(i)} = L_i\]
+    Then, from the definition of $||\cdot||_2$, we have 
+    \[||a_n -L||_2^2 = (a_n^{(1)} - L_1)^2 + \cdots + (a_n^{(d)} - L_d)^2\]
+    Now taking limits of both sides
+    \[\lim_{n\rightarrow\infty} ||a_n - L||_2^2 = \lim_{n\rightarrow\infty} (a_n^{(1)} - L_1)^2 + \cdots + \lim_{n\rightarrow\infty} (a_n^{(d)} - L_d)^2\]
+    Now we'll prove exercise 2.2.5 which states that if $\infseq{a}$ is a sequence of non-negative real number converging to $L \geq 0$, then $\lim\limits_{n \rightarrow \infty} \sqrt{a_n}$ converges to $\sqrt{L}$. To prove this we will consider two cases where $L = 0$, and $L > 0$. 
+    \begin{itemize}
+        \item \textbf{Case 1, L = 0}: Suppose $\infseq{a} \rightarrow 0$, then from the definition of convergence we have that $\forall \epsilon > 0$, $\exists n_0$ such that $\forall n \geq n_0$, 
+        \[|a_n - 0| < \epsilon\]
+        Since $\epsilon$ is abritrary, we'll replace $\epsilon$ with $\epsilon^2$, so 
+        \[|a_n - 0| < \epsilon^2\]
+        Then we get 
+        \[|a_n - 0| = |a_n| < \epsilon^2 \implies \sqrt{|a_n|} < \epsilon\]
+        Therefore, $\sqrt{a_n} \rightarrow 0$ by the definition of convergence.
+        \item \textbf{Case 2, $L > 0$}: Suppose $\infseq{a} \rightarrow L > 0$. Let $\epsilon >0$ be given, then there exists $n_0$ such that for all $n \geq n_0$,
+        \[|a_n - L| < \epsilon\]
+        We much such that $|\sqrt{a_n} - \sqrt{L}| < \epsilon$
+        \[|\sqrt{a_n} - \sqrt{L}| \cdot \frac{\sqrt{a_n} + \sqrt{L}}{\sqrt{a_n} + \sqrt{L}} = \frac{|(\sqrt{a_n} - \sqrt{L})(\sqrt{a_n} + \sqrt{L})|}{\sqrt{a_n} + \sqrt{L}}\]
+        Since $\sqrt{a_n} + \sqrt{L}$ is positive because $a_n, L \geq 0$, then $\sqrt{a_n} + \sqrt{L} = |\sqrt{a_n} + \sqrt{L}|$, then using the fact that $|a|\cdot|b| = |a\cdot b|$, we get 
+        \[\frac{|a_n - \sqrt{L}\sqrt{a_n} + \sqrt{L}\sqrt{a_n} + L|}{\sqrt{a_n} + \sqrt{L}} = \frac{|a_n - L|}{\sqrt{a_n} + \sqrt{L}} \leq \frac{|a_n - L|}{\sqrt{L}}\]
+        Now if we replace $\epsilon$ with $\epsilon \over \sqrt{L}$, we get 
+        \[|\sqrt{a_n} - \sqrt{L}| < \frac{|a_n - L|}{\sqrt{L}} < \frac{\epsilon}{\sqrt{L}} \implies |\sqrt{a_n} - \sqrt{L}| < \epsilon\]
+        Therefore, $\lim\limits_{n\rightarrow\infty}\sqrt{a_n} = \sqrt{L}$
+    \end{itemize}
+    Now going back to the original proof, 
+    \[\lim_{n\rightarrow \infty} ||a_n - L||_2^2 = 0\]
+    So from exercise 2.2.5 we have
+    \[\lim_{n\rightarrow \infty} \sqrt{||a_n - L||^2_2} = \sqrt{0}\]
+    Therefore,
+    \[\lim_{n \rightarrow \infty} ||a_n - L||_2 = 0\]
+    as required.
 \end{proof}
 
 
 
 
 
+%-------------- Lecture 1 ------------------------
 \chapter{The Real Numbers $\real$}
-TBC.
+\begin{center}
+    \textbf{Summary:} $\real$ is a complete ordered field.
+\end{center}
+\section{Fields}
+\begin{definition}
+    A \emph{field} is a set F together with operations $+,\cdot$ satisfying
+    \begin{itemize}
+        \item (F1) $a+b=b+a$ $\forall a,b \in F$ (Commutativity)
+        \item (F2) $(a + b) + c = a + (b + c)$ $\forall a,b,c \in F$     (Associativity)
+        \item (F3) $\exists 0 \in F$ s.t $0 + a = a$ $\forall a \in F$ (Additive Identity)
+        \item (F4) $\exists -a \in F$ s.t $a + (-a) = 0$ $\forall a \in F$ (Additive Inverse)
+        \item (F5) $a\cdot b = b \cdot a$ $\forall a,b \in F$ (Commutativity)
+        \item (F6) $(a \cdot b) \cdot c = a \cdot (b \cdot c)$ $\forall a,b,c \in F$ (Associativity)
+        \item (F7) $\exists 1 \in F$ s.t $1 \cdot a = a$ $\forall a \in F$ (Multiplicative Identity)
+        \item (F8) $\forall a \in F \setminus \{0\}$ $\exists a^{-1} \in F$ s.t $a^{-1} \cdot a = 1$ (Multiplicative Inverse)
+        \item (F9) $a \cdot (b + c) = a \cdot b + a \cdot c$ $\forall a,b,c \in F$ (Distributivity)
+    \end{itemize}
+\end{definition}
+
+\section{Ordered Fields}
+
+\begin{definition}
+    An \emph{ordered field} is a field $F$ along with a relation $<$ satistfying
+    \begin{itemize}
+        \item (O1) $\forall a,b,c \in F$, if  $a < b$ and $b < c$ then $a<c$ (Transitivity)
+        \item (O2) $\forall a,b \in F$ exactly one of the following is true,
+        \[a < b \text{ or } a = b \text{ or } b < a\]
+        \item (O3) $\forall a,b,c \in F$, if $a < b$, then $a + c < b + c$
+        \item $\forall a,b,c \in F$, If $a < b$ and $0 < c$, then $ac < bc$
+    \end{itemize}
+\end{definition}
+
+\section{Complete Ordered Fields}
+\begin{definition}
+    Let F be an ordered field. Let $S \subseteq F$. An upper bound or $S$ is some $M \in F$ s.t $\forall x \in S$
+    \[x \leq M\]
+
+\end{definition}
+
+
+
 \chapter{Completeness of $\real$, Absolute Value, Sequences }
 TBC.
 \chapter{Convergence of Sequences}
