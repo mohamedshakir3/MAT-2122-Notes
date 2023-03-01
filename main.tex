@@ -239,6 +239,79 @@
     as required.
 \end{proof}
 
+\begin{manualtheorem}{4.2.2}[Cauchy Covergence $\real^d$]
+    Let $\infseq{a}$ be a sequence $\real^d$. Then it converges if it converges if and only if it is cauchy.
+\end{manualtheorem}
+\begin{proof}
+    Suppose $\infseq{a}$ is a sequence in $\real^d$ that converges to $L \in \real^d$. Let $\epsilon > 0$ be given, then there exists $n_0$ such that $\forall m,n \geq n_0$,
+    \[||a_n - L||_2 < \epsilon\]
+    \[||a_m - L||_2 < \epsilon\]
+    Since $\epsilon$ arbitrary we can replace $\epsilon$ with $\frac{\epsilon}{2}$, so 
+    \[||a_n-L||_2 = \frac{\epsilon}{2} \text{ and } ||a_m - L||_2 = \frac{\epsilon}{2}\]
+    So,
+    \[||a_m - a_n||_2 = ||a_m - L + L - a_n||_2 \leq ||a_m - L||_2 + ||L - a_n||_2\]
+    \[= ||a_m - L||_2  + ||a_n - L||_2 < \frac{\epsilon}{2} +  \frac{\epsilon}{2} = \epsilon\]
+\end{proof}
+
+\begin{manualprop}{4.3.4}
+    Given $a \in \real^d$, and $r > 0$, the open ball $B(a,r)$ is an open set. 
+\end{manualprop}
+\begin{center}
+    \textbf{Note: This is example 4.3.4 from the professors notes.}
+\end{center}
+\begin{proof}
+    Recall the definition of an open set is that for any $x$ in the set, we can define an open ball (or epsilon neighborhood) around $x$ such that the ball is contained in the set. So we want an open ball $B(x;\epsilon)$ such that $B(x;\epsilon) \subseteq B(a;r)$. To see this, let $x \in B(a;r)$, so that $||x-a||_2 < r$. Define 
+    \[\epsilon \coloneqq r - ||a-x||_2 > 0\] 
+    Now take some element $y \in B(x;\epsilon)$, then we want to show that tis element is contained in $B(a;r)$. So, $y \in B(x;\epsilon)$, so that $||y-x||_2 < \epsilon$. Then,
+    \begin{align*}
+        ||y-a||_2 = ||y - x + x -a||_2 &\leq ||y - x||_2 + ||x -a||_2\\
+        &< \epsilon + ||a-x||_2 = r
+    \end{align*}
+    Therefore, 
+    \[||y-a||_2 < r\]
+    So $y \in B(a;r)$ as required, so $B(a;r)$ is an open set.
+\end{proof}
+
+
+\begin{manualprop}{4.3.5}
+    \begin{enumerate}[label=(\roman*)]
+        \item The sets $\emptyset$, $\real^d$ are open
+        \item For any finite collection of open sets, $U_1, \ldots, U_m \subseteq \real^d$, their intersection is
+        \[U_1 \cap \cdots \cap U_m\]
+        is open
+        \item For any arbitrary collection of open sets $\{U_\alpha: \alpha \in I\}$, their union,
+        \[\bigcup_{\alpha\in I} U_\alpha\]
+        is open.
+    \end{enumerate}
+\end{manualprop}
+\begin{proof}
+    \begin{enumerate}[label=(\roman*)]
+        \item $(i)$ and $(ii)$ are Exercise 4.3.1
+        \item Will add them later!
+        \item Set
+        \[U \coloneqq \bigcup_{\alpha\in I} U_\alpha\]
+        Since $U_\alpha$ is open, there is some $\epsilon > 0$ such that 
+        \[B(x;\epsilon) \subseteq U_\alpha\]
+        Then since $U$ is the union of all the $U_\alpha$, we have that $U_\alpha \subseteq U$ so it follows that 
+        \[B(x;\epsilon) \subseteq U\]
+        as required. 
+    \end{enumerate}
+\end{proof}
+
+\begin{manualtheorem}{4.4.5}[Heine-Borel Theorem]
+    Let K be a subset of $\real^d$. Then K is compact if and only if K is closed and bounded.
+\end{manualtheorem}
+\begin{proof}
+   ($\implies$) Suppose that $K$. To see that $K$ is closed, suppose for a contradiction that it is not closed. By proposition 4.3.9, $F$ is closed if and only if for every sequence $\infseq{a}$ in $F$, if $\infseq{a}$ converges then 
+   \[\lim_{n\rightarrow \infty} a_n \in F\]
+   So, if $K$ is not closed, then it follows that there exists some sequence $\infseq{a}$ such that 
+   \[\lim_{n\rightarrow\infty} a_n \not\in K\]
+   Then by proposition 2.5.4, if a sequence $\infseq{a}$ converges, then all subsequences of the sequence converge to the same point, and hence no subsequence converges to a point in $K$. This contradicts the fact that $K$ is compact. Similarly for the boundess of $K$, suppose for a contradiction that $K$ was not bounded. Then for any $n \in \nat$, there exists $a_n \in K$ such that $||a_n||_2 \geq n$. So the sequence $\infseq{a}$ is unbounded, as well as all subsequences $(a_{n_k})^\infty_{k=1}$. Therefore, no subsequence converge since they are all unbounded. This contradicts the fact that $K$ is compact.\\[2ex]
+   ($\impliedby$) Assume $K$ is closed and bounded. Since $K$ is bounded, any sequence $\infseq{a}$ in $K$ is bounded. Then by the Bolzano-Weierstrass theorem, $\infseq{a}$ is bounded so there exists a convergent subsequence $(a_{n_k})_{k=1}^\infty$ that converges to some $L \in \real^d$. Since $K$ is closed, from proposition 4.3.9 we have that 
+   \[\lim_{k\rightarrow\infty} a_{n_k} \in K\]
+   Therefore every sequence $\infseq{a}$ has a subsequence $(a_{n_k})_{k=1}^\infty$ that converges to some $L \in K$, so $K$ is compact.
+\end{proof}
+    
 
 
 
