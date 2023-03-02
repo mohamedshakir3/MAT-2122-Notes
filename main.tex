@@ -211,7 +211,7 @@
     Then,
     \begin{enumerate}[label=(\roman*)]
         \item if $\sum\limits_{n=1}^\infty b_n$ converges, then so does $\sum\limits_{n=1}^\infty a_n$
-        \item if $\sum\limits_{n=1}^\infty a_n$ diverges, then so does $\sum\limits_{n=1}^\infty a_n$
+        \item i1f $\sum\limits_{n=1}^\infty a_n$ diverges, then so does $\sum\limits_{n=1}^\infty a_n$
     \end{enumerate}
 \end{manualprop}
 \begin{proof}
@@ -222,6 +222,27 @@
     for all $M$. Therefore
     \[\sum_{N=1}^N a_n \leq \sum_{N=1}^N b_n \leq M\]
     Therefore, by the Boundedness test, $\sum\limits_{n=1}^\infty a_n$ converges. $(ii)$ is the contrapositive of $(i)$ so it follows that it holds. 
+\end{proof}
+
+\begin{manualprop}{3.2.3}[Absolute Convergence Test]
+    Let $\infseq{a}$ be a sequence of real numbers. If the series 
+    \[\infser{|a}|\]
+    converges, then so does 
+    \[\infser{a}\]
+\end{manualprop}
+\begin{proof}
+    Assume $\infser{|a}|$ converges, Write 
+    \[(a_n)_+ = \max\{a_n, 0\}\]
+    \[(a_n)_- = \max\{-a_n, 0\}\]
+    So $(a_n)_+$ is all the positive terms from $a_n$ and $(a_n)_-$ is all the negative terms from $a_n$, but we are negating them so that they are positive, so we have 
+    \[a_n = (a_n)_+ - (a_n)_-\]
+    Then, we have that 
+    \[0 \leq (a_n)_+ \leq |a_n|\] 
+    So, by the Comparison Test, we have that $|a_n|$ converges so $\sum\limits_{n=1}^\infty (a_n)_+$ converges. Similarily, 
+    \[0 \leq (a_n)_- \leq |a_n|\]
+    Therefore by the Comparison Test, $\sum\limits_{n=1}^\infty (a_n)_-$ converges. So by linearity,
+    \[\sum_{n=1}\infty a_n = \sum_{n=1}\infty (a_n)_+ - \sum_{n=1}\infty (a_n)_- \]
+    converges.
 \end{proof}
 
 \begin{manualprop}{4.2.3}
