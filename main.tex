@@ -188,6 +188,42 @@
     \[\lim_{N\rightarrow \infty} S_N - \lim_{N\rightarrow\infty} S_{N-1} = \lim_{N\rightarrow \infty} \sum_{n=1}^N a_n - \lim_{N\rightarrow \infty} \sum_{n=1}^{N-1} a_N = \lim_{N\rightarrow \infty} a_n = 0\]
 \end{proof}
 
+
+\begin{manualprop}{3.2.1}[Boundedness Test]
+    Let $\infseq{a}$ be a sequence of real numbers. Suppose that
+    \begin{enumerate}[label=(\roman*)]
+        \item $a_n \geq 0$ for all $n$, and
+        \item There is a bound $M \in \real$ on the partial sums, so that
+        \[\sum_{n=1}^N a_n \leq M\]
+        for all $N \in N_{\geq 1}$.
+    \end{enumerate}
+    Then $\infser{a}$ converges.
+\end{manualprop}
+\begin{proof}
+    Since $a_n \geq 0$, the partial sums $(S_N)_{N=1}^\infty$ satisfy
+    \[S_N \leq S_{N+1} \text{ for all $N$.}\]
+    In other words, $(S_N)^\infty_{N=1}$ is an increasing sequence. The second condition ensures that the sequence is bounded above. Therefore, by the Monotone Convergence Criterion, it converges. Therefore, $\sum\limits_{n=1}^\infty a_n$ converges.
+\end{proof}
+
+\begin{manualprop}{3.2.2}[Comparison Test]
+    Let $\infseq{a}$ and $\infseq{b}$ be sequences of real numbers such that
+    \[0 \leq a_n \leq b_n \text{ for all n}\]
+    Then,
+    \begin{enumerate}[label=(\roman*)]
+        \item if $\sum\limits_{n=1}^\infty b_n$ converges, then so does $\sum\limits_{n=1}^\infty a_n$
+        \item if $\sum\limits_{n=1}^\infty a_n$ diverges, then so does $\sum\limits_{n=1}^\infty a_n$
+    \end{enumerate}
+\end{manualprop}
+\begin{proof}
+    Since the sequence $\sum\limits_{n=1}^\infty$ converges, take $M \coloneqq \sum\limits_{n=1}^\infty$. Then, we have the sequence of partial sums 
+    \[\left(\sum_{n=1}^\infty b_n\right)_{n=1}^\infty\]
+    is increasing and converges to $M$, so $M$ is the supremum of this sequence, therefore
+    \[\sum_{N=1}^N b_n \leq M \]
+    for all $M$. Therefore
+    \[\sum_{N=1}^N a_n \leq \sum_{N=1}^N b_n \leq M\]
+    Therefore, by the Boundedness test, $\sum\limits_{n=1}^\infty a_n$ converges. $(ii)$ is the contrapositive of $(i)$ so it follows that it holds. 
+\end{proof}
+
 \begin{manualprop}{4.2.3}
     Let $\infseq{a}$ be a sequence in $\real^d$, with 
     \[a_n = (a_n^{(1)}, \ldots, a_n^{(d)}) \text { for each } n \in \nat\]
