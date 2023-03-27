@@ -1200,7 +1200,7 @@ If $f: X \rightarrow \real_m$, We can define functions
 $$f_1, \ldots, f_m: X \rightarrow \real$$
 by 
 $$(f_1(x), \ldots, f_m(x)) = f(x)$$
-$f_1, \ldots, f_m$ are callF    ed the \emph{component functions} of $f$.
+$f_1, \ldots, f_m$ are called the \emph{component functions} of $f$.
 \begin{prop}
     Let $X \in \real^d$, $a \in \real^d$ a limit point of $X$, $f: X \rightarrow \real^m$,
     $f_1,\ldots, f_m$ its component functions. $L = (L_1, \ldots, L_m) \in \real^m$. Then
@@ -1231,4 +1231,212 @@ $$f(x)\coloneqq \begin{cases}
     1, x > 0
 \end{cases}$$
 $$\lim_{x \rightarrow 0^+} f(x) = 1 \neq \lim_{x \rightarrow 0^-} f(x) = -1$$
+
+%---------------------- Lecture 13 ----------------------%
+\chapter{Continuity}
+\section{One-Sided Limits}
+\textbf{Recall:} For $X \subseteq \real$, $f: X \rightarrow \real^m$, $a \in \real$
+\begin{itemize}
+    \item If $a$ is a limit point of $X \cap [a, \infty]$, then 
+    $$\lim_{x \rightarrow a^+} f(x) \coloneqq \lim_{x\rightarrow a}f_{X\cap [a,\infty)}(x)$$
+    $\lim\limits_{x\rightarrow a^-}f(x)$ is defined similarly. 
+\end{itemize}
+In other words, $\lim\limits_{x\rightarrow a^+}f(x) = L$ means $\forall \epsilon>0$, $\exists \delta>0$ such that if $a < x < a + \delta$ and $x \in X$, then 
+\[||f(x) - L||_2 < \epsilon\]
+\section{Continuity}
+\begin{definition}
+    Let $f: X\rightarrow \real^m$ where $X \subseteq \real^d$. Let $a \in X$.
+    \begin{itemize}
+        \item If a is not an isolated point, then we say f is continous at a if 
+        \[\lim_{x\rightarrow a}f(x) = f(a)\]
+        \item If a is an isolated point, then we always say $f$ is \emph{continuous} at a.
+    \end{itemize}
+\end{definition}
+\begin{definition}[$\delta-\epsilon$ Characterization of Continuity]
+    f is continous at a $\iff$ $\forall \epsilon > 0$, $\exists \gamma > 0$ s.t if
+    \[x \in X \cap B(a; \delta)\]
+    then 
+    \[||f(x) - f(a)||_2 < \epsilon\]
+    In other wordsm if x is close to a, the f(x) is close to f(a). This holds regardless of whether or not a is isolated.
+\end{definition}
+\noindent
+\textbf{Example:} $f: \real \mapsto \real$ $f(x) \coloneqq x^2$. For any $a \in \real$, we proved last lecture that 
+\[\lim_{x\rightarrow a}f(x) = a^2 = f(a)\]
+Therefore, $f$ is continuous at $a$.\\[2ex]
+\textbf{Example:} 
+\[f(x) \coloneqq \begin{cases}
+    1 \text{  if } x \leq 1\\
+    2 \text{  if } x > 1
+\end{cases}\]
+For this function, 
+\[\lim_{x \rightarrow 1^+ f(x) = 2 \neq f(x) = 1}\]
+Therefore, $f$ is not continous at 1.\\[2ex]
+\textbf{Example:} 
+\[f(x) \coloneqq \begin{cases}
+    \sin\left(\frac{1}{x}\right) \text{  if } x > 0\\
+    L \text{  if } x = 0 \text{ for some $L \in \real$}\\
+\end{cases}\]
+No matter how we choose $L$, $f$ is not continous at 0. 
+\begin{proof}
+    We want to show $\lim\limits_{x \rightarrow 0}f(x)$ does not exist. Consider the sequence 
+    \[\left(\frac{1}{2\pi n}\right)^\infty_{n=1} \rightarrow 0\]
+    and $f\left(\frac{1}{2\pi n} = 0 \rightarrow 0\right)$. But we also have 
+    \[\left(\frac{1}{2\pi n + \pi/2}\right)_{n=1}^\infty \rightarrow 0\]
+    and $f\left(\frac{1}{2\pi n + \pi/2}\right) = 1 \rightarrow 1$. So if $\lim\limits_{x \rightarrow 0}f(x)$ exists, then $f(a_n) \rightarrow L$ for a sequence $\infseq{a_n}$ in $(0, \infty)$ such that $a_n \rightarrow 0$. So $L = 0$ and $L = 1$, therefore a contradiction
+\end{proof}
+\textbf{Example:} 
+\[f(x) \coloneqq \begin{cases}
+    1 \text{  if } x \in \mathbb{Q}\\
+    0 \text{  if } x \notin \mathbb{Q}
+\end{cases}\]
+$f$ is not continous at any point.
+\begin{proof}
+    Let $a \in \real$. We'll prove $\lim\limits_{x \rightarrow a}f(x)$ does not exist.
+    \[\exists \infseq(x) \in \mathbb{Q} \text{ s.t } x_n \rightarrow a\]
+    so $f(x_n) = 1 \rightarrow 1$
+    \[\exists \infseq(y) \in \real \setminus \mathbb{Q} \text{ s.t } y_n \rightarrow a\]
+    Since we can find $z_n \in \mathbb{Q}$ such that $z_N \rightarrow a + \sqrt{2}$, so $y \coloneqq z_n - \sqrt{2} \in \real \setminus \mathbb{Q}$, $y_n \rightarrow a$. So $f(y_n) = 0 \rightarrow 0$.  Therefore, the $\lim\limits_{x \rightarrow a}f(x)$ does not exist.
+\end{proof}
+\textbf{Example:}
+\[f(x) \coloneqq \begin{cases}
+    x\sin\left(\frac{1}{x}\right) \text{ if } x \neq 0\\
+    0 \text{ if } x = 0
+\end{cases}\]
+$f$ is continuous. 
+\begin{proof}
+    Use squeeze theorem, if $x \geq 0$, then $-x \leq f(x) \leq x$. So 
+    \[-|x| \leq f(x) \leq |x|\]
+    \[\lim_{x\rightarrow 0}|x| = 0 = \lim_{x\rightarrow 0}-|x|\]
+    \[\therefore \lim_{x\rightarrow 0} f(x) = 0 = f(0)\]
+\end{proof}
+\begin{prop}
+    Let $X \subseteq \real^d$, $Y \subseteq \real^m$, and $f: X \mapsto Y$, $g: Y \rightarrow \real^n$, $a \in X$. If $f$ is continuous at a and g is continuous at f(a), then $g \circ f$ is continuous at a.
+\end{prop}
+\begin{proof}
+    Use the $\delta-\epsilon$ characterization. Let $\epsilon > 0$ be given. Since $g$ is at $f(a)$, $\exists \eta > 0$ (using $\eta$ instead of $\delta$), such that if $y \in B(f(a); \eta) \cap Y$, then 
+    \[||g(x) - g(f(a))||_2 < \epsilon\]
+    Since $f$ is continuous at $a$, $\exists \delta > 0$ such that if $x \in B(a; \delta) \cap X$, then
+    \[||f(x) - f(a)||_2 < \eta\]
+    In other words, $f(x) \in B(f(a); \eta)$. Therefore if $x \in B(a; \delta) \cap X$, then since  $f(x) \in B(f(a); \eta)$, 
+    \[||g(x) - g(f(a))||_2 < \epsilon\]
+    as required.
+\end{proof}
+
+\begin{prop}
+    Let $X \subseteq \real^d$, $f,g: X \mapsto \real^m$, $a \in X$ such that $f,g$ are continuous at a,
+    \begin{enumerate}[label=(\roman*)]
+        \item $f+g: X \mapsto \real^m$ is continuous at $a$
+        \item $cf: X \mapsto \real^m$ is continuous at $a$ for any $c \in \real$
+        \item $\gamma f: X \mapsto \real^m$ is continuous at $a$ if $\gamma: X \mapsto \real$ is continuous at $a$. 
+        \item If $m=1$, and $g(x) \neq 0$, $\forall x \in X$, then 
+        \[\frac{f}{g}: X \mapsto \real\]
+        is continuous at a.
+    \end{enumerate}
+\end{prop}
+    \begin{proof}
+        Follows from the algebra of limits.
+    \end{proof}
+    If $f: X \mapsto \real^m$, $f = (f_1, \ldots, f_m)$ where $f_i: X \mapsto \real$, then $f$ is continuous at $a$ if and only if $f_i$ is continuous at $a$ for all $i \in \{1, \ldots, m\}$.
+    \begin{itemize}
+        \item You are allowed to use the fact that sin, cos, exp, log are all continuous functions log are all continuous $\log: [0,\infty) \mapsto \real$ is continuous at all $a \in [0,\infty)$.
+    \end{itemize}
+    \section{Properties of Continuous Functions}
+    $f: X \mapsto \real^m$ is \emph{(globally) continuous} if $f$ is continuous at $a$ for all $a \in X$.
+    \begin{theorem}
+        Let $K \subseteq \real^d$ be a compact set. If $f: K \mapsto \real^m$ is continuous, then $f(K)$ is compact. 
+    \end{theorem}
+    \begin{proof}
+        Let $\infseq{a}$ be a sequence in $f(K)$. We need to show that $\exists$ a subsequence. We need to show that $\exists$ a subsequence $(a_{n_k})_{k=1}^\infty$ s.t $a_{n_k} \rightarrow b$ for some $b \in f(K)$. Since $a_n \in f(K)$, $\exists x_n \in K$ s.t $f(x_n) = a_n$ for all $n$. This gives a sequence $\infseq{x}$ in $K$. Since $K$ is compact, $\exists$ a subsequence $(x_{n_k})_{k=1}^\infty$ s.t $x_{n_k} \rightarrow x_0$. Since $f$ is continuous at $x_0$, $f(x_{n_k}) \rightarrow f(x_0)$. Therefore, $a_{n_k} \rightarrow f(x_0)$ and $(a_{n_k})_{n=1}^\infty$ is a subsequences of $(a_n)_{n=1}^\infty$. This is what we wanted.
+    \end{proof} 
+\begin{corollary}[Extreme Value Theorem]
+    Let $K \subseteq \real^d$ be compact, $f: K \rightarrow \real$ a continous function. Then $f$ is bounded and it attains its bounds, i.e $\exists x_{\min}, x_{\max} \in K$ such that $\forall x \in K$
+    \[f(x_{\min}) \leq f(x) \leq f(x_{\max})\]
+\end{corollary}
+\begin{proof}
+    From the previous result, $f(K)$ is compact in $\real$. By the Heine-Borel theorem, this means $f(k)$ is closed and bounded. Therefore, $f$ is bounded. Since $f(K)$ is closed, $\sup f(K) \in f(K)$ since there is a sequence $\infseq{y}$ in $f(K)$ such that $y_n \rightarrow \sup f(K)$. So $\exists x_{\max} \in K$ such that 
+    \[f(x_{\max}) = \sup f(k)\]
+    Therefore, 
+    \[f(x) \leq f(x_{\max}) \text{  } \forall x \in K\]
+    Similarily, $\exists x_{\min} \in K$ such that $f(x_{\min}) \leq f(x)$ $\forall x \in K$. 
+\end{proof}
+
+%----------------- Lecture 14
+\chapter{Properties of Continous Functions Continued}
+\textbf{Recall:}
+\begin{manualcorollary}{13.3.1}[Extreme Value Theorem]
+    If $K \subseteq \real^d$ is compact and $f: K \rightarrow \real$ is continuous, then $\exists x_{\min}, x_{\max} \in K$ such that $f(x_{\min}) \leq f(x) \leq f(x_{\max})$ for all $x \in K$.
+\end{manualcorollary} 
+\begin{theorem}[Intermediate Value Theorem]
+  Let $f: [a,b] \rightarrow \real$ be continuous, and let $y_0 \in \real$ be any number between $f(a)$ and $f(b)$. Then there exists a number $x_0$ between $a$ and $b$ such that $f(x_0) = y_0$.
+\end{theorem}   
+    \begin{proof}
+        Without loss of generality, assume $f(a) \leq f(b)$. So $x_0 \in [f(a), f(b)]$. Let
+        \[S \coloneqq \{x \in [a,b]: f(x) \leq x_0\}\]
+        $S \subseteq [a,b]$, so $S$ is bounded. $a \in S$ since $f(a) \leq x_0$. Therefore $S \neq \emptyset$.
+        So $\exists x_0 \coloneqq \sup S \in [a,b]$. We will show $f(x_0) = y_0$. We will consider the cases, where $f(x_0) = y_0$, $f(x_0) < y_0$, and $f(x_0) > y_0$. If $f(x_0) < y_0$, set $\epsilon \coloneqq y_0 - f(x_0)$. Since $f$ is continuous at $x_0$, $\exists \delta > 0$ s.t if $|x - x_0| < \delta$ and $x \in [a,b]$. Then $|f(x) - f(x_0)| < \epsilon$. Since $f(x_0) < y_0 \leq f(b)$ for $x_0 \neq b$. So we can find $x > x_0$ such that $x \in [a,b]$ and $|x - x_0| < \delta$.  Then $f(x) < f(x_0) + \epsilon = y_0$. So $x \in S$ by the definition of $S$, since $S = \{x: f(x) \leq y_0\}$. This is a contradiction since $x > x_0$, but $x_0$ is an upper bound for $S$.\\[2ex]
+        If $f(x_0) > y_0$, set $\epsilon \coloneqq f(x_0) - y_0$. Since $f$ is continuous at $x_0$, $\exists \delta > 0$ such that if $x \in [a,b]$ and $|x - x_0| < \delta$, then $|f(x) - f(x_0)| < \epsilon$. So $f(x_0) > y_0 \leq f(a)$. So $x_0 > a$. We may assume that $x_0 - \delta > a$ since $\delta$ is abritrary and can be arbitrarly small. \\[1ex]
+        Claim: $x_0 - \delta$ is an upper bound for $S$. Proof of claim, if $x > x - \delta$, then either $|x - x_0| < \delta$, in which case $f(x) > f(x_0)- \epsilon = y-0$, or $x > x_0$, in which case $x \not\in S$ since $x_0$ is an upper bound for $S$. Therefore, if $x > x_0 - \delta$, then $x \not\in S$. This proves the claim.\\[1ex]
+        The claim contradits that $x_0$ is the least upper bound for $S$.  
+    \end{proof}
+    \begin{corollary}
+        Let $f: [a,b] \rightarrow \real$ be continuous. Then $f([a,b]) = [c,d]$ for some $c \leq d$. 
+    \end{corollary}
+    \begin{proof}
+        By extreme value theorem, $\exists x_{\min}, x_{\max}$ such that $f(x) \in [f(x_{\min}), f(x_{\max})]$ $\forall x \in [a,b]$. So we can set $c \coloneqq f(x_{\min})$ and $d \coloneqq f(x_{\max})$ and we have
+        \[f([a,b]) \subseteq [c,d]\]
+        for $y_0 \in [c,d] = [f(x_{\min}), f(x_{\max})]$. By the Intermediate Value Theorem, $\exists x_0$ between $x_{\min}$ nad $x_{\max}$ such that $f(x_0) = y_0$. Therefore
+        \[[c,d] \subseteq f([a,b])\]
+        Thus, 
+        \[f([a,b]) = [c,d]\]
+        \end{proof}
+
+    \section{Inverses of Continuous Functions}
+        Let $f: A \mapsto B$, $f$ is  
+        \begin{itemize}
+            \item \textbf{Injective} (or one-to-one) If $\forall x,y \in A$, if $f(x) = f(y)$, then $x = y$.
+            \item \textbf{Surjective} (or onto) If $\forall y \in B$, $\exists x \in A$ such that 
+            \[f(x) = y\]
+            \item \textbf{Bijective} (or one-to-one and onto) If $f$ is both injective and surjective.
+        \end{itemize}
+        \begin{align*}
+            \text{$f$ is bijective } &\iff \text{it is inveritble }\\
+            &\iff \exists f^{-1}:B \mapsto A \text{ s.t } f \circ f^{-1} = id_B \text{ and } f^{-1} \circ f = id_A
+        \end{align*}
+    \begin{proof}
+        ($\impliedby$) If $f$ is inveritble, then it is 
+        \begin{itemize}
+            \item \textbf{Injective} since if $f(x) = f(y)$ then $x = f^{-1}(f(x)) = f^{-1}(f(y)) = y$
+            \item \textbf{Surjective} since given $y \in B$, $x \coloneqq f^{-1}(y)$ satisfies $f(x) = y$. 
+        \end{itemize}
+        ($\implies$) If $f$ is bijective, then for $y \in B$, $\exists x \in A$ such that $f(x) = y$. Also, this $x$ is unique since $f$ is injective. So we can define 
+        \[f^{-1}(y) \coloneqq x\]
+        and this is an inverse to $f$.
+    \end{proof}
+    Given $f: A \mapsto \real$ that is injective, we view $f$ as a function $A \mapsto f(A)$, and this way we force $f$ to be surjective. Thus $f^{-1}: f(A) \mapsto A$ exists.\\[2ex]
+    \textbf{Question:} If $f$ is injective and continuous, mus $f^{-1}$ be continuous? \textbf{No}. Consider the example with $f: [0,1) \cup [2, \infty]$
+    \[f(x) \coloneqq \begin{cases}
+        x_1 \text{ if } x < 1 \\
+        x - 1 \text{ if } x \geq 2
+    \end{cases}\]
+    $f^{-1}: [0,\infty) \mapsto [0,1) \cup [2, \infty] \subseteq \real$, so 
+    \[f^{-1}(y) = \begin{cases}
+        y_1 \text{ if } y < 1 \\
+        y + 1 \text{ if } y \geq 1
+    \end{cases}\] 
+    $f^{-1}$ is not continuous.
+    \begin{definition}
+        Let $A \subseteq \real$, $f: A \mapsto \real$. $f$ is 
+        \begin{enumerate}[label=(\roman*)]
+            \item \emph{increasing} if $\forall x,y \in A$, $x \leq y$ then $f(x) \leq f(y)$
+            \item \emph{strictly increasing} if $\forall x,y \in A$, $x < y$ then $f(x) < f(y)$
+            \item \emph{decreasing} if $\forall x,y \in A$, $x \leq y$ then $f(x) \geq f(y)$
+            \item \emph{strictly decreasing} if $\forall x,y \in A$, $x < y$ then $f(x) > f(y)$
+        \end{enumerate}
+    \end{definition}
+    \begin{lemma}
+        Let $I \subseteq \real$ be an interval, $f: I \mapsto \real$ be an injective continuous function. Then $f$ is either strictly increasing or strictly decreasing. 
+    \end{lemma}
+    \begin{proof}
+        It suffices to consider the case where $I$ is a closed, bounded interval. A general interval $I$ is a union of an increasing sequence of closed bounded intervals, so if $f$ is strictly increasing or strictly decreasing on each of these subintervals, then $f$ is strinctly increasing or decreasing on all of $I$.
+    \end{proof}
 \end{document}
