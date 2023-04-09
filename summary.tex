@@ -1,0 +1,743 @@
+
+\documentclass{article}
+\usepackage[landscape]{geometry}
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{amsmath,amssymb}
+\usepackage{listings}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{mathtools} 
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{environ}
+\makeatletter
+
+\newcommand{\real}{\mathbb{R}}
+
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
+\title{CSI 2132 Midterm Cheat Sheet}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+
+\advance\topmargin-.8in
+\advance\textheight3in
+\advance\textwidth3in
+\advance\oddsidemargin-1.5in
+\advance\evensidemargin-1.5in
+\parindent0pt
+\parskip2pt
+\newcommand{\hr}{\centerline{\rule{3.5in}{1pt}}}
+%\colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}
+
+
+\definecolor{blue}{HTML}{A7BED3}
+\definecolor{brown}{HTML}{DAB894}
+\definecolor{pink}{HTML}{FFCAAF}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{fact}{Fact}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+
+
+
+
+\tikzset{header/.style={path picture={
+\fill[green, even odd rule, rounded corners]
+(path picture bounding box.south west) rectangle (path picture bounding box.north east) 
+([shift={( 2pt, 4pt)}] path picture bounding box.south west) -- 
+([shift={( 2pt,-2pt)}] path picture bounding box.north west) -- 
+([shift={(-2pt,-4pt)}] path picture bounding box.north east) -- 
+([shift={(-6pt, 6pt)}] path picture bounding box.south east) -- cycle;
+},
+label={[anchor=west, fill=green]north west:\textbf{#1:}},
+}} 
+
+\tikzstyle{mybox} = [draw=black, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[fill=black, text=white, rounded corners, font=\bfseries]
+
+
+\tikzstyle{bluebox} = [draw=blue, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{bluetitle} =[fill=blue, inner sep=4pt, text=white, font=\small]
+
+
+\tikzstyle{brownbox} = [draw=brown, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{browntitle} =[fill=brown, inner sep=4pt, text=white, font=\small]
+
+\tikzstyle{pinkbox} = [draw=pink, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{pinktitle} =[fill=pink, inner sep=4pt, text=white, font=\small]
+
+\tikzstyle{redbox} = [draw=red!35, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{redtitle} =[fill=red!35, inner sep=4pt, text=white, font=\small]
+
+
+\NewEnviron{brownbox}[1]{
+    \begin{tikzpicture}
+    \node[brownbox](box){%
+    \begin{minipage}{0.9\textwidth}
+    \BODY
+    \end{minipage}};
+    \node[browntitle, right=10pt] at (box.north west) {#1};
+    \end{tikzpicture}
+}
+
+ \NewEnviron{redbox}[1]{
+    \begin{tikzpicture}
+    \node[redbox](box){%
+    \begin{minipage}{0.9\textwidth}
+    \BODY
+    \end{minipage}};
+    \node[redtitle, right=10pt] at (box.north west) {#1};
+    \end{tikzpicture}
+}
+   
+    
+
+\NewEnviron{bluebox}[1]{%
+\begin{tikzpicture}
+    \node[bluebox](box){%
+        \begin{minipage}{0.9\textwidth}
+            \BODY
+        \end{minipage}
+    };
+    
+\node[bluetitle, right=10pt] at (box.north west) {#1};
+\end{tikzpicture}
+}
+
+\NewEnviron{pinkbox}[1]{%
+\begin{tikzpicture}
+    \node[pinkbox](box){%
+        \begin{minipage}{0.9\textwidth}
+            \BODY
+        \end{minipage}
+    };
+    
+\node[pinktitle, right=10pt] at (box.north west) {#1};
+\end{tikzpicture}
+}
+
+
+
+\NewEnviron{blackbox}[1]{%
+\begin{tikzpicture}
+    \node[mybox](box){%
+        \begin{minipage}{0.3\textwidth}
+        \raggedright
+        \small{
+            \BODY
+        }
+        \end{minipage}
+    };
+    
+\node[fancytitle, right=10pt] at (box.north west) {#1};
+\end{tikzpicture}
+}
+
+
+\begin{document}
+
+\begin{center}{\large{\textbf{MAT 2125 Midterm Summary Sheet}}}\\
+\end{center}
+
+
+
+
+\begin{multicols*}{3}
+
+%----------------- Fields -----------------------------
+\begin{blackbox}{Fields}
+    \textbf{Definition:} \textit{A \emph{field} is a set $F$ equipped with two operations, addition and multiplication, and satisfies these axioms}
+      \begin{bluebox}{Field Axioms}
+          \textbf{Definition:} \textit{A \emph{field} is a set F equipped with two operations, addition and multiplication which satisfies the following axioms}
+                \begin{itemize}
+                    \item \textit{(F1) $\forall a,b \in F$ $a + b = b + a$ }
+                    \item \textit{(F2) $\forall a,b,c \in F$ $(a + b) + c =  a + (b + c)$}
+                    \item \textit{(F3) $\exists 0 \in F$ s.t  $a + 0 = 0 + a = a$ $\forall a \in F$}
+                    \item \textit{(F4) $\forall a \in F$ $\exists -a \in F$ s.t $a + (-a) = (-a) + a = 0$}
+                    \item \textit{(F5) $\forall a,b \in F$ $a\cdot b = b \cdot a$}
+                    \item \textit{(F6) $\forall a,b,c \in F$ $(a\cdot b)\cdot c = a \cdot(b\cdot c)$}
+                    \item \textit{(F7) $\exists 1 \in F$ s.t $1 \neq 0$ and $a\cdot 1 = 1\cdot a = a$ $\forall a \in F$}
+                    \item \textit{(F8) $\forall a \in F\setminus\{0\}$ $\exists a^{-1}$ s.t $a \cdot a^{-1} = a^{-1} \cdot a = 1$}
+                    \item \textit{$\forall a,b,c \in F$ $(a+b)\cdot c = a \cdot c + b\cdot c$}
+                \end{itemize}
+    \end{bluebox}
+    \textbf{Definition:} \textit{An \emph{ordered field} is a field $F$ equipped with a binary relation $<$ and satisfies these axioms}
+    \begin{bluebox}{Order Axioms}
+         \begin{itemize}
+                \item \textit{(O1) If $a<b$ and $b<c$, then $a < c$}
+                \item \textit{(O2) $\forall a,b \in F$, exactly one of the following is true: $a = b$ or $a < b$ or $b < a$}
+                \item \textit{(O3) $\forall a,b,c \in F$, if $a<b$ then $a + c < b + c$}
+                \item \textit{(O4) $\forall a,b,c \in F$, if $a< b$ and $0 < c$, then $a \cdot c < b \cdot b$}
+                \end{itemize}
+    \end{bluebox}
+    \textbf{Definition:}\textit{ Let $F$ be an ordered field, $S \subseteq F$, $a \in F$. Then $a$ is an upper bound for S if for any $x\in S$}\\[-3ex]
+    \[x \leq a\]
+    $a$ is a lowerbound for $S$ if for any $x \in S$, $a \leq x$. 
+        \textbf{$S$ is bounded if it bounded above and below.}
+    \begin{redbox}{Suprema}
+        When $a$ is a least upper bound for $S$, we write
+        \[a = \sup S\]
+    \end{redbox}
+    \begin{pinkbox}{Infima}
+        When $a$ is the greatest lower bound for $S$, we write
+        \[a = \inf S\]
+    \end{pinkbox}\\[-2ex]
+\end{blackbox}
+\begin{blackbox}{Boundedness}
+    \begin{brownbox}{Completeness}
+        \textbf{Definition:} \textit{If $S \subseteq F$ is nonempty and bounded above, then $\sup S$ exists.}
+    \end{brownbox}
+        \begin{brownbox}{The Archimedean Property}
+    \textbf{Theorem:} \textit{The set $\mathbb{N}_{\geq1}$ is not bounded above.}
+    \end{brownbox}
+    \begin{pinkbox}{Absolute Value and Distance}
+    The \textit{absolute value} of a real number $a \in \mathbb{R}$ is defined by 
+    \[|a| \coloneqq \begin{cases}
+    a, \ if \ a \geq 0\\
+    -a, \ if \ a < 0
+    \end{cases}\]
+    \textbf{Properties:}
+    \begin{multicols*}{2}
+        \begin{enumerate}[label=(\roman*)]
+            \item $|-x| = |x|$
+            \item $-|x| \leq x \leq |x|$
+            \item $|xy| = |x|\cdot |y|$
+            \item $|x+y| \leq |x| + |y|$
+            \item $||x|-|y|| \leq |x-y|$
+        \end{enumerate} 
+    \end{multicols*}
+
+    \textbf{Definition:}\textit{Let $x,y \in \mathbb{R}$. The distance between $x,y$ is}
+    \[d(x,y) \coloneqq |x-y|\]
+    \textbf{Properties:}
+    \begin{enumerate}[label=(\roman*)]
+        \item $d(x,y) = d(y,x)$
+        \item $d(x,y) = 0 \iff x = y$
+        \item $d(x,z) \leq d(x,y) + d(y,z)$
+    \end{enumerate}
+\end{pinkbox}\\[-4ex]
+\end{blackbox}
+\begin{blackbox}{Sequences}
+\textbf{Definition:} \textit{A sequence $(a_n)_{n=1}^\infty$ is \emph{bounded} if the set $\{a_n : n \in \mathbb{N}\}$ is bounded}\\[0.2ex]
+\begin{brownbox}{Convergence}
+\textbf{Definition:} \textit{Let $(a_n)_{n=1}^\infty$ be a sequence, and $L \in R$. We say that the sequence converges to $L$ if $\forall \epsilon > 0$ $\exists n_0 \in \mathbb{N}$ s.t $\forall n\geq n_0$}
+\[|a_n -L| < \epsilon\]
+\textbf{Definition:} \textit{ We say that $(a_n)_{n=1}^\infty$ diverges to $\infty$ if for every $R > 0$, $\exists n_0 \in \mathbb{N}$, s.t $\forall n \geq n_0$}
+\[a_n > R\]
+\textbf{Proposition:} If $(a_n)_{n=1}^\infty$ converges, then it is bounded.
+\end{brownbox}\\[-0.2ex]
+\end{blackbox}
+
+\begin{blackbox}{Limits}
+    \textbf{Proposition:}\textit{(Uniqueness) Let $(a_n)_{n=1}^\infty$ be a sequence and $L_1, L_2 \in \mathbb{R}$}\\[-3ex]
+    \[\lim_{n\rightarrow\infty}a_n = L_1 \wedge \lim_{n\rightarrow\infty} a_n = L_2 \implies L_1 = L_2\]
+    \begin{bluebox}{Algebra of Limits}
+   \begin{enumerate}[label=(\roman*)]
+       \item $(a_n + b_n)_{n=1}^\infty$ converges to $L_a + L_b$
+       \item $(ca_n)_{n=1}^\infty$ converges to $cL_n$
+       \item $(a_nb_n)_{n=1}^\infty$ converges to $L_aL_b$
+       \item $a_n \neq 0$ $\forall n$ $\wedge$ $L_a \neq 0$ $\implies$ $\left(\frac{1}{a_n}\right)_{n=1}^\infty \rightarrow \frac{1}{L_a}$
+   \end{enumerate}
+\end{bluebox}
+ \begin{pinkbox}{Properties of Limits}
+        \textbf{Proposition:} \textit{Let $(a_n)_{n=1}^\infty$ and $(b_n)_{n=1}^\infty$ be converging sequences}\\[-1.6ex]
+        \[\forall n \ a_n \leq b_n \implies \lim_{n\rightarrow \infty} a_n  \leq \lim_{n \rightarrow \infty} b_n\]
+        \textbf{Corollary:} \textit{Let $(a_n)_{n=1}^\infty$ be a converging sequence}\\[-1.6ex]
+        \[\forall n \ m \leq a_n \leq M \implies m \leq \lim_{n\rightarrow \infty} a_n \leq M\]
+    \end{pinkbox}
+    \begin{brownbox}{Squeeze Theorem}
+    Let $(a_n)_{n=1}^\infty$,$(b_n)_{n=1}^\infty$,$(c_n)_{n=1}^\infty$ be sequences such that 
+    \begin{enumerate}[label=(\roman*)]
+        \item $(a_n)_{n=1}^\infty$ and $(c_n)_{n=1}^\infty$ converge to same number $L$
+        \item $a_n \leq b_n \leq c_n$ $\forall n$
+    \end{enumerate}
+    Then $(b_n)_{n=1}^\infty$ also converges to $L$.
+    \end{brownbox}
+
+    \begin{bluebox}{Monotone Convergence Criterion}
+        Let $(a_n)_{n=1}^\infty$ be a monotone sequence, it converges if and only if it is bounded. If it is increasing, then\\[-1ex]
+        \[(a_n)_{n=1}^\infty \rightarrow \sup \{a_n: n \in \mathbb{N}_{\geq 1}\}\]
+        If it is decreasing,
+         $(a_n)_{n=1}^\infty \rightarrow \inf \{a_n: n \in \mathbb{N}_{\geq 1}\}$
+    \end{bluebox}\\[-1ex]
+\end{blackbox}
+\begin{blackbox}{Subsequences}
+    \textbf{Proposition:}\textit{If $(a_n)_{n=1}^\infty$ converges to $L$, then any subsequence also converges to $L$}\\[1ex]
+        \textbf{Proposition:} \textit{Every sequence contains a monotone subsequence}\\[1ex]
+        \textbf{Bolzano-WeierStrass Theorem:} \textit{Every bounded sequence has a convergent subsequence}\\[1ex]
+        \textbf{Cauchy Convergence Criterion:} \textit{$(a_n)_{n=1}^\infty$ converges $\iff$ it is Cauchy}\\
+\end{blackbox}
+
+\begin{blackbox}{Limit Superior and Limit Inferior}
+\textbf{Definition:}\textit{ Let $(a_n)_{n=1}^\infty$ be a sequence. The limit superior and inferior of $(a_n)_{n=1}^\infty$ is}\\[-4ex]
+$$\limsup_{n\rightarrow \infty} a_n \coloneqq \inf \{\beta \in \mathbb{R} \ \exists n_0 \ s.t \ a_n \leq \beta \ \forall n\geq n_0\}$$
+\[\liminf_{n\rightarrow \infty} a_n \coloneqq \sup\{\beta \in \mathbb{R} \ \exists n_0 \ s.t \ a_n \geq \beta \ \forall n\geq n_0\}\]
+\begin{redbox}{Propositions and Theorems}
+    \textbf{Proposition:}\textit{ For any sequence $(a_n)_{n=1}^\infty$}
+        \[\liminf_{n \rightarrow \infty} a_n \leq \limsup_{n\rightarrow \infty} a_n\]\\[-3ex]
+        \textbf{Proposition:}\textit{ Let $(a_n)_{n=1}^\infty$ be a bounded sequence. Then}\\[-2ex]
+        \[\limsup_{n\rightarrow \infty} a_n = \lim_{n\rightarrow \infty} \sup \{a_n, a_{n+1}, a_{n+2}, \ldots\}\]
+        \[\liminf_{n\rightarrow \infty} a_n = \lim_{n\rightarrow \infty} \inf \{a_n, a_{n+1}, a_{n+2}, \ldots\}\]
+        \textbf{Theorem:}\textit{ Let $(a_n)_{n=1}^\infty$ be a sequence of real numbers. Then $(a_n)_{n=1}^\infty$ converges if and only if}
+        $$-\infty < \limsup_{n\rightarrow \infty} a_n = \liminf_{n\rightarrow \infty} a_n < \infty$$\\[-4ex]
+        Then\\[-3ex]
+        \[\lim_{n\rightarrow \infty} a_n = \limsup_{n\rightarrow \infty} a_n = \liminf_{n\rightarrow \infty} a_n  \]
+\end{redbox}\\[-3ex]
+\end{blackbox}
+\begin{blackbox}{Series}
+    \textbf{Definition:}\textit{ Let $(a_n)_{n=1}^\infty$ be a sequence.}\\[-2ex]
+        \[S_N \coloneqq \sum_{n=1}^N a_n = a_1 + \cdots + a_N\]
+        called the $N^{th}$ partial sum. $\sum_{n=1}^N a_n$ converges to L if $(S_N)_{N=1}^\infty$ to L. Then \\[-2ex]
+        \[\sum_{n=1}^\infty a_n = L\]\\[-1ex]
+ \begin{bluebox}{Propositions and Theorems}
+        \textbf{Proposition:}\textit{ Let $(a_n)_{n=1}^\infty, (a_n)_{n=1}^\infty$ be sequences s.t $a_n\leq b_n$ $\forall n$. If both series converge then}\\[-2ex]
+        \[\sum_{n=1}^\infty a_n \leq \sum_{n=1}^\infty b_n\]
+        \textbf{Proposition:}\textit{ Let $(a_n)_{n=1}^\infty$ be a sequence and $m \in \mathbb{N}_{\geq 1}$. Then}\\[-2ex]
+        \[\sum_{n=1}^\infty a_n \ converges \iff \sum_{n=m}^\infty a_n \ converges\]
+        \textbf{Proposition:}\textit{ Let $(a_n)_{n=1}^\infty$ be a sequence.}\\[-2ex]
+        \[\sum_{n=1}^\infty a_n \ converges \implies \lim_{n\rightarrow \infty} a_n = 0\]
+    \end{bluebox}\\[-3ex]
+\end{blackbox}
+\begin{blackbox}{Convergence Tests}
+    \textbf{Boundedness Test:}\textit{ If}
+        \begin{enumerate}[label=(\roman*)]
+            \item $a_n \geq 0$ $\forall n$
+            \item \textit{There is a bound $M \in \mathbb{R}$ on the partials sums so that $\forall N \in \mathbb{N}$,}
+            \[\sum_{n=1}^N a_n \leq M\]
+            Then $\sum_{n=1}^\infty$ converges.
+        \end{enumerate}
+         \textbf{Comparison Test:}\textit{ $(b_n)_{n=1}^\infty$ s.t $0 \leq a_n \leq b_n$ $\forall n$, then}
+            \begin{enumerate}[label=(\roman*)]
+                \item if $\sum_{n=1}^\infty b_n$ converges, then so does $\sum_{n=1}^\infty a_n$
+                \item if $\sum_{n=1}^\infty a_n$ diverges, then so does $\sum_{n=1}^\infty a_n$
+            \end{enumerate}
+        \textbf{Absolute Convergence Test:}
+        \[\sum_{n=1}^\infty |a_n| \ converges \implies \sum_{n=1}^\infty a_n\ converges \]
+        \textbf{Ratio Test:}\textit{If}
+            \[\limsup_{n\rightarrow\infty} \left| \frac{a_{n+1}}{a_n} \right| < 1\]
+            \textit{Then $\sum_{n=1}^\infty a_n$ converges absolutely. No conclusion can be made if $=1$, diverges otherwise.}\\[2.5ex]
+            \textbf{Root Test:}\textit{ If}
+            \[\limsup_{n\rightarrow\infty} \sqrt[n]{|a_n|} < 1\]
+            \textit{Then $\sum_{n=1}^\infty a_n$ converges (absolutely). If $=1$ the test in inconclusive, diverges otherwise.}\\[2.5ex]
+            \textbf{Alternating Series Test:} Suppose
+            \begin{enumerate}[label=(\roman*)]
+                \item $(a_n)_{n=1}^\infty$ is a decreasing sequence
+                \item $\lim_{n\rightarrow \infty} = 0$
+            \end{enumerate}
+            Then
+            \[\sum_{n=1}^\infty (-1)^{n+1}a_n\]
+            converges.  Moreover, 
+        \[\sum_{n=1}^{2N} (-1)^{n+1} a_n \leq \sum_{n=1}^\infty (-1)^{n+1}a_n \leq \sum_{n=1}^{2N - 1}a_n\]
+        
+        \textbf{Integral Test:}\textit{ Let $f: [1,\infty)\rightarrow \mathbb{R}$ be a function. Supoose that}\\[1ex]
+        \begin{enumerate}[label=(\roman*)]
+            \item $f(x) \geq 0$ $\forall x \in [1,\infty)$
+            \item $f$ is decreasing: $f(x) \geq f(y)$ whenever $x \leq y$
+        \end{enumerate}
+        Then 
+        \[\sum_{n=1}^\infty f(n) \ converges \iff \int_1^\infty f(x) dx \ converges\]
+\end{blackbox}
+
+
+\begin{blackbox}{More Series}
+\textbf{Proposition:} \textit{Let $(a_n)_{n=1}^\infty$, $(b_n)_{n=1}^\infty$ be sequence and $c \in \mathbb{R}$. Suppose their series' converges, then}
+\begin{enumerate}[label=(\alph*)]
+    \item $\sum\limits_{n=1}^\infty(a_n + b_n)$ converges and 
+    \[\sum_{n=1}^\infty (a_n + b_n) = \sum_{n=1}^\infty a_n + \sum_{n=1}^\infty b_n\]
+    \item $\sum\limits_{n=1}^\infty ca_n$ converges and
+    \[\sum_{n=1}^\infty ca_n = c\sum_{n=1}^\infty a_n\]
+\end{enumerate}
+    \begin{brownbox}{Cauchy Convergence Criterion For Series}
+        \textit{Let $(a_n)_{n=1}^\infty$ be a sequence of real numbers. Then $\sum\limits_{n=1}^\infty a_n$ converges if and only if for ever $\epsilon > 0$, $\exists N_0$ s.t $\forall N \geq M \geq N_0$}
+        \[\left| \sum_{n=M}^N a_n \right| < \epsilon\]
+    \end{brownbox}\\[-3ex]
+\end{blackbox}
+
+\begin{blackbox}{Norms}
+\textbf{Definition:}\textit{ A norm on $\mathbb{R}^d$ is a function $||\cdot||: \mathbb{R}^d \rightarrow [0,\infty)$ satisfying the following}
+\begin{bluebox}{Properties of Norms}
+    \begin{enumerate}[label=(\roman*)]
+        \item $||a|| = 0$ \textit{if and only if} $a = (0,\ldots,0)$
+        \item $||ca|| = |c|\cdot ||a||$
+        \item $||a+b|| \leq ||a||+||b||$
+    \end{enumerate}
+\end{bluebox}
+\begin{redbox}{Euclidean Norm}
+    \[||(a_1,\ldots,a_d)||_2 \coloneqq \sqrt{a_1^2 + \cdots + a_2^2}\]
+    \textbf{Proposition:} \textit{Let $a,b \in \mathbb{R}^d$ and let $||\cdot||$ denote the Euclidean norm}\\[0.01pt]
+    \textit{
+    \begin{enumerate}[label=(\roman*)]
+        \item (Cauchy-Schwarz Inequality) 
+        $$|a \cdot b| \leq ||a||_2 \cdot ||b||_2$$
+        \item (Triangle Inequality) $$||a+b||_2 \leq ||a||_2 + ||b||_2$$
+        \item Therefore, $||\cdot||_2$ is a norm in $\mathbb{R}^d$.
+    \end{enumerate}
+    }
+\end{redbox}\\[-3ex]
+\end{blackbox}
+
+\begin{blackbox}{Convergence in $\mathbb{R}^d$}
+\textbf{Definition:}\textit{ Let $(a_n)_{n=1}^\infty$ be a sequence in $\mathbb{R}^d$ and let $L \in \mathbb{R}^d$. We say that $(a_n)_{n=1}^\infty$ converges to $L$ if $\lim\limits_{n\rightarrow\infty} ||a_n - L||_2 = 0$. In this case we write}\\[-3ex]
+\[\lim_{n\rightarrow \infty} a_n = L \text{ or } a_n \rightarrow L \text{ as } n \rightarrow \infty\]
+\textbf{Proposition:}\textit{ Let $(a_n)_{n=1}^\infty$ be a sequence in $\mathbb{R}^d$ with $a_n = (a_n^{(1)}, \ldots, a_n^{(d)}$. Let $L = (L_1, \ldots, L_d) \in \mathbb{R}^d$}. Then\\[-2ex]
+\[\lim_{n\rightarrow\infty} a_n = L \iff \lim_{n\rightarrow\infty} a_n^{(i)} = L_i \text{ for each $i$}\]
+\begin{redbox}{Cauchy Convergence}
+    \textbf{Definition:}\textit{ A sequence in $\mathbb{R}^d$ is \emph{Cauchy} if for every $\epsilon > 0$, $\exists n_0$ s.t $\forall m,n \geq n_0$}
+    \[||a_m-a_n||_2 < \epsilon\]
+    \textbf{Cauchy Convergence Criterion:} \textit{A sequence in $\mathbb{R}^d$ converges if and only if it is Cauchy.}
+    \end{redbox}
+    \textbf{Definition:}\textit{ A subset S of $\mathbb{R}^d$ is bounded if $\exists M>0$ s.t}\\[-2ex]
+    \[||x||_2 \leq M\]
+    \begin{brownbox}{Bolzano-Weierstrass Theorem for $\mathbb{R}^d$}
+    \textit{Let $(a_n)_{n=1}^\infty$ be a bounded sequence in $\mathbb{R}^d$. Then it has a subsequence which converges}
+    \end{brownbox}\\[-3ex]
+\end{blackbox}
+\begin{blackbox}{Open and Closed Sets}
+\textbf{Definition:}\textit{ Let $a \in \mathbb{R}^d$ and let $r > 0$. The \emph{open ball} centered at $a$ with a radius $r$ is }
+\[B(a;r) \coloneqq \{x\in\mathbb{R}^d: ||x-a||_2 < r\}\]
+\textbf{Definition:} \textit{Let $A \subseteq \mathbb{R}^d$ be a set
+\begin{enumerate}[label=(\roman*)]
+    \item A is \emph{open} if for every $x \in A$, there exists $\epsilon > 0$ such that\\[-1.7ex]
+    \[B(x;\epsilon) \subseteq A\]
+    \item A is \emph{closed} if its complement\\[-1.7ex]
+    \[\mathbb{R}^d \setminus A = \{x \in \mathbb{R}^d: x \not\in A\}\]
+    is open\\[-4ex]
+\end{enumerate}
+ } 
+     \textbf{It is not the case that a set is either open or closed}
+
+ \textbf{Proposition:}\textit{ 
+ \begin{enumerate}[label=(\roman*)]
+    \item The sets $\emptyset$ and $\mathbb{R}^d$ are open
+    \item For any finite collection of open sets, their union is open
+    \item For any finite collection of open sets, their intersection is open
+ \end{enumerate}
+ }
+\end{blackbox}
+\begin{blackbox}{Types of Points}
+    \textbf{Definition:}\textit{ Let $A \subseteq \mathbb{R}^d$ be a set and let $a \in \mathbb{R}^d$
+    \begin{enumerate}[label=(\roman*)]
+        \item a is an \emph{interior point} of A if $\exists \epsilon > 0$ s.t $B(a;\epsilon) \subseteq A$
+        \[A^{\circ} \coloneqq \{x \in \mathbb{R}^d: \text{ x is an interior point}\}\]
+        \item a in an \emph{accumulation point} of A if there is a sequence in A s.t $a = \lim\limits_{n\rightarrow\infty} a_n$. The closure of A is
+        \[\bar{A} \coloneqq \{x \in \mathbb{R}^d: \text{x is an accumulation point}\}\]
+        \item a is a \emph{boundary point} of A if it is an accumulation point of A and it is not an interior point. The boundary of A is
+        \[\partial A \coloneqq \{x \in \mathbb{R}^d: \text{ x is a boundary point}\} = \bar{A} \setminus A^{\circ}\]
+        \item a is an \emph{isolated point} of A if $\exists \epsilon > 0$ s.t $B(a;\epsilon) \cap A = \{a\}$
+        \item a is a \emph{limit point} of A if it an accumulation point and not an isolated point
+    \end{enumerate}}
+\end{blackbox}
+\begin{blackbox}{Compactness}
+\textbf{Definition:} \textit{Let $K \subseteq \mathbb{R}^d$ be a set}. We say that $K$ is compact if every sequence in $K$ has a subsequence that converges to a point in K.
+\begin{bluebox}{Heine-Borel Theorem}
+    \textit{Let $K \subseteq \mathbb{R}^d$
+    \[K \text{ is compact} \iff K \text{ is closed and bounded}\]
+    }
+    \
+\end{bluebox}
+\textbf{Proposition:}\textit{
+\begin{enumerate}[label=(\roman*)]
+    \item For any finite collection of compact sets, their union is compact
+    \item For any arbitrary collection of compact sets, their intersection is compact
+\end{enumerate}
+}
+\end{blackbox}
+\begin{blackbox}{Continuous Functions}
+    \textbf{Definition:} We write 
+    \[ \lim_{x\rightarrow a} f(x) = L\]
+    if for every $\epsilon > 0$, there exists $\delta > 0$ such that if $x \in X \setminus \{a\}$ and $||x-a||_2 < \delta$, then $||f(x) - L||_2 < \epsilon$. \\[1ex]
+    \textbf{Proposition:} Let $X \subseteq \mathbb{R}^d$, $Y \subseteq Y^m$, $f: X \mapsto Y$, $g: Y \mapsto \mathbb{R}^n$. Suppose that $f$ is continuous at $a$ and $g$ is continuous at $f(a)$, then $g \circ f: X \mapsto \mathbb{R}^n$ is continuous at $a$.
+\end{blackbox}
+\begin{blackbox}{Properties of Continuous Functions}
+    \textbf{Proposition:} Let $X \subseteq \mathbb{R}^d$ and let $a \in \mathbb{R}^d$ be a limit point. Let $f,g: X \mapsto \mathbb{R}^m$ and $\gamma: X \mapsto \mathbb{R}$ be functions which are all continuous at $a$. Let $c \in \mathbb{R}$. Then 
+    \begin{enumerate}[label=(\roman*)]
+        \item $f+g$ is continuous at $a$
+        \item $c \cdot f$ is continuous at $a$
+        \item $\gamma \cdot f$ is continuous at $a$
+        \item if $\gamma(x) \neq 0$ for all $x \in X$, then $\frac{1}{\gamma}$ is continuous at $a$.
+    \end{enumerate}
+    \begin{bluebox}{Sequential Characterization of Limits}
+        Let $X \subseteq \mathbb{R}^d$ and let $a \in \mathbb{R}^d$ be a limit point. Let $f: X \mapsto \mathbb{R}^m$ and let $L \in \mathbb{R}^m$. Then $\lim\limits_{x\rightarrow a} f(x) = L$ if and only if for every sequence $(a_n)^\infty_{n=1}$ in $X \setminus a$ which converges to $a$, we have 
+        \[\lim_{n\rightarrow\infty} f(a_n) = L\]
+    \end{bluebox}
+    \begin{brownbox}{Algebra of Limits}
+    Let $X \subseteq \mathbb{R}^d$ and let$a \in \mathbb{R}^d$ be a limit point. Let $f,g: X \mapsto \mathbb{R}^m$ and $\gamma: X \mapsto \mathbb{R}$ be functions which all have limits at $a$. Let $c \in \mathbb{R}$, then
+    \begin{enumerate}[label=(\roman*)]
+        \item $\lim\limits_{x\rightarrow a} (f(x) + g(x)) = \left(\lim\limits_{x\rightarrow a} f(x)\right) + \left(\lim\limits_{x\rightarrow a} g(x)\right)$
+        \item $\lim\limits_{x \rightarrow a} (cf(x)) = c \left(\lim\limits_{x\rightarrow a} f(x)\right)$
+        \item $\lim\limits_{x\rightarrow a} (\gamma(x)f(x)) = \left(\lim\limits_{x\rightarrow a}\gamma(x)\right)\left(\lim\limits_{x\rightarrow a} f(x)\right)$
+        \item If $\gamma(x) \neq 0$ for all $x \in X$ and $\lim\limits_{x\rightarrow a} \gamma(x) \neq 0$, then  $\lim\limits_{x\rightarrow a}\frac{1}{\gamma(x)} = \frac{1}{\lim\limits_{x\rightarrow a}\gamma(x)}$
+    \end{enumerate}
+        
+    \end{brownbox}
+    \textbf{Proposition }(Squeeze Theorem). Let $X \in \mathbb{R}^d$ and let $a \in \mathbb{R}^d$ be a limit point. Let $f,g,h: X \mapsto \mathbb{R}$ with 
+    $$f(x) \leq g(x) \leq h(x) \text{ for all $x \in X$}$$ 
+    Then if
+    $$\lim\limits_{x \rightarrow a}  f(x) = \lim\limits_{x \rightarrow a} h(x) = L$$ 
+    then 
+    $$\lim\limits_{x \rightarrow a} g(x) = L$$
+\end{blackbox}
+\begin{blackbox}{Continuity}
+    \textbf{Definition.} Let $X \subseteq \mathbb{R}^d$ and let $a \in X$ be a point which is not isolated. Let $f:X \mapsto \mathbb{R}^m$. We say f is continuous at $a$ if 
+    \[\lim_{x\rightarrow a}f(x) = f(a)\]
+\end{blackbox}
+\begin{blackbox}{Properties of Continuous Functions}
+    \textbf{Definition.} Let $X \subseteq \mathbb{R}^d$ and let $f: X \mapsto \mathbb{R}^m$ be a function. We say $f$ is continuous on $X$ if $f$ is continuous at $a$ for every $a \in X$.\\[1ex]
+    \textbf{Theorem.} Let $K \subseteq \mathbb{R}^d$ be compact and let $f: K \mapsto \mathbb{R}^m$ be a continuous function. Then its image $f(K)$ is also compact. 
+    \begin{redbox}{Extreme Value Theorem}
+        Let $K \subset \mathbb{R}^d$ be compact and nonempty, and let $f: K \mapsto \mathbb{R}$ be a continuous function. Then there exists $x_{\min}, x_{\max} \in K$ such that for all $x \in K$, \\[-1ex]
+        \[f(x_{\min}) \leq f(x) \leq f(x_{\max})\]
+        In other words, the image of $f$ is bounded and attains its bounds.
+    \end{redbox}
+    \begin{brownbox}{Intermediate Value Theorem}
+        Let $f: [a,b] \mapsto \mathbb{R}$ be a continuous function. Let $y \in \mathbb{R}$ be any value between $f(a)$ and $f(b)$. Then there exists $z \in [a,b]$ such that $f(z) = y$. 
+    \end{brownbox}
+    Let $f: [a,b] \mapsto \mathbb{R}$ be a continuous function. Then $f([a,b]) = [c,d]$ for some $c,d \in \mathbb{R}$
+\end{blackbox}
+\begin{blackbox}{More on Continuous Functions}
+    When $f$ is bijective, it follows that is has an inverse.\\[1ex]
+    \textbf{Definition.} Let $X \subseteq \mathbb{R}$ and let $f: X \mapsto \mathbb{R}$ be a function. 
+    \begin{enumerate}[label=(\roman*)]
+        \item We say $f$ is weakly increasing if for $x,y \in X$\\[-3ex]
+        \[x \leq y \implies f(x) \leq f(y)\]
+        \item We say $f$ is strictly increasing if for $x,y \in X$, \\[-3ex]
+        \[x < y \implies f(x) < f(y)\]
+        Similarly for weakly and strictly decreasing. 
+    \end{enumerate}
+    \textbf{Lemma.} Let $a < b$ and let $f: [a,b] \mapsto \mathbb{R}$ be a continuous function. The following equivalent. 
+    \begin{enumerate}[label=(\roman*)]
+        \item $f$ is either strictly increasing or strictly decreasing.
+        \item $f$ is injective
+    \end{enumerate}
+    \textbf{Theorem.} Let $I \subseteq \mathbb{R}$ be an interval and let $f: I \mapsto \mathbb{R}$ be an injective continuous function. Then $f^{-1}: f(I) \mapsto \mathbb{R}$ is continuous. 
+\begin{bluebox}{Uniform Continuity}
+    Let $X \subseteq \mathbb{R}^d$ and $f: X \mapsto \mathbb{R}^m$ be a function. We say that $f$ is uniformly continuous on $X$ if for any $\epsilon > 0$, there exists $\delta > 0$ such that for any $x,y \in X$, if $||x - y||_2 < \delta$, then $||f(x) - f(y)||_2 < \epsilon$
+\end{bluebox}\\[-0.5ex]
+\textbf{Theorem.} Let $K \subseteq \mathbb{R}^d$ be compact and let $f: K \mapsto \mathbb{R}^m$ be continuous. Then $f$ is uniformly continuous.
+\end{blackbox}
+\begin{blackbox}{Infinite Limits and Limits at Infinity}
+    \textbf{Definition.} Let $A \subseteq \mathbb{R}^d$ and $f: A \mapsto \mathbb{R}^m$
+    \begin{itemize}
+        \item If $m=1$ and $a \in \mathbb{R}^d$ is a limit point of $A$, then we write $\lim\limits_{x \rightarrow a} f(x) = \infty$ if for every $R > 0$, there exists $\delta > 0$ such that if $x \in A \setminus \{a\}$ and $||x-a||_2 < \delta$ then 
+        \[f(x) > R\]
+        \item Similarly,If $m=1$ and $a \in \mathbb{R}^d$ is a limit point of $A$, then we write $\lim\limits_{x \rightarrow a} f(x) = -\infty$ if for every $R > 0$, there exists $\delta > 0$ such that if $x \in A \setminus \{a\}$ and $||x-a||_2 < \delta$ then 
+        \[f(x) < -R\] 
+        \item If $d = 1$, $A$ is not bounded above, and $L \in \real^m$, we write $\lim\limits_{x\rightarrow \infty} f(x) = L$ if for every $\epsilon > 0$ there exists $R > 0$  such that if $x \in A$ and $x > R$, then 
+        \[||f(x) - L||_2 < \epsilon\]
+        \item Similarly, If $d = 1$, $A$ is not bounded above, and $L \in \real^m$, we write $\lim\limits_{x\rightarrow -\infty} f(x) = L$ if for every $\epsilon > 0$ there exists $R > 0$  such that if $x \in A$ and $x < -R$, then 
+        \[||f(x) - L||_2 < \epsilon\]
+        \item If $A$ is not bounded and $L \in \real^m$, we write $\lim\limits_{||x||_2 \rightarrow \infty} f(x) = L$ if for every $\epsilon > 0$ there exists $R > 0$ such that if $x \in A$ and $||x||_2 > R$, then 
+        \[||f(x) - L||_2 < \epsilon\]
+    \end{itemize}
+\end{blackbox}
+\begin{blackbox}{Differentiation}
+    \begin{bluebox}{The Derivative}
+        Let $X \subseteq \mathbb{R}$, $f: X \mapsto \mathbb{R}$ be a function, let $a \in X$ be a non-isolated point. We write \\[-2ex]
+        \[f'(a) = \lim_{x\rightarrow a}\frac{f(x) - f(a)}{x-a}\]
+    \end{bluebox}
+    \textbf{Proposition:} If $f$ is differentiable at $a$ then $f$ is continuous at $a$.
+    \begin{pinkbox}{Computation Rules for Derivatives}
+    Let $X \subseteq \real$, let $f,g : X \mapsto \real$ be functions, let $a \in X$ be a non-isolated point. Suppose that $f$ and $g$ are both differentiable at $a$, and let $c \in \real$. Then
+    \raggedright
+    \begin{enumerate}[label=(\roman*)]
+        \item \textbf{Linearity: }$(cf)'(a) = c(f'(a))$ and $(f+g)'(a) = f'(a) + g'(a)$
+        \item \textbf{Product: }$(fg)'(a) = f'(a)g(a) + f(a)g'(a)$
+    \end{enumerate}
+    \end{pinkbox}\\[-1ex]
+\end{blackbox}
+\begin{blackbox}{More on Computing Derivatives}
+    \begin{redbox}{Chain Rule}
+        Let $X,Y \subseteq \real$, let $f: X \mapsto \real$ and $g: Y \mapsto \real$ be functions, let $a \in X$ be a non-isolated point. Suppose that $f(X) \subseteq Y$ and that $f(a)$ is a non-isolated point of $Y$. Suppose also that $f$ is differentiable at $a$ and $g$ is differentiable at $f(a)$. Then $g\circ f$ is differentiable at $a$, and \\[-2ex]
+        \[(g \circ f)'(a) = g'(f(a))f'(a)\]
+    \end{redbox}
+    \begin{brownbox}{Inverse Rule}
+        Let $X \subseteq \real$ be an interval, let $f: X \mapsto \real$ be a continuous injective function. Let $a \in X$. If $f$ is differentiable at $a$ and $f'(0) \neq 0$ then $f^{-1}(a) \neq 0$ then $f^{-1}: f(X) \mapsto \real$ is differentiable at $f(a)$ and \\[-2ex]
+        \[(f^{-1})'(f(a)) = \frac{1}{f'(a)}\]\\[-6ex]
+    \end{brownbox}\\[-2ex]
+\end{blackbox}
+\begin{blackbox}{Optimizing Differentiable Functions}
+    \textbf{Definition.} Let $X \subseteq \real$, let $f: X \mapsto \real$, and let $a \in X$ be an interior point
+    \begin{enumerate}[label=(\roman*)]
+        \item $a$ is a local minimum of $f$ if there exists $r > 0$ such that $(a-r, a+r) \subseteq X$ and \\[-2ex]
+        \[f(a) \leq f(x) \text{ for all } x \in (a -r , a +r)\]
+        \item $a$ is a local minimum of $f$ if there exists $r > 0$ such that $(a-r, a+r) \subseteq X$ and \\[-2ex]
+        \[f(a) \geq f(x) \text{ for all } x \in (a -r , a +r)\]
+    \end{enumerate}
+    \textbf{Theorem.} Let $X \subseteq \real$, let $f: X \mapsto \real$ and let $a \in X$ be an interior point. If $f$ has a local maximum or local minimum at $a$ and $f$ is differentiable at $a$, then $f'(a) = 0$
+    \begin{bluebox}{The Mean Value Theorem}
+        \textbf{Theorem} (Rolle's Theorem).  Let $f: [a,b] \mapsto \real$ be a continuous function that is differentiable on $(a,b)$. If $f(a) = f(b)$ then there exists $x_0 \in (a,b)$ such that \\[-2ex]
+        \[f'(x_0) = 0\]
+        \textbf{Theorem} (Cauchy's Mean Value Theorem). Suppose that $f,g: [a,b] \mapsto \real$ are continuous functions that are differentiable on $(a,b)$. Then there exists $x_0 \in (a,b)$ such that \\[-2ex]
+        \[(f(b) - f(a))g'(x_0) = (g(b)-g(a))f'(x_0)\]
+        \textbf{Corollary} (Mean Value Theorem). Let $f: [a,b] \mapsto \real$ be a continuous function that is differentiable on $(a,b)$. There there exists $x_0 \in (a,b)$ such that 
+        \[f'(x_0) = \frac{f(b) - f(a)}{b-a}\]
+    \end{bluebox}\\[-2ex]
+\end{blackbox}
+\begin{blackbox}{Darboux Sums}
+    A \emph{partition} of an interval $[a,b]$ is a finite set $\{t_0, t_1, \ldots, t_n\}$ such that 
+    \[a = t_0 < t_1 < \cdots < t_n = b\]
+    A partition breaks up the interval $[a,b]$ into $n$ subintervals \\[-2ex]
+    \[[t_0, t_1], [t_1, t_2], \ldots, [t_{n-1}, t_n]\]
+    Let $ = \{t_0, t_1, \ldots, t_n\}$ be a partition and let $f: [a,b] \mapsto \real$ be a bounded function. For $i = 1, \ldots, n$, define
+    \[m_1(P,f) \coloneqq \inf f([t_{i-1}, t_i]) = \inf \{f(t) : t \in [t_{n-1}, t_1\}\]
+    \[M_1(P,f) \coloneqq \sup f([t_{i-1}, t_i]) = \sup \{f(t) : t \in [t_{n-1}, t_1\}\]
+    \begin{bluebox}{Darboux Sum}
+        Let $P = \{t_0, t_1, \ldots, t_n\}$ be a partition and let $f: [a,b] \mapsto \real$ be a bounded function. The lower Darboux sum of $f$ for $P$ is \\[-2ex]
+        \[L(P,f) \coloneqq \sum_{i=1}^n m_i(P,f)(t_i - t_{i-1})\]
+        The upper Darboux sum of $f$ for $P$ is \\[-2ex]
+        \[U(P,f) \coloneqq \sum_{n=1}^n M_i(P,f)(t_i - t_{i-1}\]
+    \end{bluebox}
+    \textbf{Definition.} Let $P, P'$ be partitions. We say that $P'$ refines $P$ if for all $X \in P'$, there exists $Y \in P$ such that $X \subseteq Y$.\\[1ex]
+    \textbf{Lemma.} Let $f: [a,b] \mapsto \real$ be a bounded function and let $P, P'$ be partitions of $[a,b]$ such that $P'$ refines $P$, then \\[-2ex]
+    \[L(P, f) \leq L(P',f) \text{ and } U(P', f) \leq U(P, f)\]
+    To understand this conceptually, consider $f$ restricted to the interval $[a,b]$, then take $c \in [a,b]$ \\[-2ex] 
+    \[\inf f|_{[a,b]} (b-a) = \inf f|_{[a,b]} \cdot (b-c) + \inf f|_{[a,b]} (c -a)\]
+    you can see this by factoring out $\inf f|_{[a,b]}$ and you will have the left side of the equality, then we have\\[-2ex]
+    \[\inf f|_{[a,b]} (b-a)  \leq \inf f|_{[c,b]} (b - c) +  \inf f|_{[a,c]} (c -a)\]
+    To understand this, consider the infimum of $[a,b]$. We have that either the infimum either occurs in $f|_[c,b]$, so $\inf f|_{[c,b]} = \inf f|_{[a,c]}$ or it occurs only in $f|_{[a,b]}$, so in this case $ \inf f|_{[a,c]} <  \inf f|_{[b,c]}$, and thus $ \inf f|_{[a,c]} \leq  \inf f|_{[b,c]}$. The same argument can be applied to the supremum to get $ \sup f|_{[a,c]} \geq  \sup f|_{[b,c]}$. So as the number of intervals increases, the lower Darboux sum increases and the upper Darboux sum decreases.
+\end{blackbox}
+\begin{blackbox}{The Riemman Integral}
+    \textbf{Corollary.} Let $f: [a,b] \mapsto \real$ be a bounded function and let $P, P'$ be partitions of $[a,b]$. Then 
+    \[L(P,f) \leq U(P',f)\]
+    \textbf{Definition.} A bounded function $f: [a,b] \mapsto \real$ is (Riemann) integrable if for all partitions $P$ of $[a,b]$
+    \[\sup\{L(P,f)\} = \inf \{U(P,f)\}\]
+    Then we set 
+    \[\int_a^b f(t) dt = \sup\{L(P,f)\} = \inf \{U(P,f)\}\]
+    \textbf{Proposition.} Let $f: [a,b] \mapsto \real$ be a bounded function. Then $f$ is integral if and only if for every $\epsilon > 0$, there exists a partition P such that 
+    \[U(P,f) - L(P,f) < \epsilon\]
+    \textbf{Theorem.} If $f: [a,b] \mapsto \real$ is continuous then $f$ is integrable. 
+    \begin{redbox}{Properties of the Integral}
+        \textbf{Proposition} (Additive Property). Let $f: [a,b]\mapsto \real$ be a bounded function and let $c \in (a,b)$. Then $f$ is integrable if and only if $f|_{[a,c]}$ and $f|_{[c,b]}$ are both integrable. In this case,
+        \[\int_a^b f(t)dt = \int_a^c f(t) dt + \int_c^b f(t) dt\]
+        \textbf{Proposition} (Linearity). Let $f,g : [a,b]\mapsto \real$ be bounded integrable functions and let $c \in \real$. Then $cf + g$ is integrable and 
+        \[\int_a^b cf(t) + g(t) dt = c\int_a^b f(t) dt  + \int_a^b g(t) dt\]
+        \textbf{Proposition.} Let $f,g : [a,b] \mapsto \real$ be integrable. If $f(t) \leq g(t)$ for all $t \in [a,b]$ then 
+        \[\int_a^b f(t) dt \leq \int_a^b\]
+        \textbf{Corollary.} Let $f: [a,b]\mapsto \real$ be integrable. If $m, M \in \real$ are such that 
+        \[m \leq f(t) \leq M\]
+        for all $x \in [a,b]$ then 
+        \[m(b-a) \leq \int_a^b f(t) dt \leq M(b-a)\]
+    \end{redbox}\\[-2ex]
+\end{blackbox}
+\begin{blackbox}{The Fundamental Theorem of Calculus}
+    \begin{bluebox}{Fundemental Theorem of Calculus}
+        
+    Let $f: [a,b] \mapsto \real$ be an integrable function. Define $F: [a,b] \mapsto \real$ by
+    \[F(x) \coloneqq \int_a^x f(t)dt\]
+    For any $x \in [a,b]$, if $f$ is continuous at $x$ then $F$ is differentiable at $x$ and 
+    \[F'(x) = f(x)\]
+    \end{bluebox}
+\textbf{Theorem.} Let $F: [a,b]\mapsto \real$ be a differentiable function, such that $F': [a,b]\mapsto \real$ is continuous. Then
+\[\int_a^b F'(t)dt = F(b) - F(a)\]
+\end{blackbox}
+\begin{blackbox}{Improper Integrals}
+    \textbf{Definition.} Let $f: (a,b] \mapsto \real$ be a function such that, for every $x \in (a,b]$, $f|_{[x,b]}$ is Riemann integrable. Then we define
+    \[\int_a^b f(t) dt \coloneqq \lim_{x \rightarrow a^+} \int_x^b f(t) dt\]
+    provided that this limit exists. Likewise, if $f: [a,b) \mapsto \real$ is such that $f|_{[a,b]}$ is integrable for all $x \in [a,b)$, then \\[1.6ex]
+    \[\int_a^b f(t) dt \coloneqq \lim_{x\rightarrow b^-} \int_a^x f(t) dt\]
+\end{blackbox}
+\begin{blackbox}{Sequences and Series of Functions}
+    \begin{bluebox}{Pointwise Limits}
+        Let $X$ be a set, let $(f_n: X \mapsto \real^m)_{n=1}^\infty$ be a sequence of functions, and let $f: X \mapsto \real^m$. We say that $(f_n)_{n=1}^\infty$ converges pointwise to $f$ if for every $x \in X$, 
+        \[\lim_{n\rightarrow \infty}f_n(x) = f(x)\]
+    \end{bluebox}
+    \begin{pinkbox}{Uniform Convergence}
+         Let $X$ be a set, let $(f_n: X \mapsto \real^m)_{n=1}^\infty$ be a sequence of functions, and let $f: X \mapsto \real^m$. We say that $(f_n)_{n=1}^\infty$ converges \emph{uniformly} to $f$ if for every $\epsilon > 0$, there exists $n_0$ such that for all $ n \geq n_0$ and $x \in X$, 
+         \[||f_n(x) - f(x)||_2 < \epsilon\]
+    \end{pinkbox}
+    \begin{center}
+    \textbf{Note: }The uniform convergence of $f_n$ to $f$ implies that $f_n$ converges pointwise to $f$.
+    \end{center}
+\end{blackbox}
+\begin{blackbox}{Series of Functions}
+    Let $X$ be a set, let $(f_n: X \mapsto \real^m)_{n=1}^\infty$ be a sequence of functions, and let $f: X \mapsto \real^m$. We define \\[-2ex]
+    \[u-\sum_{n=1}^\infty f_n \coloneqq u-\lim_{N\rightarrow\infty} \sum_{n=1}^N f_n\]
+    provided that this limit exists. When this limit exists, we say that the series $\sum\limits_{n=1}^\infty$ converges uniformly. 
+    \begin{brownbox}{The Weierstrass $M$-test}
+    Let $X$ be a set, let $(f_n: X \mapsto \real^m)_{n=1}^\infty$ be a sequence of functions, and let $(M_n)_{n=1}^\infty$ be a sequence of non-negative real numbers. Suppose that the following hold: 
+    \begin{enumerate}[label=(\roman*)]
+        \item $|f_n(x)| \leq M_n$ for all $x \in X$ and 
+        \item $\sum\limits_{n=1}^\infty M_n$ converges
+    \end{enumerate}
+        Then $\sum\limits_{n=1}^\infty f_n$ converges uniformly\\[-2ex]
+    \end{brownbox}
+    \begin{bluebox}{Properties of Uniform Convergence}
+        \raggedright
+        \textbf{Theorem.} Let $X$ be a set, let $(f_n: X \mapsto \real^m)_{n=1}^\infty$ be a sequence of functions which uniformly converge to $f: X \mapsto \real^m$. If each $f_n$ is continuous at $a$, then so is $f$. Hence if each $f_n$ is continuous on $X$, then so is $f$.\\[1ex]
+        \textbf{Corollary.} Let $X \subseteq \real^d$ and suppose $(f_n: X \mapsto \real^m)_{n=1}^\infty$ is a sequence of continuous functions. If $\sum\limits_{n=1}^\infty f_n$ converges uniformly, then the function $\sum_{n=1}^\infty f_n$ is continuous. \\[1ex]
+        \textbf{Theorem.} Let $(f_n: [a,b] \mapsto \real)_{n=1}^\infty$ be a sequence of continuous functions which converges uniformly to $f: [a,b] \mapsto \real$. Then \\[-1.5ex]
+        \[\int_a^b f(t) dt = \lim_{n \rightarrow \infty} \int_a^b f_n(t)dt\]
+        \textbf{Corollary.}  Let $(f_n: [a,b] \mapsto \real)_{n=1}^\infty$ be a sequence of continuous. If the series $\sum\limits_{n=1}^\infty f_n$ converges uniformly, then\\[-1ex]
+        \[\sum_{n=1}^\infty \int_a^b f_n(t) dt = \int_a^b \sum_{n=1}^\infty f_n(t)dt\]
+        \textbf{Theorem.} Let $(f_n: [a,b] \mapsto \real)_{n=1}^\infty$ be a sequence of differentiable functions such that $f'_n$ is continuous for each $n$. Suppose that the sequence $(f'_n)_{n=1}^\infty$ converges uniformly to some function $g: [a,b] \mapsto \real$ and that $(f_n)_{n=1}^\infty$ converges pointwise to $f$. Then $f$ is differentiable and $f' = g$.
+    \end{bluebox} \\[-2ex]
+\end{blackbox}
+\begin{blackbox}{Series of Functions Continued}
+\begin{bluebox}{Properties of Uniform Convergence}
+    Let  $(f_n: [a,b] \mapsto \real^m)_{n=1}^\infty$ be a sequence of differentiable functions such that $f'_n$ is continuous for each $n$, and let $f = \sum\limits_{n=1}^\infty f_n$. If the series $\sum\limits_{n=1}^\infty f'_n$ converges uniformly, then 
+    \[f' = \sum\limits_{n=1}^\infty f'_n\]
+\end{bluebox}
+\end{blackbox}
+\begin{blackbox}{Power Series}
+    A power series is a series of the form 
+    \[\sum_{n=0}^\infty a_n(x-c)^n\]
+    where $(a_n)_{n=1}^\infty$ is a sequence of real numbers $c \in \real$ and $x$ is a variable. The numbers $a_0, a_1, \ldots$ are the coefficents of the power series, and $c$ is called the center of the power series. \\[2ex]
+    \begin{pinkbox}{Convergence of a Power Series}
+        Let $\sum\limits_{n=0}^\infty a_n(x-c)^n$ be a power series. The interval of convergence of this power series is the set 
+        \[\left\{b \in \real: \sum_{n=0}^\infty a_n(b-c)^n \text{ converges}\right\}\]
+    \end{pinkbox}\\[1ex]
+    \textbf{Theorem.} Let $\sum\limits_{n=0}^\infty a_n(x-c)^n$ be a power series and define 
+    \[R \coloneqq \frac{1}{\limsup\limits_{n\rightarrow\infty} \sqrt[n]{|a_n|}}\]
+    (interpreted as 0 if $\limsup$ is $\infty$ and $\infty$ if $\limsup$ is 0) Then for $b \in \real$
+    \begin{enumerate}[label=(\roman*)]
+        \item If $|b - c| < R$, then $\sum\limits_{n=0}^\infty a_n(b-c)^n$ converges, while
+        \item if $|b - c| < R$, then  $\sum\limits_{n=0}^\infty a_n(b-c)^n$ diverges
+    \end{enumerate}
+    \textbf{Note:} $R$ is called the \emph{radius of convergence}\\[2ex]
+    \textbf{Proposition.} Let  $\sum\limits_{n=0}^\infty a_n(x-c)^n$ be a power series and let $R$ be its radius of convergence. Let $[a,b]$ be any closed bounded interval contained in $(c-R, c+R)$ (which is $\real$ when $R = \infty$). Then the series converges uniformly on $[a,b]$
+\end{blackbox}
+\begin{blackbox}{Continuity, Integration, and Differentiation}
+    \textbf{Theorem.} Let  $\sum\limits_{n=0}^\infty a_n(x-c)^n$ be a power series with interval of convergence $I$, and define $f: I \mapsto \real$ by \\[-2ex]
+    \[f(x) \coloneqq  \sum_{n=0}^\infty a_n(b-c)^n\]\\[-0.5ex]
+    Then $f$ is continuous on $I$ and for any $a,b \in I$, \\[-2ex]
+    \[\int_a^b f(t)dt = \sum_{n=1}^\infty \frac{a_n}{n+1}\left((b-c)^{n+1} - (a-c)^{n+1}\right)\]\\[-1ex]
+    \textbf{Theorem.} Let  $\sum\limits_{n=0}^\infty a_n(x-c)^n$ be a power series with radius of convergence  $R > 0$, and define $f: (c - R, c + R) \mapsto \real$ by \\[-2ex]
+    \[f(x) \coloneqq  \sum_{n=0}^\infty a_n(x-c)^n\]\\[-1ex]
+    Then the power series $\sum_{n=0}^\infty na_n(x-c)^{n-1}$ also has a radius of convergence $R$, and for $x \in (c- R, c+ R)$, \\[-2ex]
+    \[f'(x) = \sum_{n=0}^\infty na_n (x-c)^{n-1}\]\\[-2ex]
+    \textbf{Corollary.} Let $\sum\limits_{n=0}^\infty a_n(x-c)^n$ be a power series with radius of convergence $R > 0$, and define $f: ( c - R, c + R) \mapsto \real$ by \\[-2ex]
+   \[f(x) \coloneqq  \sum_{n=0}^\infty a_n(x-c)^n\]\\[-2ex]
+   Then for each $n$, \\[-3ex]
+   \[a_n = \frac{f^{(n)}(c)}{n!}\]
+\end{blackbox}
+\begin{blackbox}{Taylor Series}
+    Let $I \subseteq \real$ be an open interval and $f: I \mapsto \real$ be a function which is infinitely differentiable. Meaning that $f^{(n)}$ exists for all $n$. For $c \in I$, the \emph{Taylor Series} of $f$ centered at $c$ is the power series\\[-0.6ex]
+    \[\sum_{n=0}^\infty \frac{f^{(n)}(c)}{n!}(x-c)^n\]\\[-1ex]
+    For $N \in \mathbb{N}_{\geq0}$ the $N^{th}$ Taylor polynomial of $f$ is \\[-1ex]
+    \[P_N(x) \coloneqq \sum_{n=0}^N \frac{f^{(n)}(c)}{n!}(x-c)^n\]\\[-1ex]
+\begin{bluebox}{Lagrange Remainder Theorem}
+    Let $f: (a,b) \mapsto \real$ be a function which $f', f^{(2)},\ldots, f^{(N+1)}$ all exist on $(a,b)$, let $c \in (a,b)$, and let $P_N(x)$ be the $N^{th}$ Taylor polynomial of $f$ centered at $c$. Then for $x \in (a,b)$, there exists $z$ between $c$ and $x$ such that \\[-1ex]
+    \[f(x) - P_N(x) = \frac{f^{(N+1)}(z)}{(N+1)!} (x-c)^{N+1}\]\\[-6ex]
+\end{bluebox}\\[-2ex]
+\end{blackbox}
+\end{multicols*}
+
+\end{document}

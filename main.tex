@@ -1017,7 +1017,7 @@ $$\partial A = \real$$
     There exists finitely many indeces $\alpha_1, \ldots, \alpha_n$ such that 
     \[A \subseteq \bigcup_{i=1}^n U_{\alpha_i}\]
 \end{definition}
-\chapter{Limits of a Function of Continous Variables}
+\chapter{Limits of a Function of Continuous Variables}
 A sequence is a function $\nat \rightarrow \real$. Here, we'll consider function 
 that are going from $\real \rightarrow \real$ (or $\real^d \rightarrow \real^m$).
 \begin{definition}
@@ -1247,17 +1247,17 @@ In other words, $\lim\limits_{x\rightarrow a^+}f(x) = L$ means $\forall \epsilon
 \begin{definition}
     Let $f: X\rightarrow \real^m$ where $X \subseteq \real^d$. Let $a \in X$.
     \begin{itemize}
-        \item If a is not an isolated point, then we say f is continous at a if 
+        \item If a is not an isolated point, then we say f is continuous at a if 
         \[\lim_{x\rightarrow a}f(x) = f(a)\]
         \item If a is an isolated point, then we always say $f$ is \emph{continuous} at a.
     \end{itemize}
 \end{definition}
 \begin{definition}[$\delta-\epsilon$ Characterization of Continuity]
-    f is continous at a $\iff$ $\forall \epsilon > 0$, $\exists \gamma > 0$ s.t if
+    f is continuous at a $\iff$ $\forall \epsilon > 0$, $\exists \gamma > 0$ s.t if
     \[x \in X \cap B(a; \delta)\]
     then 
     \[||f(x) - f(a)||_2 < \epsilon\]
-    In other wordsm if x is close to a, the f(x) is close to f(a). This holds regardless of whether or not a is isolated.
+    In other words if x is close to a, the f(x) is close to f(a). This holds regardless of whether or not a is isolated.
 \end{definition}
 \noindent
 \textbf{Example:} $f: \real \mapsto \real$ $f(x) \coloneqq x^2$. For any $a \in \real$, we proved last lecture that 
@@ -1270,13 +1270,13 @@ Therefore, $f$ is continuous at $a$.\\[2ex]
 \end{cases}\]
 For this function, 
 \[\lim_{x \rightarrow 1^+ f(x) = 2 \neq f(x) = 1}\]
-Therefore, $f$ is not continous at 1.\\[2ex]
+Therefore, $f$ is not continuous at 1.\\[2ex]
 \textbf{Example:} 
 \[f(x) \coloneqq \begin{cases}
     \sin\left(\frac{1}{x}\right) \text{  if } x > 0\\
     L \text{  if } x = 0 \text{ for some $L \in \real$}\\
 \end{cases}\]
-No matter how we choose $L$, $f$ is not continous at 0. 
+No matter how we choose $L$, $f$ is not continuous at 0. 
 \begin{proof}
     We want to show $\lim\limits_{x \rightarrow 0}f(x)$ does not exist. Consider the sequence 
     \[\left(\frac{1}{2\pi n}\right)^\infty_{n=1} \rightarrow 0\]
@@ -1289,7 +1289,7 @@ No matter how we choose $L$, $f$ is not continous at 0.
     1 \text{  if } x \in \mathbb{Q}\\
     0 \text{  if } x \notin \mathbb{Q}
 \end{cases}\]
-$f$ is not continous at any point.
+$f$ is not continuous at any point.
 \begin{proof}
     Let $a \in \real$. We'll prove $\lim\limits_{x \rightarrow a}f(x)$ does not exist.
     \[\exists \infseq(x) \in \mathbb{Q} \text{ s.t } x_n \rightarrow a\]
@@ -1349,7 +1349,7 @@ $f$ is continuous.
         Let $\infseq{a}$ be a sequence in $f(K)$. We need to show that $\exists$ a subsequence. We need to show that $\exists$ a subsequence $(a_{n_k})_{k=1}^\infty$ s.t $a_{n_k} \rightarrow b$ for some $b \in f(K)$. Since $a_n \in f(K)$, $\exists x_n \in K$ s.t $f(x_n) = a_n$ for all $n$. This gives a sequence $\infseq{x}$ in $K$. Since $K$ is compact, $\exists$ a subsequence $(x_{n_k})_{k=1}^\infty$ s.t $x_{n_k} \rightarrow x_0$. Since $f$ is continuous at $x_0$, $f(x_{n_k}) \rightarrow f(x_0)$. Therefore, $a_{n_k} \rightarrow f(x_0)$ and $(a_{n_k})_{n=1}^\infty$ is a subsequences of $(a_n)_{n=1}^\infty$. This is what we wanted.
     \end{proof} 
 \begin{corollary}[Extreme Value Theorem]
-    Let $K \subseteq \real^d$ be compact, $f: K \rightarrow \real$ a continous function. Then $f$ is bounded and it attains its bounds, i.e $\exists x_{\min}, x_{\max} \in K$ such that $\forall x \in K$
+    Let $K \subseteq \real^d$ be compact, $f: K \rightarrow \real$ a continuous function. Then $f$ is bounded and it attains its bounds, i.e $\exists x_{\min}, x_{\max} \in K$ such that $\forall x \in K$
     \[f(x_{\min}) \leq f(x) \leq f(x_{\max})\]
 \end{corollary}
 \begin{proof}
@@ -1361,7 +1361,7 @@ $f$ is continuous.
 \end{proof}
 
 %----------------- Lecture 14
-\chapter{Properties of Continous Functions Continued}
+\chapter{Properties of Continuous Functions Continued}
 \textbf{Recall:}
 \begin{manualcorollary}{13.3.1}[Extreme Value Theorem]
     If $K \subseteq \real^d$ is compact and $f: K \rightarrow \real$ is continuous, then $\exists x_{\min}, x_{\max} \in K$ such that $f(x_{\min}) \leq f(x) \leq f(x_{\max})$ for all $x \in K$.
@@ -1413,7 +1413,7 @@ $f$ is continuous.
         and this is an inverse to $f$.
     \end{proof}
     Given $f: A \mapsto \real$ that is injective, we view $f$ as a function $A \mapsto f(A)$, and this way we force $f$ to be surjective. Thus $f^{-1}: f(A) \mapsto A$ exists.\\[2ex]
-    \textbf{Question:} If $f$ is injective and continuous, mus $f^{-1}$ be continuous? \textbf{No}. Consider the example with $f: [0,1) \cup [2, \infty]$
+    \textbf{Question:} If $f$ is injective and continuous, must $f^{-1}$ be continuous? \textbf{No}. Consider the example with $f: [0,1) \cup [2, \infty]$
     \[f(x) \coloneqq \begin{cases}
         x_1 \text{ if } x < 1 \\
         x - 1 \text{ if } x \geq 2
@@ -1437,6 +1437,21 @@ $f$ is continuous.
         Let $I \subseteq \real$ be an interval, $f: I \mapsto \real$ be an injective continuous function. Then $f$ is either strictly increasing or strictly decreasing. 
     \end{lemma}
     \begin{proof}
-        It suffices to consider the case where $I$ is a closed, bounded interval. A general interval $I$ is a union of an increasing sequence of closed bounded intervals, so if $f$ is strictly increasing or strictly decreasing on each of these subintervals, then $f$ is strinctly increasing or decreasing on all of $I$.
+        It suffices to consider the case where $I$ is a closed, bounded interval. A general interval $I$ is a union of an increasing sequence of closed bounded intervals, so if $f$ is strictly increasing or strictly decreasing on each of these subintervals, then $f$ is strinctly increasing or decreasing on all of $I$. Consider the case $I = [a,b]$ with $(a < b)$. Without loss of generality, assume $f(a) < f(b)$, in this case we'll show that $f$ is strictly increasing. By contradiction, if $f$ is not strictly increasing, then there exists $x_1 < x_2$ such that 
+        \[f(x_1) \geq f(x_2)\]
+        We'll break this into 2 cases. 
+        \begin{itemize}
+            \item \textbf{Case 1:} $f(x) > f(b)$. In this case,
+            \[f(a) < f(b) < f(x_1)\]
+            and 
+            \[f|_{[a,x_1]}\]
+            is continuous. So by the Intermediate Value Theorem, $\exists z \in [a, x_1]$ such that $f(z) = f(b)$. But,
+            \[z \leq x_1 < x_2 \leq b\]
+            So $z \neq b$, which contradicts that $f$ is injective. 
+            \item \textbf{Case 2:} $f(x_1) \leq f(b)$. In this case, $f(x_2) \leq f(x_1) \leq f(b)$ and $f|_{[x_1, b]}$ is continuous. So by the Intermediate Value Theorem, $\exists z \in [x_1, b]$ such that $f(z) = f(x_1)$. $z \geq x_2 > x_1$ so $z \neq x_1$. But, this contradicts that $f$ is injective.
+        \end{itemize}
+        In both cases, we get a contridction, so our assumption that $f$ is not strictly increasing is false.
     \end{proof}
+    \chapter{}
+    Let $I \subset \real$ be an interval, $f: I \mapsto \real$ be a continuous function. Then $f^{-1}: f(I) \mapsto \real$ is continuous. 
 \end{document}
