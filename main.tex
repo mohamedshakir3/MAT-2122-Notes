@@ -369,9 +369,261 @@
    Therefore every sequence $\infseq{a}$ has a subsequence $(a_{n_k})_{k=1}^\infty$ that converges to some $L \in K$, so $K$ is compact.
 \end{proof}
     
+\chapter*{Important Proofs for Final}
+\label{chapter:final}
+\addcontentsline{toc}{chapter}{\hyperref[chapter:final]{Important Proofs for Final}}
 
 
+\begin{manualtheorem}{1.3.13}[The Archimedean Property]
+    The set $\mathbb{N}_{\geq1}$ is not bounded above.
+\end{manualtheorem}
+    
+    \begin{proof}
+    Suppose for a contradiction that $\mathbb{N}$ was bounded above. Then by completeness, $a = \sup \mathbb{N}$ exists. Since $a$ is a least upper bound, $a - 1$ is not an upper bound, so there exists $m \in \mathbb{N}$ such that 
+    \[m > a - 1\]
+    Then since $m \in \mathbb{N}$, we have $m + 1 \in \mathbb{N}$, so 
+    \[m + 1 > a\]
+    But $a$ is an upper bound, thus a contradiction. 
+    \end{proof}
 
+
+    \begin{manualprop}{2.2.4}[Uniqueness of Limits]
+        Let $(a_n)_{n=1}^\infty$ be a sequence and let $L_1, L_2 \in \mathbb{R}$. If 
+        \[\lim_{n\rightarrow\infty} a_n = L_1 \text{ and } \lim_{n\rightarrow\infty} a_n = L_2\]
+        then 
+        \[L_1 = L_2\]
+    \end{manualprop}
+    \begin{proof}
+            Suppose for a contradiction $L_1 \neq L_2$. We can assume without loss of generality that $L_1 < L_2$. Define 
+            \[\epsilon = \frac{L_2 - L_1}{2}\]
+            Since $\lim\limits_{n\rightarrow\infty} a_n = L$, there exists $n_0$ such that $\forall n \geq n_0$
+            \[L_1 - \epsilon < a_n < L_1 + \epsilon\]
+            Using the second inequality and the definition of $\epsilon$, we get
+            \[a_n < L_1 + \epsilon = L_1 + \frac{L_2 - L_1}{2} = L_1 + \frac{L_2}{2} - \frac{L_1}{2} = \frac{L_2 + L_1}{2}\]
+            Likewise, since $\lim\limits_{n\rightarrow\infty} a_n = L_2$, there exists $m_0$ such that for all $n \geq m_0$, 
+            \[L_2 - \epsilon < a_n < L_2 + \epsilon\]
+            Then from the first inequality, we get
+            \[a_n > L_2 - \epsilon = L_2 - \frac{L_2 - L_1}{2} = \frac{L_2 + L_1}{2}\]
+            So, we get that for all $n \geq \max\{n_0, m_0\}$, 
+            \[a_n > \frac{L_2 + L_1}{2} > a_n\]
+            Thus, a contradiction.
+    \end{proof}
+
+
+        \begin{manualprop}{2.2.8}
+            Let $(a_n)_{n=1}^\infty$ be a sequence which converges to some number $L \in \mathbb{R}$. Then $(a_n)_{n=1}^\infty$ is bounded.
+        \end{manualprop}
+        \begin{proof}
+            Since $\lim\limits_{n\rightarrow\infty} a_n = L$, set $\epsilon \coloneqq 1$, there exists $n_0$ such that for all $n \geq n_0$
+            \[|a_n - L| < 1\]
+            So we have that $\forall n \geq n_0$
+            \[L - 1 < a_n < L + 1\]
+            Now set
+            \[M \coloneqq \max\{a_1, a_2, \ldots, a_{n_0-1}, L+1\}\]
+            If $n < n_0$, then it is amongst the set $\{a_1, \ldots, a_{n_0-1}\}$, so $M$ will be the max of this set. Therefore, $\forall n < n_0$, $a_n \leq M$. Then for $n \geq n_0$, by the definition of the limit we know that $a_n < L + 1$, so we get that $a_n < L + 1 \leq M$. Therefore, for all values of $n$,the set $\{a_n: n \in \mathbb{N}\}$ is bounded above.\\[1ex]
+            Similarly for the lower bound, take
+            \[M \coloneqq \min\{a_1, a_2, \ldots, a_{n_0 -1}, L - 1\}\]
+            If $n < n_0$, then it is in the set $\{a_1, a_2, \ldots, a_{n_0-1}\}$
+            $M'$ is at most the minimum of this set, so $\forall n < n_0$, $a_n \geq M'$. If $n \geq n_0$, by the definition of the limit we know that for all $n \geq n_0$, $a_n > L - 1$. So $M'$ is at most $L - 1$. Therefore $\forall n \geq n_0$, $a_n > L - 1 \geq M'$. Therefore, the set is bounded below and above, so it is bounded.
+   \end{proof}
+
+   \begin{manualprop}{3.2.1}[Boundedness Test]
+    Let $\infseq{a}$ be a sequence of real numbers. Suppose that
+    \begin{enumerate}[label=(\roman*)]
+        \item $a_n \geq 0$ for all $n$, and
+        \item There is a bound $M \in \real$ on the partial sums, so that
+        \[\sum_{n=1}^N a_n \leq M\]
+        for all $N \in N_{\geq 1}$.
+    \end{enumerate}
+    Then $\infser{a}$ converges.
+\end{manualprop}
+\begin{proof}
+    Since $a_n \geq 0$, the partial sums $(S_N)_{N=1}^\infty$ satisfy
+    \[S_N \leq S_{N+1} \text{ for all $N$.}\]
+    In other words, $(S_N)^\infty_{N=1}$ is an increasing sequence. The second condition ensures that the sequence is bounded above. Therefore, by the Monotone Convergence Criterion, it converges. Therefore, $\sum\limits_{n=1}^\infty a_n$ converges.
+\end{proof}
+
+
+\begin{manualprop}{4.2.3}
+    Let $\infseq{a}$ be a sequence in $\real^d$, with 
+    \[a_n = (a_n^{(1)}, \ldots, a_n^{(d)}) \text { for each } n \in \nat\]
+    and let $L = (L_1, \ldots, L_d) \in \real^d$. Then
+    \[\lim_{n\rightarrow\infty} a_n = L\]
+    if and only if, for each $i = 1, \ldots, d$,
+    \[\lim_{n\rightarrow\infty} a_n^{(i)} = L_i\]
+\end{manualprop}
+\begin{proof}
+    ($\implies$) Assume that $\lim\limits_{n\rightarrow\infty} a_n = L$. Then, for each $i = 1, \ldots, d$, we have that $|x_i|^2 \leq \sum_{i=1}^{d} x_i^2 = ||x||_2^2$, therefore 
+    \[|x_i| \leq ||x||_2\]
+    Using this fact, we then have each component of $||a_n - L||_2$ is less than or equal to it. So 
+    \[|a_n^{(i)} - L_i| \leq ||a_n - L||_2\]
+    \[-||a_n - L||_2 \leq a_n^{(i)} - L_i \leq ||a_n-L||_2\]
+    Since $\lim\limits_{n\rightarrow \infty}a_n = L$, we have 
+    $\lim\limits_{n\rightarrow\infty} a_n - L = 0$. By the Squeeze theorem, it follows that 
+    \[\lim_{n \rightarrow \infty} a_n^{(i)} - L_i = 0 \implies \lim_{n\rightarrow \infty} a_n^{(i)} = L\]
+    ($\impliedby$) Suppose for each $i = 1, \ldots, d$, we have 
+    \[\lim_{n\rightarrow\infty} a_n^{(i)} = L_i\]
+    Then, from the definition of $||\cdot||_2$, we have 
+    \[||a_n -L||_2^2 = (a_n^{(1)} - L_1)^2 + \cdots + (a_n^{(d)} - L_d)^2\]
+    Now taking limits of both sides
+    \[\lim_{n\rightarrow\infty} ||a_n - L||_2^2 = \lim_{n\rightarrow\infty} (a_n^{(1)} - L_1)^2 + \cdots + \lim_{n\rightarrow\infty} (a_n^{(d)} - L_d)^2\]
+    Now we'll prove exercise 2.2.5 which states that if $\infseq{a}$ is a sequence of non-negative real number converging to $L \geq 0$, then $\lim\limits_{n \rightarrow \infty} \sqrt{a_n}$ converges to $\sqrt{L}$. To prove this we will consider two cases where $L = 0$, and $L > 0$. 
+    \begin{itemize}
+        \item \textbf{Case 1, L = 0}: Suppose $\infseq{a} \rightarrow 0$, then from the definition of convergence we have that $\forall \epsilon > 0$, $\exists n_0$ such that $\forall n \geq n_0$, 
+        \[|a_n - 0| < \epsilon\]
+        Since $\epsilon$ is abritrary, we'll replace $\epsilon$ with $\epsilon^2$, so 
+        \[|a_n - 0| < \epsilon^2\]
+        Then we get 
+        \[|a_n - 0| = |a_n| < \epsilon^2 \implies \sqrt{|a_n|} < \epsilon\]
+        Therefore, $\sqrt{a_n} \rightarrow 0$ by the definition of convergence.
+        \item \textbf{Case 2, $L > 0$}: Suppose $\infseq{a} \rightarrow L > 0$. Let $\epsilon >0$ be given, then there exists $n_0$ such that for all $n \geq n_0$,
+        \[|a_n - L| < \epsilon\]
+        We much such that $|\sqrt{a_n} - \sqrt{L}| < \epsilon$
+        \[|\sqrt{a_n} - \sqrt{L}| \cdot \frac{\sqrt{a_n} + \sqrt{L}}{\sqrt{a_n} + \sqrt{L}} = \frac{|(\sqrt{a_n} - \sqrt{L})(\sqrt{a_n} + \sqrt{L})|}{\sqrt{a_n} + \sqrt{L}}\]
+        Since $\sqrt{a_n} + \sqrt{L}$ is positive because $a_n, L \geq 0$, then $\sqrt{a_n} + \sqrt{L} = |\sqrt{a_n} + \sqrt{L}|$, then using the fact that $|a|\cdot|b| = |a\cdot b|$, we get 
+        \[\frac{|a_n - \sqrt{L}\sqrt{a_n} + \sqrt{L}\sqrt{a_n} + L|}{\sqrt{a_n} + \sqrt{L}} = \frac{|a_n - L|}{\sqrt{a_n} + \sqrt{L}} \leq \frac{|a_n - L|}{\sqrt{L}}\]
+        Now if we replace $\epsilon$ with $\epsilon \over \sqrt{L}$, we get 
+        \[|\sqrt{a_n} - \sqrt{L}| < \frac{|a_n - L|}{\sqrt{L}} < \frac{\epsilon}{\sqrt{L}} \implies |\sqrt{a_n} - \sqrt{L}| < \epsilon\]
+        Therefore, $\lim\limits_{n\rightarrow\infty}\sqrt{a_n} = \sqrt{L}$
+    \end{itemize}
+    Now going back to the original proof, 
+    \[\lim_{n\rightarrow \infty} ||a_n - L||_2^2 = 0\]
+    So from exercise 2.2.5 we have
+    \[\lim_{n\rightarrow \infty} \sqrt{||a_n - L||^2_2} = \sqrt{0}\]
+    Therefore,
+    \[\lim_{n \rightarrow \infty} ||a_n - L||_2 = 0\]
+    as required.
+\end{proof}
+
+\begin{manualprop}{4.3.4}
+    Given $a \in \real^d$, and $r > 0$, the open ball $B(a,r)$ is an open set. 
+\end{manualprop}
+\begin{center}
+    \textbf{Note: This is example 4.3.4 from the professors notes.}
+\end{center}
+\begin{proof}
+    Recall the definition of an open set is that for any $x$ in the set, we can define an open ball (or epsilon neighborhood) around $x$ such that the ball is contained in the set. So we want an open ball $B(x;\epsilon)$ such that $B(x;\epsilon) \subseteq B(a;r)$. To see this, let $x \in B(a;r)$, so that $||x-a||_2 < r$. Define 
+    \[\epsilon \coloneqq r - ||a-x||_2 > 0\] 
+    Now take some element $y \in B(x;\epsilon)$, then we want to show that tis element is contained in $B(a;r)$. So, $y \in B(x;\epsilon)$, so that $||y-x||_2 < \epsilon$. Then,
+    \begin{align*}
+        ||y-a||_2 = ||y - x + x -a||_2 &\leq ||y - x||_2 + ||x -a||_2\\
+        &< \epsilon + ||a-x||_2 = r
+    \end{align*}
+    Therefore, 
+    \[||y-a||_2 < r\]
+    So $y \in B(a;r)$ as required, so $B(a;r)$ is an open set.
+\end{proof}
+
+\begin{manualprop}{4.3.9}
+    Let $F \subseteq \real^d$. Then $F$ is closed if and only if for every sequence $\infseq{a}$ in $F$, if $\infseq{a}$ converges then 
+    \[\lim_{n\rightarrow\infty} a_n \in F\]
+\end{manualprop}
+\begin{proof}
+    ($\implies$) Assume that $F$ is closes, so $\real^d \setminus F$ is open. Let $\infseq{a}$ be a sequence in $F$ which converges. Suppose for a contradiction that $L \coloneqq \lim\limits_{n\rightarrow\infty} a_n$ is not in $F$. So $L \in \real^d \setminus F$. Then by openness, there exists $\epsilon > 0$ such that $B(L; \epsilon) \subseteq \real^d \setminus F$. Using the definition of convergence, we have that there exists $n$ such that 
+    \[||a_n - L||_2 < \epsilon\]
+    But, this means that 
+    \[a_n \in B(L;\epsilon) \subseteq \real^d \setminus F\]
+    which contradicts that $a_n \in F$. Therefore, $L \in F$ as required.\\[1ex]
+    ($\impliedby$) Assume that every sequence in $F$ that converges, the limit is in $F$. We want to show that $\real^d \setminus F$ is open. Take a point $x \in \real^d \setminus F$, and suppose for a contradiction that there is no $\epsilon > 0$ such that $B(x; \epsilon) \subseteq \real^d \setminus F$. We can take $\epsilon \coloneqq \frac{1}{n}$. So for each $n \in \nat_{\geq 1}$, $B(x;\frac{1}{n})$ is not contained in $\real^d \setminus F$. So, there must be a point in $B(x;\frac{1}{n})$ that is in $F$. Let $a_n$ be such a point. Then since it is in $B(x;\frac{1}{n})$, we have that
+    \[||a_n-x||_2 < \frac{1}{n}\]
+    $x \in \real^d \setminus F$ so $x \neq a_n$, so 
+    \[0 < ||a_n-x||_2 < \frac{1}{n}\]
+    So by the squeeze theorem,
+    \[\lim_{n\rightarrow\infty} ||a_n-x||_2 = 0\]
+    So, 
+    \[\lim_{n \rightarrow \infty} a_n = x\]
+    By our hypothesis, every sequence which converges, the limit is in $F$. So $x \in F$, but by our assumption $x \in \real^d \setminus F$, which is a contradiction. Therefore, $\real^d \setminus F$ is open as required.
+\end{proof}
+
+\begin{manualprop}{5.2.5}
+    Let $X \subseteq \real^d$ and let $Y \subseteq \real^m$. Let $f : X \mapsto Y$ and $g : Y \mapsto \real^n$ be functions. Let $a \in X$. Suppose that $f$ is continuous at $a$ and $g$ is continuous at $f(a)$. Then $g \circ f$ is continuous at $a$.
+\end{manualprop}
+\begin{proof}
+    Let $\epsilon > 0$ be given. Since $g$ is continuous at $f(a)$, there exists $\eta > 0$ such that for all $y \in Y$, if $||y - f(a)||_2 < \eta$, then $||g(y) - g(f(a))||_2 < \epsilon$ (by the definition of continuity). Since $f$ is continuous at $a$, we can find $\delta$ such that for all $x \in X$, if $||x-a||_2 < \delta$, then $||f(x) - f(a)||_2 < \eta$. Now since these inequalities hold for all $x \in X$ and $y \in Y$. We can take $y = f(x)$. So if $x \in X$ and $||x-a||_2 < \delta$, then $||f(x) - f(a)||_2 < \eta$, and so 
+    \[||g(f(x)) - g(f(a))||_2 < \epsilon\]
+    as required.
+\end{proof}
+    
+\begin{manualtheorem}{5.3.2}
+    Let $K \subseteq \real^d$ be compact and let $f: K \mapsto \real^m$ be a continuous function. Then its image, $f(K)$ is also compact. 
+\end{manualtheorem}
+\begin{proof}
+    Let $\infseq{y}$ be a sequence in $f(K)$, we need to find a subsequence that converges to a point in $f(K)$. Recall that $f(K) = \{f(k): k \in K\}$. So, we can find $x_n \in K$ for each $n$ such that $y_n = f(x_n)$. Since $K$ is compact, there is a subsequence $(x_{n_k})_{n=1}^\infty$ which converges to a point $a \in K$. $f$ is continuous so 
+    \[\lim_{x\rightarrow a} f(x) = f(a)\]
+    therefore by the Sequential Characterization of Limits, $\lim_{k \rightarrow \infty} f(x_{n_k} ) = f(a)$. So, the subsequence $(y_{n_k})_{n=1}^\infty$ converges to $f(a) \in f(K)$ as required.
+\end{proof}
+
+\begin{manualcorollary}{5.3.3}[Extreme Value Theorem]
+    Let $K \subset \real^d$ be compact and nonempty, and let $f: K \mapsto \real$ be a continuous function. Then there exists $x_{\min}, x_{\max} \in K$ such that for all $x \in K$, 
+    \[f(x_{\min}) \leq f(x) \leq f(x_{\max})\]
+    In otherwords, the image of $f$ is bounbded above and below, and it attains its boundes. 
+\end{manualcorollary}
+\begin{proof}
+    By the previous theorem, $f(K)$ is compact. By the Heine-Borel theorem, $f(K)$ is closed and bounded. Since it is bounded, by completeness we have $\sup f(K)$ and $\inf f(K)$ exist. We can construct a sequence $(a_n)_{n=1}^\infty$ which converges to $\sup f(K)$. Let $L \coloneqq \sup f(K)$. For any given $\epsilon > 0$, $L - \epsilon < L$ so it is not an upperbound. Therefore we have some element $a \in f(K)$ such that $L - \epsilon < a \leq L$. Set $\epsilon \coloneqq \frac{1}{n}$ for $n \in \nat_{\geq 1}$. So we can define the seqeunce members of $(a_n)_{n=1}^\infty$ as 
+    \[L - 1 < a_1 \leq L\]
+    \[L - \frac{1}{2} < a_2 \leq L\]
+    \[L - \frac{1}{3} < a_3 \leq L\]
+    \[L - \frac{1}{n} < a_n \leq L\]
+    This holds for all $n \in \nat_{\geq1}$ since if $L - \frac{1}{n}$ is an upper bound, then it contradicts that $L = \sup f(K)$. Then by the Squeeze theorem, we have that this sequence converges to $L$. So since $f(K)$ is closed, $L \in f(K)$. Similarly, we can construct a sequence that converges to $\inf f(K)$. Therefore, by boundedness we have 
+    \[\inf f(K) \leq f(K) \leq \sup f(K) \]
+    Since $f(K)$ is closed, there exists $x_{\min} \in K$ such that $f(x_{\min}) = \inf f(K)$. Similarly, there exists $x_{\max} \in K$ such that $f(x_{\max}) = \sup f(K)$. 
+    \begin{center}
+        \textbf{Note:} It follows that $\sup f(K) \in f(K)$ because $f(K)$ is closed, but I wanted to prove it in an intuitive way to be thorough.
+    \end{center}
+\end{proof}
+
+\begin{manualtheorem}{5.4.4}
+    Let $I \subseteq \real$ be an interval and let $f : I \mapsto \real$ be an injective continuous functiion. Then $f^{-1}: f(I) \mapsto \real$ is continuous. 
+\end{manualtheorem}
+\begin{proof}
+    From Lemma 5.4.3, since $f$ is injective then $f$ is either strictly increasing or strictly decreasing. Assume without loss of generality that $f$ is strictly increasing. Let $b \in f(I)$, we want to show that $\lim\limits_{y\rightarrow b} f^{-1}(y) = f^{-1}(b)$. Let $\epsilon > 0$ be given. Set $a \coloneqq f^{-1}(b)$, so $f(a) = b$. Consider 2 cases where $a \in I^{\circ}$ and $a \in \partial I$. When $a \in \partial I$ the argument follows very similarly so we will suppose that $a \in I^{\circ}$. Since $\epsilon$ is arbitrary, we can assume $a - \epsilon, a + \epsilon \in I$. Then we have
+    \[f(a - \epsilon) < f(a) < f(a + \epsilon)\]
+    Then set 
+    \[\delta \coloneqq \min\{f(a) - f(a - \epsilon), f(a + \epsilon) - f(a)\} > 0\]
+    We want to prove that if $y \in f(I)$ and $|y - b| < \delta$, then $|f^{-1}(y) - f^{-1}(b)| < \epsilon$. Suppose for a contradiction that this is false, then 
+    \[f^{-1}(y) \leq f^{-1}(b) \text{ or } f^{-1}(y) \geq f^{-1}(b) + \epsilon\]
+    Set $x \coloneqq f^{-1}(y)$ so $f(x) = y$. So we have 
+    \[x \leq a - \epsilon \text{ or } x \geq a + \epsilon\]
+    In the first case since $f$ is strictly increasing we get 
+    \[y = f(x) \leq f(a - \epsilon) \leq f(a) - \delta = b - \delta\]
+    So $y = b - \delta$. In the second case we get 
+    \[y = f(x) \geq f(a + \epsilon) \geq f(a) + \delta = \beta + \delta\]
+    In both cases, this contradicts that $|y - b| < \delta$ so we must have that our claim was true. 
+\end{proof}
+
+\begin{manualprop}{6.1.5}
+    Let $X \subseteq \real$, let $f: X \mapsto \real$ be a function, let $a \in X$ be a non-isolated point. If $f$ is differentiable at $a$ then $f$ is continuous at $a$.
+\end{manualprop}
+\begin{proof}
+    We want to show that $\lim\limits_{x\rightarrow a}f(x) - f(a)$. We have 
+    \begin{align*}
+        \lim_{x\rightarrow a}f(x) - f(a) &= \lim_{x\rightarrow a}\left(\frac{f(x) - f(a)}{x - a}(x - a)\right)\\
+        &= \left(\lim_{x\rightarrow a} \frac{f(x) - f(a)}{x-a}\right)\left(\lim_{x\rightarrow a} x- a\right)\\
+        &= f'(a) \cdot 0 = 0 \implies \lim_{x\rightarrow a} f(x) = f(a)
+    \end{align*}
+    We can use algebra of limits since both limits are well defined.
+\end{proof}
+
+\begin{manualtheorem}{6.3.2}
+    Let $X \subseteq \real$, let $f: X \mapsto \real$ and let $a \in X$ be an interior point. If $f$ has a local maximum or local minimum at $a$ and $f$ is differentiable at $a$, then $f'(a) = 0$.
+\end{manualtheorem}
+\begin{proof}
+    Assume that $f$ is a local minimum at $a$. Let $r > 0$ be such that $(a-r, a+r) \subseteq X$ and 
+    \[f(a) \leq f(x) \ \ \forall x \in (a - r, a + r)\]
+    In other words, $f(a)$ is the local minimum in the $r$ neighborhood of $a$. Since $f$ is differentiable, the limit 
+    \[\lim_{x\rightarrow a} \frac{f(x) - f(a)}{x-a}\]
+    exists. By the Sequential Characterization of Limits, for any sequence $(x_n)_{n=1}^\infty$ in $X$ converging to $a$, we have 
+    \[f'(a) = \lim_{n\rightarrow\infty} \frac{f(x_n) - f(a)}{x_n - a}\]
+    We want to construct two sequences that converge to $a$ from the left and right, so from the right consider the sequence with members $x_n \in (a, a+r)$
+    \[x_n \coloneqq a + \frac{r}{n+1}\]
+    Then $x_n - a > 0$ and $f(x_n) - f(a) \leq 0$ since $f(a) \leq f(x)$ $\forall x \in (a - r, a + r)$. So this implies that 
+    \[f'(a) = \lim_{n\rightarrow \infty} \frac{f(x_n) = f(a)}{x_n-a} \geq 0\]
+    Similarily, we can construct a sequence from the left with members $x_n \in (a-r, a)$, take 
+    \[x_n \coloneqq a - \frac{r}{n+1}\]
+    So $x_n - a < 0$, thus
+    \[f'(a) = \lim_{n \rightarrow \infty} \frac{f(x_n)-f(a)}{x_n-a} \leq 0\]
+    Then by combining these inequalities, we get that $f'(a) = 0$, as required.
+\end{proof}
 
 %-------------- Lecture 1 ------------------------
 \chapter{The Real Numbers $\real$}
