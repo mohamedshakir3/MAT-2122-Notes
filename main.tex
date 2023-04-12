@@ -625,6 +625,127 @@
     Then by combining these inequalities, we get that $f'(a) = 0$, as required.
 \end{proof}
 
+\begin{manualtheorem}{6.4.1}[Rolle's Theorem]
+    Let $f: [a,b] \mapsto \real$ be a continuous function that is differentiable on $(a,b)$. If $f(a) = f(b)$, then there exists $x_0 \in (a,b)$ such that
+    \[f'(x_0) = 0\]
+\end{manualtheorem}
+\begin{proof}
+    If $f$ is constant then it follows that $f'(x_0) = 0$ for all $x_0 \in (a,b)$. Otherwise, by the Extreme Value theorem there exists $x_{\min}, x_{\max}$ such that 
+    \[f(x_{\min}) \leq f(x) \leq f(x_{\max})\]
+    Since $f$ is not constant, we know that we have either (or both)
+    \[f(x_{\min}) < f(a) = f(b) \text{ or } f(x_{\max}) > f(a) = f(b)\]
+\end{proof}
+
+\begin{manualtheorem}{7.1.11}
+    If $f: [a,b] \mapsto \real$ is continuous, then $f$ is integrable. 
+\end{manualtheorem}
+
+\begin{proof}
+    Since $f$ is continuous, then by definition there exists $\delta$ such that if $x,y \in [a,b]$ and $|x - y| < \delta$, then $|f(x) - f(y)| < \epsilon$. By proposition 5.3.6, we have that $f([a,b]) = [c,d]$ for some $c,d \in \real$. Let $P = \{t_0, \ldots, t_{n-1}\}$ be a partion such that 
+    \[|t_i - t_{i-1}| < \delta\]
+    for all $i$. Since $f$ is uniformly continuous, then for $x,y \in [t_{i-1}, t_i]$ if $|x - y| < \delta$, then $|f(x) - f(y)|$. So, the maximum distance from $|f(x) - f(y)|$ cannot exceed $\epsilon$. In otherwords, 
+    \[M_i(P,f) - m_i(P,f) < \epsilon\]
+     By the extreme value theorem, we can find a maximum and minimum $f(x_{\min})$, $f(x_{\max})$ for any interval $[t_{i-1}, t_i]$. From the partitions we have that 
+    \[f(x_{\min}) = m_i(P,f) \text{ and } f(x_{\max}) = M_i(P,f)\]
+    Now if we take the sums of these intervals, we get
+    \begin{align*}
+        U(P,f) - L(P,f) &= \sum_{i=1}^n (M_i(P,f) - m_i(P,f))(t_i - t_{i-1})\\
+        &< \sum_{i=1}^n \epsilon(t_i - t_{i-1})\\
+        &= \epsilon \sum_{i=1}^n (t_i - t_{i-1})\\
+        &= \epsilon (t_n-t_0)\\
+    \end{align*}
+    Since $\epsilon$, is arbitrary, we can replace $\epsilon$ with $\frac{\epsilon}{b-a}$. Then we get that
+    \[U(P,f) - L(P,f) < \frac{\epsilon}{b-a} (t_n-t_0) = \epsilon\]
+    Then from proposition 7.1.10, which states that $f$ is integrable if and only if for every $\epsilon > $, there exists a partition $P$ such that 
+    \[U(P,f) - L(P,f) < \epsilon\]
+    we have that $f$ is integrable.
+\end{proof}
+\begin{manualprop}{}
+    Let $X$ be a set, let $(f_n: X \mapsto \real^m)$ be a sequence of functions, and let $f: X \mapsto \real^m$. If $f_n$ converges uniformly to $f$, then $f$ converges pointwise to $f$.
+\end{manualprop}
+\begin{proof}
+    Suppose $f_n$ converge uniformaly to $f$, then $\forall \epsilon > 0$, $\exists n_0$ such that $\forall n \geq n_0$, 
+    \[||f_n(x) - f(x)||_2 <\epsilon \ \ \forall x \in X\]
+    Therefore, from the definition of the limit, we have that 
+    \[\lim_{n\rightarrow \infty} f_n(x) = f(x) \ \ \forall x \in X\]
+    as required. 
+\end{proof}
+
+\begin{manualtheorem}{8.2.6}[The Weierstrass $M$-test]
+    Let $X$ be a set, let $(f_n: X \rightarrow \real)_{n=1}^\infty$ be a sequence of functions, and let $(M_n)_{n=1}^\infty$ be a sequence of non-negative real numbers. Suppose that the follow hold
+    \begin{enumerate}[label=(\roman*)]
+        \item $|f_n(x) \leq M_n$ for all $x \in X$, and 
+        \item $\sum\limits_{n=1}^\infty M_n$ converges 
+    \end{enumerate}
+    Then $\sum\limits_{n=1}^\infty f_n$ converges uniformly. 
+\end{manualtheorem}
+
+\begin{proof}
+    For each $x \in X$, by the comparison test we have that the series
+    \[\sum_{n=1}^\infty |f_n(x)|\]
+    converges since 
+    \[|f_n(x)| \leq M_n \implies \sum_{n=1}^\infty |f_n(x)| \leq \sum_{n=1}^\infty M_n\]
+    Therefore, $\sum\limits_{n=1}^\infty f_n(x)$ converges absolutely. Set 
+    \[g(x) \coloneqq \sum_{n=1}^\infty f_n(x)\]
+    We want to show that this sequence converges, that is, for any $\epsilon > 0$, $\exists n_0$ such that $\forall x \in X$
+    \[|\sum_{n=1}^\infty f_n(x)- \sum_{n=1}^{N_0} f_n(x| < \epsilon\]
+    Since $\sum\limits_{n=1}^\infty M_n$ converges, so by the Cauchy convergence criterion, for all $\epsilon > 0$, there exists $N_0$ such that 
+    \[\sum_{n=1}^\infty M_n- \sum_{n=1}^{N_0} M_n| < \epsilon \]
+    So, take 
+    \[g \coloneqq \sum_{n=1}^\infty f_n(x)\]
+    We want to show that $g = \text{u}-\sum_{n=1}^\infty f_n(x)$. Now, take $N \geq N_0$, then
+    \begin{align*}
+        |g(x) - \sum_{n=1}^N f_n(x)| &= |\sum_{n=1}^\infty f_n(x) - \sum_{n=1}^N f_n(x)|\\
+        &= |\sum_{n=N+1}^\infty f_n(x)|\\
+        &\leq \sum_{n=N+1}^\infty |f_n(x)|\\
+        &\leq \sum_{n=N+1}^\infty M_n\\
+        &< \epsilon
+    \end{align*} 
+    as required.
+\end{proof}
+
+\begin{manualtheorem}{8.3.1}
+    Let $X \subseteq \real^d$ be a set and $a \in X$. Let $(f_n: X \rightarrow \real^m)_{n=1}^\infty$ be a sequence of functions which converges unifromly to $f: X \rightarrow \real^m$. If each $f_n$ is continuous at $a$, then so is $f$. Hence, if each $f_n$ is continuous, then so is $f$.
+\end{manualtheorem}
+\begin{proof}
+    Since $f_n$ converges uniformly to $f$, then for any $\epsilon > 0$, there exists $n_0$ such that 
+    \[||f_n(x) - f(x)||_2 < \epsilon\]
+    Now take any $n \geq n_0$, we want to show that there exists $\delta > 0$ such that if 
+    \[||x-a||_2 < \delta\]
+    then 
+    \[||f(x) - f(a)|| < \epsilon\]
+    Since $f_n$ is continuous, then for all $x \in X$, we have that when $||x-a||_2 < \delta$, then
+    \[||f_n(x) - f_n(a)||_2 < \epsilon\]
+    Now take $x \in X$ such that $||x-a||_2 < \delta$, then
+    \begin{align*}
+        ||f(x) - f(a)||_2 &= ||f(x) - f_n(x) + f_n(x) - f_n(a) + f_n(a) - f(a)||_2\\
+        &\leq ||f(x) - f_n(x)||_2 + ||f_n(x) - f_n(a)||_2 + ||f_n(a) - f(a)||_2\\
+    \end{align*}
+    Then since $f_n$ converges uniformly to $f$, we have that 
+    \[||f(x) - f_n(x)||_2 < \epsilon \text{ and } ||f_n(a) - f(a)||_2 < \epsilon\]
+    Therefore,
+    \[||f(x) - f_n(x)||_2 + ||f_n(x) - f_n(a)||_2 + ||f_n(a) - f(a)||_2 = \epsilon + \epsilon + \epsilon\]
+    Since $\epsilon$ is arbitrary, we can replace it with $\frac{\epsilon}{3}$, and we get 
+    \[||f(x) - f(a)||_2 < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} = \epsilon\]
+    as required.
+\end{proof}
+
+\begin{manualtheorem}{9.1.15}
+    Let $\sum\limits_{n=0}^\infty a_n(x-c)^n$ be a power series, and define 
+    \[R \coloneqq \frac{1}{\limsup\limits_{n\rightarrow\infty} \sqrt[n]{|a_n|}}\]
+    (this value is 0 when $\limsup$ is $\infty$ and $\infty$ when $\limsup$ is 0). Then for $b \in \real$, 
+    \begin{enumerate}[label=(\roman*)]
+        \item if $|b-c|< R$, then$\sum\limits_{n=0}^\infty a_n(x-c)^n$ converges, while 
+        \item if $|b-c| \geq R$, then $\sum\limits_{n=0}^\infty a_n(x-c)^n$ diverges.
+    \end{enumerate}
+\end{manualtheorem}
+\begin{proof}
+    Let $b \in \real$ with $b \neq 0$, since the case where $b = c$ is trivial. We have 
+    \[\limsup_{n\rightarrow \infty} \sqrt[n]{|a_n(b-c)^n|} = \limsup_{n\rightarrow \infty}|b-c|\sqrt[n]{|a_n|} = |b-c|\limsup_{n\rightarrow \infty}\sqrt[n]{|a_n|}= \frac{|b-c|}{R}\]
+    Hence by the root test, if $\frac{|b-c|}{R} < 1$ (i.e $|b-c| < R$), the series converges, while if $\frac{|b-c|}{R} \geq 1$ $|b-c|>R$, the series diverges as required 
+\end{proof}
+
+
 %-------------- Lecture 1 ------------------------
 \chapter{The Real Numbers $\real$}
 \begin{center}
