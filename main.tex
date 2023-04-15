@@ -674,34 +674,24 @@
 \begin{manualtheorem}{8.2.6}[The Weierstrass $M$-test]
     Let $X$ be a set, let $(f_n: X \rightarrow \real)_{n=1}^\infty$ be a sequence of functions, and let $(M_n)_{n=1}^\infty$ be a sequence of non-negative real numbers. Suppose that the follow hold
     \begin{enumerate}[label=(\roman*)]
-        \item $|f_n(x) \leq M_n$ for all $x \in X$, and 
+        \item $|f_n(x)| \leq M_n$ for all $x \in X$, and 
         \item $\sum\limits_{n=1}^\infty M_n$ converges 
     \end{enumerate}
     Then $\sum\limits_{n=1}^\infty f_n$ converges uniformly. 
 \end{manualtheorem}
 
 \begin{proof}
-    For each $x \in X$, by the comparison test we have that the series
-    \[\sum_{n=1}^\infty |f_n(x)|\]
-    converges since 
-    \[|f_n(x)| \leq M_n \implies \sum_{n=1}^\infty |f_n(x)| \leq \sum_{n=1}^\infty M_n\]
-    Therefore, $\sum\limits_{n=1}^\infty f_n(x)$ converges absolutely. Set 
-    \[g(x) \coloneqq \sum_{n=1}^\infty f_n(x)\]
-    We want to show that this sequence converges, that is, for any $\epsilon > 0$, $\exists n_0$ such that $\forall x \in X$
-    \[|\sum_{n=1}^\infty f_n(x)- \sum_{n=1}^{N_0} f_n(x| < \epsilon\]
-    Since $\sum\limits_{n=1}^\infty M_n$ converges, so by the Cauchy convergence criterion, for all $\epsilon > 0$, there exists $N_0$ such that 
-    \[\sum_{n=1}^\infty M_n- \sum_{n=1}^{N_0} M_n| < \epsilon \]
-    So, take 
-    \[g \coloneqq \sum_{n=1}^\infty f_n(x)\]
-    We want to show that $g = \text{u}-\sum_{n=1}^\infty f_n(x)$. Now, take $N \geq N_0$, then
+    Consider the sequence of partial sums 
+    \[s_n = \sum_{m=1}^n f_m\]
+    Take $N, M \in \natural$ such that $N \leq M$. Then
     \begin{align*}
-        |g(x) - \sum_{n=1}^N f_n(x)| &= |\sum_{n=1}^\infty f_n(x) - \sum_{n=1}^N f_n(x)|\\
-        &= |\sum_{n=N+1}^\infty f_n(x)|\\
-        &\leq \sum_{n=N+1}^\infty |f_n(x)|\\
-        &\leq \sum_{n=N+1}^\infty M_n\\
-        &< \epsilon
-    \end{align*} 
-    as required.
+        |s_{M}(x) - s_{N}(x)| &= \sum_{m = N+1}^{M} |f_m(x)|\\
+        &\leq \sum_{m = N+1}^{M} |f_m(x)|\\
+        &\leq \sum_{m=N+1}^{M} M_m\\
+    \end{align*}
+    Then we have that $\sum\limits_{n=1}^\infty M_n$ converges. So for any $\epsilon > 0$, we can find $N_0$ such that for any $M \geq N \geq N_0$, we have 
+    \[|s_M (x) - s_N(x)| \leq \sum_{m = N+1}^M M_m < \epsilon\]
+    Hence, the sequence $s_n$ converges uniformly to $\sum\limits_{n=1}^\infty f_n$.
 \end{proof}
 
 \begin{manualtheorem}{8.3.1}
