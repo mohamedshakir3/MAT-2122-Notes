@@ -683,9 +683,9 @@
 \begin{proof}
     Consider the sequence of partial sums 
     \[s_n = \sum_{m=1}^n f_m\]
-    Take $N, M \in \natural$ such that $N \leq M$. Then
+    Take $N, M \in \nat$ such that $N \leq M$. Then
     \begin{align*}
-        |s_{M}(x) - s_{N}(x)| &= \sum_{m = N+1}^{M} |f_m(x)|\\
+        |s_{M}(x) - s_{N}(x)| &= \left|\sum_{m = N+1}^{M} f_m(x)\right|\\
         &\leq \sum_{m = N+1}^{M} |f_m(x)|\\
         &\leq \sum_{m=N+1}^{M} M_m\\
     \end{align*}
@@ -735,7 +735,14 @@
     Hence by the root test, if $\frac{|b-c|}{R} < 1$ (i.e $|b-c| < R$), the series converges, while if $\frac{|b-c|}{R} \geq 1$ $|b-c|>R$, the series diverges as required 
 \end{proof}
 
-
+\section*{Pointwise vs Uniform Convergence for Sequences of Functions}
+For pointwise convergence, the definition is as follows: Let $X$ be a set and $(f_n: X \rightarrow \real^m)^\infty_{n=1}$ be a sequence of functions, and let $f: X \rightarrow \real^m$. Then $f_n$ converges to $f$ \emph{pointwise} if for all $x \in X$, we have that
+\[\lim_{n\rightarrow\infty} f_n(x) = f(x)\]
+Now the $\epsilon$-$N$ characeterization for pointwise convergence is, for any $\epsilon > 0$ and $\forall x \in X$, there exists $N \in \nat$ such that for all $n \geq N$,\
+\[||f_n(x) - f(x)||_2 < \epsilon\]
+Now for uniform convergence, we have that for any $\epsilon > 0$, there exists $N \in \nat$ such that for all $n \geq N$,
+\[||f_n(x) - f(x)||_2 < \epsilon \ \ \forall x \in X\]
+The key difference between these 2 definitions is the order of the quantifiers. For pointwise convergence, we have that for all $\epsilon > 0$, and $\forall x \in X$, there exists $N \in \nat$. But for uniform convergence, its for all $\epsilon > 0$, there exists $N \in \nat$. So, in point wise converge $N$ is "brought into existence" after the $x$ is, so $N$ can depend on $X$, whereas for uniform convergence, $N$ is "brought into existence" before the $x$ is, so $N$ \emph{cannot} depend on $X$ and must hold $\forall x$
 %-------------- Lecture 1 ------------------------
 \chapter{The Real Numbers $\real$}
 \begin{center}
